@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 
-ALLOWED_HOSTS = ['crm-ltg.herokuapp.com/ ']
+ALLOWED_HOSTS = ['crm-ltg.herokuapp.com/']
 
 
 # Application definition
