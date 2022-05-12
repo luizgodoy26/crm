@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <h1>WELCOME!</h1>
+{% block title %}
+    SEJA BEM VINDO
+{% endblock %}
+
+
+{% block main %}
+    <h1 class="ola">WELCOME!</h1>
 
     <!--  CHECK IF THE USER IS LOGGED IN AND DISPLAY IT'S NAME  -->
     {% if user.is_authenticated%}
@@ -17,5 +17,4 @@
         <a href="{% url 'login' %}"><button>Login</button></a>
     {% endif %}
 
-</body>
-</html>
+{% endblock %}
