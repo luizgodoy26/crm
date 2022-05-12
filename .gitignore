@@ -12,10 +12,11 @@ tasks.xml
 vEnv
 .venv
 venv/
+.env
 
 # Python compiled files
 *pyc
-.crmProj/settings.py
+crmProj/settings.py
 
 # Media files
 media
