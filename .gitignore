@@ -16,7 +16,6 @@ venv/
 
 # Python compiled files
 *pyc
-crmProj/settings.py
 
 # Media files
 media
