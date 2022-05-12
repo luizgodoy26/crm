@@ -1,0 +1,22 @@
+# IDE
+*.idea
+.iws
+workspace.xml
+tasks.xml
+
+
+# sqlite3
+*.sqlite3
+
+# Name of your virtuan env
+vEnv
+.venv
+venv/
+
+# Python compiled files
+*pyc
+.crmProj/settings.py
+
+# Media files
+media
+

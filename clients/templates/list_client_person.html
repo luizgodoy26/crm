@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <ul>
+        {% for client in clients %}
+
+            <li>
+                <a href="{% url 'edit_client_person' client.id %}">{{ client.first_name }}</a>
+                <button href="{% url 'delete_client_person' client.id %}">Delete</button>
+            </li>
+
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'new_client_person' %}">New client</a>
+    <br>
+    <a href="{% url 'companies_list' %}">Companies</a>
+
+    <!-- LOGOUT -->
+    <br>
+    <a href="{% url 'logout' %}"><button >Logout</button></a>
+
+</body>
+</html>
