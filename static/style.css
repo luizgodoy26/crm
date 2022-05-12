@@ -1,7 +1,109 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-.ola{
-    font-family: poppins;
-    font-weight: 600;
-    color: red;
+body{
+    font-family: Poppins;
+}
+
+/*
+ LINKS LINKS LINKS LINKS LINKS LINKS
+*/
+a{
+    text-decoration: none;
+    color: black;
+}
+
+
+
+/*
+ ICONS ICONS ICONS ICONS ICONS
+*/
+
+/* DELETE ICON */
+.fa-trash-can{
+    color: #F25252;
+    text-decoration: none;
+    active: none;
+}
+.fa-trash-can{
+    color: #F25252;
+    text-decoration: none;
+    active: none;
+}
+
+.delete-icon > .fa-regular + .fa-solid,
+.delete-icon:hover > .fa-regular {
+  display: none;
+}
+.delete-icon:hover > .fa-regular + .fa-solid {
+  display: inline-block;
+}
+
+/* EDIT ICON */
+.fa-pen-to-square{
+    color: #0540F2;
+    text-decoration: none;
+    active: none;
+}
+.fa-pen-to-square{
+    color: #0540F2;
+    text-decoration: none;
+    active: none;
+}
+
+.edit-icon > .fa-regular + .fa-solid,
+.edit-icon:hover > .fa-regular {
+  display: none;
+}
+.edit-icon:hover > .fa-regular + .fa-solid {
+  display: inline-block;
+}
+
+
+
+/*
+BUTTONS BUTTONS BUTTONS BUTTONS BUTTONS BUTTONS
+*/
+button{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    border-radius: 99px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 30px;
+    padding-left: 30px;
+    font-size: 14px;
+    text-align: center;
+    font-family: Poppins, sans-serif;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*LOGIN BUTTON*/
+.btn-login{
+    background-color: #0540F2;
+    font-weight: 400;
+    color: #FFFFFF;
+    border: 3px solid #0540F2;
+}
+
+.btn-login:hover{
+    background-color: #FFFFFF;
+    color: #0540F2;
+    border: 2px solid #0540F2;
+}
+
+/*LOGOUT BUTTON*/
+.btn-logout{
+    background-color: #F25252;
+    font-weight: 400;
+    color: #FFFFFF;
+    border: 2px solid #F25252;
+}
+
+.btn-logout:hover{
+    background-color: #FFFFFF;
+    color: #F25252;
+    border: 2px solid #F25252;
 }

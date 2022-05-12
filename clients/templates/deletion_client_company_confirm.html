@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block main %}
 
     <h1>Confirma a deleção de {{ client.company_name }} ?</h1>
 
@@ -15,5 +11,4 @@
     <br>
     <a href="{% url 'companies_list' %}"><button>Cancel</button></a>
 
-</body>
-</html>
+{% endblock %}

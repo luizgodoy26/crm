@@ -1,17 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block main %}
 
     <ul>
         {% for client in clients %}
 
             <li>
                 <a href="{% url 'edit_client_company' client.id %}">{{ client.company_name }}</a>
-                <a href="{% url 'delete_client_company' client.id %}"><button >Delete</button></a>
+
+                <!-- EDIT -->
+                <a href="{% url 'edit_client_company' client.id %}" class="edit-icon">
+                    <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                </a>
+
+                <!-- DELETE -->
+                <a href="{% url 'delete_client_company' client.id %}" class="delete-icon">
+                    <i class="fa-regular fa-trash-can fa-lg"></i>
+                    <i class="fa-solid fa-trash-can fa-lg"></i>
+                </a>
+
             </li>
 
         {% endfor %}
@@ -21,7 +29,6 @@
     <br>
     <a href="{% url 'person_list' %}">Person</a>
     <br>
-    <a href="{% url 'logout' %}"><button >Logout</button></a>
+    <a href="{% url 'logout' %}"><button class="btn-logout">Logout</button></a>
 
-</body>
-</html>
+{% endblock %}
