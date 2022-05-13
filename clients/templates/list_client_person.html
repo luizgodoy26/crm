@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %}
+Client person List
+{% endblock %}
+
 {% block main %}
 
     <ul>
@@ -7,7 +11,17 @@
 
             <li>
                 <a href="{% url 'edit_client_person' client.id %}">{{ client.first_name }}</a>
-                <button href="{% url 'delete_client_person' client.id %}">Delete</button>
+                <!-- EDIT -->
+                <a href="{% url 'edit_client_person' client.id %}" class="edit-icon">
+                    <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                </a>
+
+                <!-- DELETE -->
+                <a href="{% url 'delete_client_person' client.id %}" class="delete-icon">
+                    <i class="fa-regular fa-trash-can fa-lg"></i>
+                    <i class="fa-solid fa-trash-can fa-lg"></i>
+                </a>
             </li>
 
         {% endfor %}

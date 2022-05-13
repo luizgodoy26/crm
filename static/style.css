@@ -4,6 +4,12 @@ body{
     font-family: Poppins;
 }
 
+form{
+    display:flex;
+    flex-direction: column;
+}
+
+
 /*
  LINKS LINKS LINKS LINKS LINKS LINKS
 */
@@ -13,12 +19,81 @@ a{
 }
 
 
+/*
+ INPUT TEXTAREA
+*/
+input, textarea{
+    outline: none;
+    border-radius: 10px;
+    padding-top: 3px;
+    padding-left: 10px;
+    padding-bottom: 3px;
+    border:none;
+    width: 23rem;
+    height: 35px;
+    background: #D8E3F2;
+    margin-bottom: 20px;
+    -webkit-appearance: none;
+}
+
+/* HIDE SPIN BUTTON */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input::placeholder {
+  color: red;
+}
+
+input:required {
+  border: 1px solid #0540F2;
+}
+
+.errorlist{
+    margin: 0;
+    margin-left: -35px;
+    font-size: 12px;
+    font-style: italic;
+    text-align: left;
+    text-decoration: italic;
+    list-style-type: none;
+    color: #0540F2;
+}
+
+input:focus, textarea:focus{
+    outline: 2px solid #0540F2;
+    background: none;
+}
+
+input:hover, textarea:focus{
+    outline: 2px solid #0540F2;
+}
+
+textarea{
+    min-width: 350px;
+    min-height: 200px;
+    padding-top: 10px;
+}
+
+select{
+    outline: none;
+    border-radius: 10px;
+    padding-top: 3px;
+    padding-left: 10px;
+    padding-bottom: 3px;
+    border:none;
+    width: 350px;
+    min-height: 100px;
+    background: #D8E3F2;
+    margin-bottom: 30px;
+}
 
 /*
  ICONS ICONS ICONS ICONS ICONS
 */
-
-/* DELETE ICON */
+/* delete icon */
 .fa-trash-can{
     color: #F25252;
     text-decoration: none;
@@ -38,7 +113,7 @@ a{
   display: inline-block;
 }
 
-/* EDIT ICON */
+/* edit icon */
 .fa-pen-to-square{
     color: #0540F2;
     text-decoration: none;
@@ -64,9 +139,6 @@ a{
 BUTTONS BUTTONS BUTTONS BUTTONS BUTTONS BUTTONS
 */
 button{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
     border-radius: 99px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -78,14 +150,16 @@ button{
     border: none;
     text-decoration: none;
     cursor: pointer;
+    width: fit-content;
 }
+
 
 /*LOGIN BUTTON*/
 .btn-login{
     background-color: #0540F2;
     font-weight: 400;
     color: #FFFFFF;
-    border: 3px solid #0540F2;
+    border: 2px solid #0540F2;
 }
 
 .btn-login:hover{
@@ -106,4 +180,58 @@ button{
     background-color: #FFFFFF;
     color: #F25252;
     border: 2px solid #F25252;
+}
+
+/* CONFIRM BUTTON */
+.btn-confirm{
+    background-color: #0540F2;
+    color: #FFFFFF;
+    border: 2px solid #0540F2;
+}
+
+.btn-confirm:hover{
+    background-color: #FFFFFF;
+    color: #0540F2;
+    border: 2px solid #0540F2;
+}
+
+
+/*
+    CONTAINER CONTAINER CONTAINER CONTAINER
+*/
+.container-form{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: #FBFBFB;
+    width: 30rem;
+    display: flex;
+    justify-content: center;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
+    border-radius: 2rem;
+
+}
+
+.container-descript{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    align-items: center;
+}
+
+.h2-containter{
+    text-align: right;
+    width: 80%;
+}
+
+.img-form{
+    position: relative;
+    width: 30em;
+    justify-content: center;
+}
+
+.container {
+    display:flex;
+    justify-content: center;
+    margin: 5rem;
+    column-gap: 10rem;
 }
