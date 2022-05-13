@@ -81,12 +81,10 @@ textarea{
 select{
     outline: none;
     border-radius: 10px;
-    padding-top: 3px;
-    padding-left: 10px;
-    padding-bottom: 3px;
+    padding-left: 1rem;
     border:none;
-    width: 350px;
-    min-height: 100px;
+    width: 31rem;
+    height: 2.5rem;
     background: #D8E3F2;
     margin-bottom: 30px;
 }
