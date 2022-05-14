@@ -11,8 +11,107 @@
 </head>
 <body>
 
-    {% block main %}
+    {% block sidebar %}
+        <div class="sidebar">
+            <div class="logo_content">
+                <div class="logo">
+                    <i class="fa-solid fa-house"></i>
+                    <div class="logo_name">Promptus</div>
+                </div>
+                <i class="fa-solid fa-bars" id="btn-menu"></i>
+            </div>
+            <ul class="nav_list">
+                <li>
+                    <a href="{% url 'home' %}">
+                        <i class="fa-solid fa-house"></i>
+                        <span class="links_name">Home</span>
+                    </a>
+                    <span class="tooltip">Home</span>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-coins"></i>
+                        <span class="links_name">Revenue</span>
+                    </a>
+                    <span class="tooltip">Revenue</span>
+                </li>
+                <li>
+                    <a href="{% url 'companies_list' %}">
+                        <i class="fa-solid fa-building-user"></i>
+                        <span class="links_name">Companies</span>
+                    </a>
+                    <span class="tooltip">Companies</span>
+                </li>
+                <li>
+                    <a href="{% url 'person_list' %}">
+                        <i class="fa-solid fa-users"></i>
+                        <span class="links_name">People</span>
+                    </a>
+                    <span class="tooltip">People</span>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-file"></i>
+                        <span class="links_name">Files</span>
+                    </a>
+                    <span class="tooltip">Files</span>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-calendar"></i>
+                        <span class="links_name">Calendar</span>
+                    </a>
+                    <span class="tooltip">Calendar</span>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span class="links_name">Dashboard</span>
+                    </a>
+                    <span class="tooltip">Dashboard</span>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-user"></i>
+                        <span class="links_name">User</span>
+                    </a>
+                    <span class="tooltip">User</span>
+                </li>
+            </ul>
+            <div class="profile_content">
+                <div class="profile">
+                    <div class="profile_details">
+                        <img src="https://m.media-amazon.com/images/I/61Is5eRnq+L._AC_SY300_SX300_.jpg" alt="">
+                        <div class="name_job">
+                            <div class="name">Marcelo Grub</div>
+                            <div class="job">Engineer</div>
+                        </div>
+                    </div>
+                    <a href="{% url 'logout' %}">
+                        <i class="fa-solid fa-right-from-bracket" id="log_out"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
     {% endblock %}
+
+    <div class="page_content">
+        {% block main %}
+        {% endblock %}
+    </div>
+
+    <script>
+
+        <!-- Open and close sidebar -->
+        let btnmenu = document.querySelector("#btn-menu");
+        let sidebar = document.querySelector(".sidebar");
+
+        btnmenu.onclick = function(){
+            sidebar.classList.toggle("active");
+        }
+
+     </script>
 
 </body>
 </html>

@@ -4,6 +4,7 @@
 Companies List
 {% endblock %}
 
+
 {% block main %}
 
     <ul>
@@ -30,9 +31,6 @@ Companies List
     </ul>
 
     <a href="{% url 'new_client_company' %}">New client</a>
-    <br>
-    <a href="{% url 'person_list' %}">Person</a>
-    <br>
-    <a href="{% url 'logout' %}"><button class="btn-logout">Logout</button></a>
+
 
 {% endblock %}

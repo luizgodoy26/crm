@@ -2,6 +2,10 @@
 
 body{
     font-family: Poppins;
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 form{
@@ -9,6 +13,237 @@ form{
     flex-direction: column;
 }
 
+/*
+    SIDEBAR    SIDEBAR    SIDEBAR    SIDEBAR
+*/
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 38px;
+    background: #0540F2;
+    padding: 6px 14px;
+    z-index: 1;
+    transition: all 0.5s ease;
+}
+
+.sidebar.active{
+    width: 240px;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.sidebar .logo_content .logo{
+    color: #FFFFFF;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar.active .logo_content .logo{
+    transition: all 0.5s ease;
+
+    opacity: 1;
+}
+
+.logo_content .logo i{
+    font-size: 28px;
+    margin-right: 5px;
+}
+
+.logo_content .logo .logo_name{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.sidebar #btn-menu{
+    position: absolute;
+    color: #FFFFFF;
+    left: 50%;
+    top: 6px;
+    font-size: 20px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+.sidebar.active #btn-menu{
+    left: 90%;
+}
+
+.sidebar ul{
+    margin-top: 20px;
+
+    margin-left: -50px;
+}
+
+.sidebar ul li{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin: 0 5px;
+    list-style: none;
+    line-height: 50px;
+}
+
+.sidebar ul li .tooltip{
+    position: absolute;
+    left: 120px;
+    top: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    height: 35px;
+    width: 122px;
+    background: #FFFFFF;
+    line-height: 35px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0s;
+    opacity: 0;
+    pointer-events: none;
+    display: block;
+}
+
+.sidebar.active ul li .tooltip{
+    display: none;
+}
+
+.sidebar ul li:hover .tooltip{
+    transition: all 0.5s ease;
+    opacity: 1;
+    top: 50%;
+}
+
+.sidebar .links_name{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar.active .links_name{
+    transition: all 0.5s ease;
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.sidebar ul li a{
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    border-radius: 12px;
+    transition: all 0.4s ease;
+    white-space: nowrap;
+}
+
+.sidebar ul li a:hover{
+    color: #0540F2;
+    background: #FFFFFF;
+}
+
+.sidebar ul li i{
+    height: 50px;
+    min-width: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.sidebar .profile_content{
+    position: absolute;
+    color: #FFFFFF;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.sidebar .profile_content .profile{
+    position: relative;
+    padding: 10px 6px;
+    height: 60px;
+    background: none;
+    transition: all 0.5s ease;
+}
+
+.sidebar.active .profile_content .profile a #log_out{
+    background: #0554F2;
+}
+
+.profile_content .profile .profile_details{
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar.active .profile .profile_details{
+    opacity: 1;
+    pointer-events: auto;
+    white-space: nowrap;
+}
+
+.profile .profile_details img{
+    height: 45px;
+    width: 45px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.profile .profile_details .name_job{
+    margin-left: 10px;
+}
+
+.profile .profile_details .name{
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.profile .profile_details .job{
+    font-size: 12px;
+}
+
+.profile a #log_out{
+    text-decoration: none;
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    min-width: 50px;
+    line-height:50px;
+    font-size: 20px;
+    color: #FFFFFF;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.5s ease;
+    background: #0554F2;
+    cursor: pointer;
+}
+
+.sidebar.active .profile a #log_out{
+    left: 88%;
+    background: none;
+}
+
+.page_content{
+    position: absolute;
+    height: 100%;
+    left: 120px;
+    width: calc(100% - 200px);
+    transition: all 0.5s ease;
+}
+
+/*
+.sidebar.active ~ .page_content{
+    transition: all 0.5s ease;
+    left: 88%;
+    width: calc(100% -440px);
+    left: 240px;
+}
+*/
 
 /*
  LINKS LINKS LINKS LINKS LINKS LINKS
@@ -30,7 +265,7 @@ input, textarea{
     padding-left: 10px;
     padding-bottom: 3px;
     border:none;
-    width: 30rem;
+    width: 25rem;
     height: 35px;
     background: #D8E3F2;
     margin-bottom: 20px;
@@ -83,10 +318,11 @@ select{
     border-radius: 10px;
     padding-left: 1rem;
     border:none;
-    width: 31rem;
+    width: 26rem;
     height: 2.5rem;
     background: #D8E3F2;
     margin-bottom: 30px;
+    font-family: Poppins;
 }
 
 /*
@@ -132,7 +368,45 @@ select{
   display: inline-block;
 }
 
+.new-client-icon{
+    background-color: #0540F2;
+    padding: 10px;
+    border-radius: 12px;
+    color: #FFFFFF;
+}
 
+.new-client-icon:hover{
+    background-color: #FFFFFF;
+    padding: 10px;
+    border-radius: 12px;
+    color: #0540F2;
+    outline: 1px solid #0540F2;
+}
+
+.new-client-icon .tooltip{
+    position: absolute;
+    left: 120px;
+    top: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    height: 35px;
+    width: 122px;
+    background: #FFFFFF;
+    line-height: 35px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0s;
+    opacity: 0;
+    pointer-events: none;
+    display: block;
+    color: #000000;
+}
+
+.new-client-icon:hover .tooltip{
+    transition: all 0.5s ease;
+    opacity: 1;
+    top: 8%;
+}
 
 /*
 BUTTONS BUTTONS BUTTONS BUTTONS BUTTONS BUTTONS
@@ -202,37 +476,35 @@ button{
 .container {
     display:flex;
     justify-content: center;
-    margin: 5rem;
-    column-gap: 10rem;
+    column-gap: 5rem;
+    width: 100%;
 }
 
 .container-form{
     padding-top: 2rem;
     padding-bottom: 2rem;
     background-color: #FBFBFB;
-    width: 40rem;
+    width: 35rem;
     display: flex;
     justify-content: center;
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
     border-radius: 2rem;
-
 }
 
 .container-descript{
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 25rem;
     align-items: center;
 }
 
 .h2-containter{
-    text-align: right;
+    text-align: left;
     width: 80%;
 }
 
 .img-form{
-    position: relative;
-    width: 30em;
+    width: 400px;
     justify-content: center;
 }
 
