@@ -10,8 +10,7 @@
 
     <!--  CHECK IF THE USER IS LOGGED IN AND DISPLAY IT'S NAME  -->
     {% if user.is_authenticated%}
-        <p>Hello {{ user.username }}!</p>
-        <a href="{% url 'logout' %}"><button class="btn-logout">Logout</button></a>
+        <p>Hello {{ user.first_name }}!</p>
 
     {% else %}
         <a href="{% url 'login' %}"><button class="btn-login">Login</button></a>

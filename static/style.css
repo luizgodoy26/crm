@@ -476,7 +476,8 @@ button{
 .container {
     display:flex;
     justify-content: center;
-    column-gap: 5rem;
+    margin-top: 4rem;
+    column-gap: 4rem;
     width: 100%;
 }
 

@@ -30,7 +30,9 @@ Companies List
         {% endfor %}
     </ul>
 
-    <a href="{% url 'new_client_company' %}">New client</a>
-
+    <a href="{% url 'new_client_company' %}" class="new-client-icon">
+        <i class="fa-solid fa-user-plus"></i>
+        <span class="tooltip">Add client</span>
+    </a>
 
 {% endblock %}

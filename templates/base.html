@@ -83,8 +83,8 @@
                     <div class="profile_details">
                         <img src="https://m.media-amazon.com/images/I/61Is5eRnq+L._AC_SY300_SX300_.jpg" alt="">
                         <div class="name_job">
-                            <div class="name">Marcelo Grub</div>
-                            <div class="job">Engineer</div>
+                            <div class="name">{{ user.first_name }}</div>
+                            <div class="job">{{ user.username }}</div>
                         </div>
                     </div>
                     <a href="{% url 'logout' %}">
