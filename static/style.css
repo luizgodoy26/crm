@@ -46,7 +46,6 @@ form{
 
 .sidebar.active .logo_content .logo{
     transition: all 0.5s ease;
-
     opacity: 1;
 }
 
@@ -579,7 +578,6 @@ label{
     min-width: 1000px;
     border-radius: 12px 12px 0 0;
     overflow: hidden;
-
 }
 
 .client-table thead tr{
@@ -614,4 +612,68 @@ label{
 .received-a{
     color: #0540F2;
     font-weight: 500;
+}
+
+
+
+/*
+    INFOBOX    INFOBOX    INFOBOX    INFOBOX
+*/
+.info-box{
+    background-color: #FBFBFB;
+    width: 250px;
+    height: 100px;
+    border-radius: 12px;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    flex-direction: column;
+}
+
+.h1-info-total{
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 5px;
+    color: #0540F2;
+}
+
+.h2-info-total{
+    padding: 0;
+    padding-right: 15px;
+    margin: 0;
+    float: right;
+    margin-left: auto;
+}
+
+.h3-info-total{
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 5px;
+}
+
+.h4-info-total{
+    padding: 0;
+    padding-right: 15px;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+}
+
+.received{
+    color: #22F29B;
+}
+
+.pending{
+    color: #F25252;
+}
+
+.box-row{
+    width: 100%;
+    display: flex;
+    column-gap: 120px;
+    align-items: center;
+    justify-content: center;
 }

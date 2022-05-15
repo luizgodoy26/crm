@@ -3,7 +3,7 @@ from .models import ClientCompany, ClientPerson
 from .forms import ClientCompanyForm, ClientPersonForm
 from django.contrib.auth.decorators import login_required
 
-
+from django.db.models import Sum
 
 """
 LIST THE CLIENT COMPANIES
@@ -11,7 +11,13 @@ LIST THE CLIENT COMPANIES
 @login_required
 def client_company_list(request):
     clients = ClientCompany.objects.all()
-    return render(request, 'list_client_company.html', {'clients': clients})
+    pending_payments_total = ClientCompany.objects.aggregate(sum=Sum('pending_payments'))['sum'] or 0
+    received_payments_total = ClientCompany.objects.aggregate(sum=Sum('received_payments'))['sum'] or 0
+    client_count = ClientCompany.objects.filter().count()
+    return render(request, 'list_client_company.html', {'clients': clients,
+                                                       'pending_payments_total': pending_payments_total,
+                                                       'received_payments_total': received_payments_total,
+                                                       'client_count': client_count})
 
 
 
@@ -21,7 +27,14 @@ LIST THE CLIENT PERSONS
 @login_required
 def client_person_list(request):
     clients = ClientPerson.objects.all()
-    return render(request, 'list_client_person.html', {'clients': clients})
+    pending_payments_total = ClientPerson.objects.aggregate(sum=Sum('pending_payments'))['sum'] or 0
+    received_payments_total = ClientPerson.objects.aggregate(sum=Sum('received_payments'))['sum'] or 0
+    client_count = ClientPerson.objects.filter().count()
+    return render(request, 'list_client_person.html', {'clients': clients,
+                                                       'pending_payments_total': pending_payments_total,
+                                                       'received_payments_total': received_payments_total,
+                                                       'client_count': client_count
+                                                       })
 
 
 
