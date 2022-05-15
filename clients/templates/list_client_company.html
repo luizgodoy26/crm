@@ -7,32 +7,98 @@ Companies List
 
 {% block main %}
 
-    <ul>
-        {% for client in clients %}
+    <div class="container">
+        <div class="container-list">
 
-            <li>
-                <a href="{% url 'edit_client_company' client.id %}">{{ client.company_name }}</a>
+            <h2>Client companies list</h2>
 
-                <!-- EDIT -->
-                <a href="{% url 'edit_client_company' client.id %}" class="edit-icon">
-                    <i class="fa-regular fa-pen-to-square fa-lg"></i>
-                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+<!--            <div class="add-new-client-btn">-->
+<!--                <a href="{% url 'new_client_company' %}" class="new-client-icon">-->
+<!--                    <i class="fa-solid fa-user-plus"></i>-->
+<!--                </a>-->
+<!--                <span class="tooltip">Add client</span>-->
+<!--            </div>-->
+
+            <table class="client-table">
+
+                <thead>
+                    <tr>
+                        <th>Company name</th>
+                        <th>Company cnpj</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Pending payments</th>
+                        <th>Received payments</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for client in clients %}
+                    <tr>
+                        <!-- NEME -->
+                        <td>
+                            <a href="{% url 'edit_client_company' client.id %}">{{ client.company_name }}</a>
+                        </td>
+
+                        <!-- CNPJ -->
+                        <td>
+                            <a href="{% url 'edit_client_company' client.id %}">{{ client.company_cnpj }}</a>
+                        </td>
+
+                        <!-- PHONE -->
+                        <td>
+                            <a href="{% url 'edit_client_company' client.id %}">
+                                {% if client.phone %} {{client.phone}} {% else %} &nbsp; {% endif %}
+                            </a>
+                        </td>
+
+                        <!-- EMAIL -->
+                        <td>
+                            <a href="{% url 'edit_client_company' client.id %}">
+                                {% if client.email %} {{client.email}} {% else %} &nbsp; {% endif %}
+                            </a>
+                        </td>
+
+                        <!-- PENDING PAYMENTS -->
+                        <td>
+                            <a href="{% url 'edit_client_company' client.id %}" class="pending-a">
+                                {% if client.pending_payments %} {{client.pending_payments}} {% else %} &nbsp; {% endif %}
+                            </a>
+                        </td>
+
+                        <!-- RECEIVED PAYMENTS -->
+                        <td>
+                            <a href="{% url 'edit_client_company' client.id %}" class="received-a">
+                                {% if client.received_payments %} {{client.received_payments}} {% else %} &nbsp; {% endif %}
+                            </a>
+                        </td>
+
+                        <!-- OPTIONS -->
+                        <td>
+                            <a href="{% url 'edit_client_company' client.id %}" class="edit-icon">
+                                <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                            </a>
+
+                            <a href="{% url 'delete_client_company' client.id %}" class="delete-icon">
+                                <i class="fa-regular fa-trash-can fa-lg"></i>
+                                <i class="fa-solid fa-trash-can fa-lg"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+
+            <div class="add-new-client-btn">
+                <a href="{% url 'new_client_company' %}" class="new-client-icon">
+                    <i class="fa-solid fa-user-plus"></i>
                 </a>
+                <span class="tooltip">Add client</span>
+            </div>
 
-                <!-- DELETE -->
-                <a href="{% url 'delete_client_company' client.id %}" class="delete-icon">
-                    <i class="fa-regular fa-trash-can fa-lg"></i>
-                    <i class="fa-solid fa-trash-can fa-lg"></i>
-                </a>
-
-            </li>
-
-        {% endfor %}
-    </ul>
-
-    <a href="{% url 'new_client_company' %}" class="new-client-icon">
-        <i class="fa-solid fa-user-plus"></i>
-        <span class="tooltip">Add client</span>
-    </a>
-
+        </div>
+    </div>
 {% endblock %}

@@ -6,6 +6,7 @@ body{
     min-height: 100vh;
     width: 100%;
     overflow-x: hidden;
+    color: #4A4A4A;
 }
 
 form{
@@ -245,6 +246,8 @@ form{
 }
 */
 
+
+
 /*
  LINKS LINKS LINKS LINKS LINKS LINKS
 */
@@ -252,6 +255,7 @@ a{
     text-decoration: none;
     color: black;
 }
+
 
 
 /*
@@ -271,6 +275,8 @@ input, textarea{
     margin-bottom: 20px;
     -webkit-appearance: none;
 }
+
+
 
 /* HIDE SPIN BUTTON */
 input::-webkit-outer-spin-button,
@@ -368,45 +374,7 @@ select{
   display: inline-block;
 }
 
-.new-client-icon{
-    background-color: #0540F2;
-    padding: 10px;
-    border-radius: 12px;
-    color: #FFFFFF;
-}
 
-.new-client-icon:hover{
-    background-color: #FFFFFF;
-    padding: 10px;
-    border-radius: 12px;
-    color: #0540F2;
-    outline: 1px solid #0540F2;
-}
-
-.new-client-icon .tooltip{
-    position: absolute;
-    left: 120px;
-    top: 0;
-    transform: translate(-50%, -50%);
-    border-radius: 6px;
-    height: 35px;
-    width: 122px;
-    background: #FFFFFF;
-    line-height: 35px;
-    text-align: center;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    transition: 0s;
-    opacity: 0;
-    pointer-events: none;
-    display: block;
-    color: #000000;
-}
-
-.new-client-icon:hover .tooltip{
-    transition: all 0.5s ease;
-    opacity: 1;
-    top: 8%;
-}
 
 /*
 BUTTONS BUTTONS BUTTONS BUTTONS BUTTONS BUTTONS
@@ -426,6 +394,61 @@ button{
     width: fit-content;
 }
 
+/* add new clients button */
+.add-new-client-btn .tooltip{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.add-new-client-btn{
+    width: 25px;
+    height: 25px;
+}
+
+.add-new-client-btn:hover .tooltip{
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.5s ease;
+}
+
+.new-client-icon{
+    background-color: #0540F2;
+    display: flex;
+    width: 25px;
+    height: 25px;
+    align-items: center;
+    padding: 10px;
+    border-radius: 12px;
+    color: #FFFFFF;
+}
+
+
+.new-client-icon:hover{
+    background-color: #FFFFFF;
+    padding: 10px;
+    border-radius: 12px;
+    color: #0540F2;
+    outline: 1px solid #0540F2;
+}
+
+.add-new-client-btn .tooltip{
+    position: relative;
+    left: 120px;
+    top: -25px;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    height: 35px;
+    width: 122px;
+    background: #FFFFFF;
+    line-height: 35px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0s;
+    opacity: 0;
+    pointer-events: none;
+    display: block;
+    color: #000000;
+}
 
 /*LOGIN BUTTON*/
 .btn-login{
@@ -492,6 +515,32 @@ button{
     border-radius: 2rem;
 }
 
+.container-list{
+    padding: 2rem;
+    background-color: #FBFBFB;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
+    border-radius: 2rem;
+}
+
+.container-login{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: #FBFBFB;
+    width: 35rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
+    border-radius: 2rem;
+}
+
+.container-login h2{
+    justify-content: left;
+}
+
 .container-descript{
     display: flex;
     flex-direction: column;
@@ -509,9 +558,60 @@ button{
     justify-content: center;
 }
 
+
+
 /*
     LABEL   LABEL   LABEL   LABEL
 */
 label{
+    font-weight: 500;
+}
+
+
+
+/*
+    TABLE TABLE TABLE TABLE
+*/
+.client-table{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 1em;
+    min-width: 1000px;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+
+}
+
+.client-table thead tr{
+    background-color: #D8E3F2;
+    text-align: left;
+    font-weight: bold;
+}
+
+.client-table tbody tr{
+    border-bottom: 1px solid #E8E8E8;
+}
+
+
+.client-table tbody tr:nth-of-type(even){
+    background-color: #F9F9F9;
+}
+
+.client-table tbody tr:last-of-type{
+    border-bottom: 2px solid #D8E3F2;
+}
+
+.client-table th,
+.client-table td{
+    padding: 12px 15px;
+}
+
+.pending-a{
+    color: #F25252;
+    font-weight: 600;
+}
+
+.received-a{
+    color: #0540F2;
     font-weight: 500;
 }
