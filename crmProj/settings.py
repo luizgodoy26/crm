@@ -41,8 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'clients',
+    'accounts',
     'home'
 ]
+
+AUTH_USER_MODEL = 'accounts.User' # Overrides the current user model
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
