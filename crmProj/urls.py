@@ -12,7 +12,7 @@ urlpatterns = [
     path('register/', include(accounts_urls)),
 
     # Login and logout
-    path('login/', auth_views.LoginView.as_view(), name='login'),
+    # path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='home.html'), name='logout'),
 
     # Client application urls
