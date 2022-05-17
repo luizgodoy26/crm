@@ -10,12 +10,13 @@ from django.db.models import Sum
 """
 LIST THE CLIENT COMPANIES
 """
+# List the companies
 @login_required
 def client_company_list(request):
-    clients = ClientCompany.objects.all()
-    pending_payments_total = ClientCompany.objects.aggregate(sum=Sum('pending_payments'))['sum'] or 0
-    received_payments_total = ClientCompany.objects.aggregate(sum=Sum('received_payments'))['sum'] or 0
-    client_count = ClientCompany.objects.filter().count()
+    clients = ClientCompany.objects.filter(user=request.user)
+    pending_payments_total = ClientCompany.objects.filter(user=request.user).aggregate(sum=Sum('pending_payments'))['sum'] or 0
+    received_payments_total = ClientCompany.objects.filter(user=request.user).aggregate(sum=Sum('received_payments'))['sum'] or 0
+    client_count = ClientCompany.objects.filter(user=request.user).count()
     return render(request, 'list_client_company.html', {'clients': clients,
                                                        'pending_payments_total': pending_payments_total,
                                                        'received_payments_total': received_payments_total,
@@ -28,10 +29,10 @@ LIST THE CLIENT PERSONS
 """
 @login_required
 def client_person_list(request):
-    clients = ClientPerson.objects.all()
-    pending_payments_total = ClientPerson.objects.aggregate(sum=Sum('pending_payments'))['sum'] or 0
-    received_payments_total = ClientPerson.objects.aggregate(sum=Sum('received_payments'))['sum'] or 0
-    client_count = ClientPerson.objects.filter().count()
+    clients = ClientPerson.objects.filter(user=request.user)
+    pending_payments_total = ClientPerson.objects.filter(user=request.user).aggregate(sum=Sum('pending_payments'))['sum'] or 0
+    received_payments_total = ClientPerson.objects.filter(user=request.user).aggregate(sum=Sum('received_payments'))['sum'] or 0
+    client_count = ClientPerson.objects.filter(user=request.user).count()
     return render(request, 'list_client_person.html', {'clients': clients,
                                                        'pending_payments_total': pending_payments_total,
                                                        'received_payments_total': received_payments_total,
@@ -43,6 +44,7 @@ def client_person_list(request):
 """
 ADD A NEW CLIENT COMPANY
 """
+# Crate a new company
 @login_required
 def new_client_company(request):
     # Start post add the company to the DB using POST or start a new form using None
@@ -50,6 +52,8 @@ def new_client_company(request):
 
     # Check if the form is valid
     if form.is_valid():
+        form = form.save(commit=False)
+        form.user = request.user
         form.save()
         return redirect('companies_list')
     return render(request, 'client_company_form.html', {'form': form})
@@ -61,9 +65,12 @@ ADD A NEW CLIENT PERSON
 """
 @login_required
 def new_client_person(request):
-    form = ClientPersonForm(request.POST or None, request.FILES or None)
+    user = request.user
+    form = ClientPersonForm(request.POST or None, request.FILES or None, user=user)
 
     if form.is_valid():
+        form = form.save(commit=False)
+        form.user = request.user
         form.save()
         return redirect('person_list')
     return render(request, 'client_person_form.html', {'form': form})
@@ -92,8 +99,11 @@ EDIT PERSON CLIENT
 @login_required
 def edit_client_person(request, id):
     client = get_object_or_404(ClientPerson, pk=id)
+    user = request.user
     # Using instance, the form already start with the data from the client received
-    form = ClientPersonForm(request.POST or None, request.FILES or None, instance=client)
+    form = ClientPersonForm(request.POST or None, request.FILES or None, user=user, instance=client)
+    # form = ClientPersonForm(request.POST or None, request.FILES or None, instance=client)
+
 
     if form.is_valid():
         form.save()

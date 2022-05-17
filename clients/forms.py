@@ -1,5 +1,8 @@
 from django.forms import ModelForm
+from django.http import request
+from django.contrib.auth.models import User
 from .models import ClientCompany, ClientPerson
+from django.contrib.sessions.models import Session
 
 from django import forms
 from django.core.validators import RegexValidator
@@ -35,3 +38,8 @@ class ClientPersonForm(ModelForm):
     class Meta:
         model = ClientPerson
         fields = ['first_name','last_name', 'cpf', 'phone', 'email', 'person_company', 'pending_payments', 'received_payments', 'description']
+
+    def __init__(self,  *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(ClientPersonForm, self).__init__(*args, **kwargs)
+        self.fields['person_company'].queryset = ClientCompany.objects.filter(user=self.user)

@@ -1,8 +1,12 @@
+from django.conf import settings
 from django.db import models
 
+User = settings.AUTH_USER_MODEL
 
 # Company client
 class ClientCompany(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
     company_name = models.CharField(max_length=30)
     company_cnpj = models.IntegerField()
     phone = models.IntegerField(null=True, blank=True)
@@ -18,6 +22,8 @@ class ClientCompany(models.Model):
 
 # Person Client
 class ClientPerson(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=90)
     cpf = models.IntegerField()
@@ -35,6 +41,8 @@ class ClientPerson(models.Model):
 
 # Documents
 class ClientDocuments(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
     file = models.FileField(upload_to='clients_files')

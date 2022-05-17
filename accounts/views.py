@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.views.generic import CreateView, FormView
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 
 from .forms import LoginForm, RegisterForm
 from .mixins import NextUrlMixin, RequestFormAttachMixin
@@ -57,7 +57,7 @@ def register_page(request):
 class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'registration/register.html'
-    success_url = '/login/'
+    success_url = '/register/login/'
 
     User = get_user_model()
 
