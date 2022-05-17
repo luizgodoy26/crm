@@ -4,6 +4,8 @@
 
 <div class="container">
 
+    {% if user.id == client.user.id %}
+
         <div class="container-form">
             <form method="POST" enctype="multipart/form-data" >
                 {% csrf_token %}
@@ -14,9 +16,13 @@
 
 
         <div class="container-descript">
-            <h2 class="h2-containter">Ajuste aqui o cadastro dos seus clientes!</h2>
+            <h2 class="h2-containter">Edit here your clients data!</h2>
             <img src="https://i.ibb.co/pX0bq35/Illustration.png" class="img-form">
         </div>
+
+    {% else %}
+        <h2>You are not allowed to edit this page</h2>
+    {% endif %}
 
 </div>
 {% endblock %}

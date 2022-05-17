@@ -2,13 +2,19 @@
 
 {% block main %}
 
-    <h1>Confirma a deleção de {{ client.first_name }} ?</h1>
+    {% if user.id == client.user.id %}
 
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <button type="submit">Delete</button>
-    </form>
-    <br>
-    <a href="{% url 'companies_list' %}"><button>Cancel</button></a>
+        <h1>Do you want to delete {{ client.first_name }} ?</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+        </form>
+        <br>
+        <a href="{% url 'companies_list' %}"><button>Cancel</button></a>
+
+    {% else %}
+        <h2>You are not allowed to edit this page</h2>
+    {% endif %}
 
 {% endblock %}

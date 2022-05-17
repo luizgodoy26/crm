@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import ClientCompany, ClientPerson
 from .forms import ClientCompanyForm, ClientPersonForm
@@ -89,7 +90,7 @@ def edit_client_company(request, id):
     if form.is_valid():
         form.save()
         return redirect('companies_list')
-    return render(request, 'client_company_form.html', {'form': form})
+    return render(request, 'client_company_form.html', {'form': form, 'client': client})
 
 
 
@@ -108,7 +109,7 @@ def edit_client_person(request, id):
     if form.is_valid():
         form.save()
         return redirect('person_list')
-    return render(request, 'client_person_form.html', {'form': form})
+    return render(request, 'client_person_form.html', {'form': form, 'client': client})
 
 
 
