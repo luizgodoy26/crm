@@ -80,10 +80,10 @@
             <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
-                        <img src="https://m.media-amazon.com/images/I/61Is5eRnq+L._AC_SY300_SX300_.jpg" alt="">
+                        <img src="https://media-exp1.licdn.com/dms/image/C4E03AQFBQ1HZr5iNEw/profile-displayphoto-shrink_800_800/0/1637244594616?e=1658361600&v=beta&t=_g6Dsfs2sFa0tVSStrPbfFFX-SrHa6JI80XU8An3R58" alt="">
                         <div class="name_job">
-                            <div class="name">{{ user.first_name}}</div>
-                            <div class="job">{{ user.username }}</div>
+                            <div class="name">{{ user.full_name}}</div>
+                            <div class="job">{{ user.email }}</div>
                         </div>
                     </div>
                     <a href="{% url 'logout' %}">
