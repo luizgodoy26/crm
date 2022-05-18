@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django.http import request
 from django.contrib.auth.models import User
-from .models import ClientCompany, ClientPerson
+from .models import ClientCompany, ClientPerson, ClientDocuments
 from django.contrib.sessions.models import Session
 
 from django import forms
@@ -43,3 +43,22 @@ class ClientPersonForm(ModelForm):
         self.user = kwargs.pop('user', None)
         super(ClientPersonForm, self).__init__(*args, **kwargs)
         self.fields['person_company'].queryset = ClientCompany.objects.filter(user=self.user)
+
+
+"""
+FORM FOR FILES
+"""
+class FilesForm(ModelForm):
+    name = forms.CharField(required=True, label='File name', widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'File name'}))
+    description = forms.CharField(required=True, label='File description', widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'File description'}))
+    class Meta:
+        model = ClientDocuments
+        fields = ['name', 'description', 'client_company', 'client_person', 'file']
+
+    def __init__(self,  *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(FilesForm, self).__init__(*args, **kwargs)
+        self.fields['client_company'].queryset = ClientCompany.objects.filter(user=self.user)
+        self.fields['client_person'].queryset = ClientPerson.objects.filter(user=self.user)

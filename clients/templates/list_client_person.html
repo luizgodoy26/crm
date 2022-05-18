@@ -52,6 +52,7 @@ Client person List
                         <th>Client CPF</th>
                         <th>Phone</th>
                         <th>Email</th>
+                        <th>Company</th>
                         <th>Pending payments</th>
                         <th>Received payments</th>
                         <th>Options</th>
@@ -82,6 +83,13 @@ Client person List
                         <td>
                             <a href="{% url 'edit_client_person' client.id %}">
                                 {% if client.email %} {{client.email}} {% else %} &nbsp; {% endif %}
+                            </a>
+                        </td>
+
+                        <!-- COMPANY -->
+                        <td>
+                            <a href="{% url 'edit_client_person' client.id %}">
+                                {% if client.person_company %} {{client.person_company}} {% else %} &nbsp; {% endif %}
                             </a>
                         </td>
 

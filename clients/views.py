@@ -1,7 +1,6 @@
-from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import ClientCompany, ClientPerson
-from .forms import ClientCompanyForm, ClientPersonForm
+from .models import ClientCompany, ClientPerson, ClientDocuments
+from .forms import ClientCompanyForm, ClientPersonForm, FilesForm
 from django.contrib.auth.decorators import login_required
 
 from django.db.models import Sum
@@ -11,7 +10,6 @@ from django.db.models import Sum
 """
 LIST THE CLIENT COMPANIES
 """
-# List the companies
 @login_required
 def client_company_list(request):
     clients = ClientCompany.objects.filter(user=request.user)
@@ -41,11 +39,21 @@ def client_person_list(request):
                                                        })
 
 
+"""
+LIST THE FILES
+"""
+@login_required
+def files_list(request):
+    files = ClientDocuments.objects.filter(user=request.user)
+    files_count = ClientDocuments.objects.filter(user=request.user).count()
+    return render(request, 'list_client_files.html', {'files': files,
+                                                       'files_count': files_count})
+
+
 
 """
 ADD A NEW CLIENT COMPANY
 """
-# Crate a new company
 @login_required
 def new_client_company(request):
     # Start post add the company to the DB using POST or start a new form using None
@@ -57,7 +65,7 @@ def new_client_company(request):
         form.user = request.user
         form.save()
         return redirect('companies_list')
-    return render(request, 'client_company_form.html', {'form': form})
+    return render(request, 'add_client_company_.html', {'form': form})
 
 
 
@@ -74,8 +82,24 @@ def new_client_person(request):
         form.user = request.user
         form.save()
         return redirect('person_list')
-    return render(request, 'client_person_form.html', {'form': form})
+    return render(request, 'add_client_person.html', {'form': form})
 
+
+
+"""
+ADD A NEW FILE
+"""
+@login_required
+def new_file(request):
+    user = request.user
+    form = FilesForm(request.POST or None, request.FILES or None, user=user)
+
+    if form.is_valid():
+        form = form.save(commit=False)
+        form.user = request.user
+        form.save()
+        return redirect('files_list')
+    return render(request, 'file_form.html', {'form': form})
 
 
 """
@@ -119,7 +143,6 @@ DELETE CLIENT COMPANY
 @login_required
 def delete_client_company(request, id):
     client = get_object_or_404(ClientCompany, pk=id)
-    form = ClientCompanyForm(request.POST or None, request.FILES or None, instance=client)
 
     if request.method == 'POST':
         client.delete()
@@ -135,10 +158,24 @@ DELETE CLIENT PERSON
 @login_required
 def delete_client_person(request, id):
     client = get_object_or_404(ClientPerson, pk=id)
-    form = ClientPersonForm(request.POST or None, request.FILES or None, instance=client)
 
     if request.method == 'POST':
         client.delete()
         return redirect('person_list')
 
     return render(request, 'deletion_client_person_confirm.html', {'client': client})
+
+
+"""
+DELETE FILE
+"""
+@login_required
+def delete_file(request, id):
+    file = get_object_or_404(ClientDocuments, pk=id)
+    user = request.user
+
+    if request.method == 'POST':
+        file.delete()
+        return redirect('files_list')
+
+    return render(request, 'deletion_file_confirm.html', {'file': file, 'user':user})
