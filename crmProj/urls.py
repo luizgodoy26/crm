@@ -3,6 +3,7 @@ from django.urls import path, include
 from clients import urls as clients_urls
 from home import urls as home_urls
 from accounts import urls as accounts_urls
+from contracts import urls as contract_urls
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -10,6 +11,7 @@ urlpatterns = [
     path('', include(home_urls)),
 
     path('register/', include(accounts_urls)),
+    path('contracts/', include(contract_urls)),
 
     # Login and logout
     # path('login/', auth_views.LoginView.as_view(), name='login'),

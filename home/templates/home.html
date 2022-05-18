@@ -14,6 +14,9 @@
 
     {% else %}
         <a href="{% url 'login' %}"><button class="btn-login">Login</button></a>
+        <br>
+        <br>
+        <a href="{% url 'register_page' %}"><button class="btn-register">Register</button></a>
     {% endif %}
 
 {% endblock %}

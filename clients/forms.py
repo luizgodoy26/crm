@@ -1,11 +1,7 @@
 from django.forms import ModelForm
-from django.http import request
-from django.contrib.auth.models import User
 from .models import ClientCompany, ClientPerson, ClientDocuments
-from django.contrib.sessions.models import Session
 
 from django import forms
-from django.core.validators import RegexValidator
 
 """
 FORM FOR CLIENT COMPANY
