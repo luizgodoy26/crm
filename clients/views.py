@@ -102,6 +102,7 @@ def new_file(request):
     return render(request, 'file_form.html', {'form': form})
 
 
+#TODO set the client edit to user
 """
 EDIT COMPANY CLIENT
 """

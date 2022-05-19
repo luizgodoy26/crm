@@ -4,6 +4,8 @@ from clients.models import ClientCompany, ClientPerson
 from .models import Contract
 from django import forms
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 """
 FORM FOR CLIENT PERSON
@@ -12,9 +14,9 @@ class ContractForm(ModelForm):
     class Meta:
         model = Contract
         widgets = {
-            'starting_date': forms.DateInput(format=('%d %b %Y'),attrs={'placeholder':'Date of the contract'},),
-            'ending_date': forms.DateInput(format=('%d %b %Y'),attrs={'placeholder':'Ending of the contract'},),
-            'payment_date': forms.DateInput(format=('%d %b %Y'),attrs={'placeholder':'Date of payment'},),
+            'starting_date': DateInput(),
+            'ending_date': DateInput(),
+            'payment_date': DateInput(),
         }
         fields = ['contract_name', 'person_client', 'company_client', 'starting_date', 'ending_date', 'payment_date', 'payment_method', 'status', 'value', 'invoice', 'description', 'file']
 

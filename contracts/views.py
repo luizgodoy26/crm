@@ -1,7 +1,12 @@
+from datetime import datetime, date
+
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import ContractForm
+from .models import Contract
+
+from django.db.models import Sum
 
 """
 ADD A NEW FILE
@@ -17,3 +22,37 @@ def new_contract(request):
         form.save()
         return redirect('files_list')
     return render(request, 'contract_form.html', {'form': form})
+
+
+# TODO: add delete contract
+
+
+"""
+LIST CONTRACT
+"""
+@login_required
+def contract_list(request):
+    contracts = Contract.objects.filter(user=request.user)
+    total_contracts_value = Contract.objects.filter(user=request.user).aggregate(sum=Sum('value'))['sum'] or 0
+    contracts_count = Contract.objects.filter(user=request.user).count()
+    today = date.today()
+    return render(request, 'list_contract.html', {'contracts': contracts,
+                                                       'total_contracts_value': total_contracts_value,
+                                                       'contracts_count': contracts_count, 'today':today})
+
+
+"""
+EDIT COMPANY CLIENT
+"""
+@login_required
+def edit_contract(request, id):
+    contract = get_object_or_404(Contract, pk=id)
+    user = request.user
+
+    # Using instance, the form already start with the data from the client received
+    form = ContractForm(request.POST or None, request.FILES or None, user=user, instance=contract)
+
+    if form.is_valid():
+        form.save()
+        return redirect('contract_list')
+    return render(request, 'contract_form.html', {'form': form, 'contract': contract})
