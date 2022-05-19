@@ -24,9 +24,6 @@ def new_contract(request):
     return render(request, 'contract_form.html', {'form': form})
 
 
-# TODO: add delete contract
-
-
 """
 LIST CONTRACT
 """
@@ -56,3 +53,17 @@ def edit_contract(request, id):
         form.save()
         return redirect('contract_list')
     return render(request, 'contract_form.html', {'form': form, 'contract': contract})
+
+
+"""
+DELETE CLIENT PERSON
+"""
+@login_required
+def delete_contract(request, id):
+    contract = get_object_or_404(Contract, pk=id)
+
+    if request.method == 'POST':
+        contract.delete()
+        return redirect('contract_list')
+
+    return render(request, 'deletion_contract_confirm.html', {'contract': contract})
