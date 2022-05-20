@@ -79,9 +79,11 @@ Companies List
                         <td>
                             <a href="{% url 'edit_contract' contract.id %}">
                                 {% if contract.status == 'PN'  %}
-                                    {{ today |sub:contract.starting_date  }}
+                                    {{ today |timeuntil:contract.starting_date  }}
+                                {% elif contract.status == 'PD'  %}
+                                    Payd
                                 {% else %}
-                                    TODO
+                                    Canceled
                                 {% endif %}
                             </a>
                         </td>

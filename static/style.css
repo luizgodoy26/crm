@@ -719,7 +719,7 @@ label{
 /* cal/static/cal/css/styles.css */
 
 .calendar {
-  width: 98%;
+  width: 90%;
   margin: auto;
   font-size: 13px;
 }
@@ -736,7 +736,7 @@ label{
 
 .calendar .calendar-td {
   width: 200px;
-  height: 150px;
+  height: 100px;
   padding: 20px 0px 0px 5px;
 }
 
@@ -770,3 +770,32 @@ label{
     float: right;
 }
 
+
+.calendar-li{
+    list-style-type: none;
+    padding: 5px;
+    padding-left: 10px;
+    margin: 10px;
+    margin-left: -15px;
+    border-radius: 5px;
+    max-width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.starting{
+    background-color: #D8E3F2;
+    color: #0540F2;
+}
+
+.ending{
+    color: #FFFFFF;
+    background-color: #F25252;
+}
+
+.paying{
+    color: #FFFFFF;
+    background-color: #0540F2;
+}

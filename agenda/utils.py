@@ -52,14 +52,14 @@ class Calendar(HTMLCalendar):
     def formatday(self, day, events):
         contracts_starting_per_day = events.filter(starting_date__day=day)
         contracts_ending_per_day = events.filter(ending_date__day=day)
-        contracts_paying_per_day = events.filter(ending_date__day=day)
+        contracts_paying_per_day = events.filter(payment_date__day=day)
         d = ''
         for contract in contracts_starting_per_day:
-                d += f"<li class='calendar-li' style='color:green'> {contract.contract_name} </li>"
+                d += f"<li class='calendar-li starting'> {contract.contract_name} </li>"
         for contract in contracts_ending_per_day:
-                d += f"<li class='calendar-li' style='color:red'> {contract.contract_name} </li>"
+                d += f"<li class='calendar-li ending'> {contract.contract_name} </li>"
         for contract in contracts_paying_per_day:
-                d += f"<li class='calendar-li' style='color:blue'> {contract.contract_name} </li>"
+                d += f"<li class='calendar-li paying'> {contract.contract_name} </li>"
 
 
         if day != 0:

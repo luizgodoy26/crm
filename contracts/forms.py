@@ -23,5 +23,5 @@ class ContractForm(ModelForm):
     def __init__(self,  *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(ContractForm, self).__init__(*args, **kwargs)
-        self.fields['person_client'].queryset = ClientCompany.objects.filter(user=self.user)
-        self.fields['company_client'].queryset = ClientPerson.objects.filter(user=self.user)
+        self.fields['company_client'].queryset = ClientCompany.objects.filter(user=self.user)
+        self.fields['person_client'].queryset = ClientPerson.objects.filter(user=self.user)
