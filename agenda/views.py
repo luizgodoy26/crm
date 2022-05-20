@@ -7,13 +7,14 @@ from django.urls import reverse
 from django.views import generic
 from django.utils.safestring import mark_safe
 
+from contracts.models import Contract
 from .forms import EventForm
 from .models import *
 from .utils import Calendar
 
 class CalendarView(generic.ListView):
-    model = Event
-    #model2 = Contract
+    # model = Event
+    model = Contract
     template_name = 'calendar.html'
 
     def get_context_data(self, **kwargs):
@@ -68,3 +69,4 @@ def event(request, event_id=None):
         form.save()
         return HttpResponseRedirect(reverse('calendar'))
     return render(request, 'event.html', {'form': form})
+
