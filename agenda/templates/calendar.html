@@ -5,9 +5,22 @@
       <div class="container">
 
             <div class="container-date">
+
+                        <h2>Calendar</h2>
                   <div>
-                        <a href="{% url 'calendar' %}?{{ next_month }}"><button class="btn btn-prev right" > Next Month</button></a>
-                        <a href="{% url 'calendar' %}?{{ prev_month }} "><button class="btn btn-next right" > Previous Month</button></a>
+                        <div class="btn-next-icon">
+                              <a href="{% url 'calendar' %}?{{ next_month }}" class="new-client-icon">
+                                <i class="fa-solid fa-angle-right"></i>
+                              </a>
+                              <span class="tooltip">Next month</span>
+                        </div>
+
+                        <div class="btn-prev-icon">
+                              <a href="{% url 'calendar' %}?{{ prev_month }}" class="new-client-icon">
+                                <i class="fa-solid fa-angle-left"></i>
+                              </a>
+                              <span class="tooltip">Previous month</span>
+                        </div>
 
                   </div>
                   {{ calendar  }}

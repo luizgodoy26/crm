@@ -55,7 +55,7 @@ class Calendar(HTMLCalendar):
         contracts_paying_per_day = events.filter(payment_date__day=day)
         d = ''
         for contract in contracts_starting_per_day:
-                d += f"<li class='calendar-li starting'> {contract.contract_name} </li>"
+                d += f"<li class='calendar-li starting'>{contract.get_html_url} {contract.contract_name}</li>"
         for contract in contracts_ending_per_day:
                 d += f"<li class='calendar-li ending'> {contract.contract_name} </li>"
         for contract in contracts_paying_per_day:

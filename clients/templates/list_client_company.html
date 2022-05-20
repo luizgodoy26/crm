@@ -92,7 +92,7 @@ Companies List
 
                         <!-- RECEIVED PAYMENTS -->
                         <td>
-                            <a href="{% url 'edit_client_company' client.id %}" class="received-a">
+                            <a href="{% url 'edit_client_company' client.id %}" class="received">
                                 {% if client.received_payments %} {{client.received_payments}} {% else %} &nbsp; {% endif %}
                             </a>
                         </td>

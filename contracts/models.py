@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 
 from clients.models import ClientCompany, ClientPerson, ClientDocuments
 
@@ -48,6 +49,10 @@ class Contract(models.Model):
     file = models.ForeignKey(ClientDocuments, null=True, blank=True, on_delete=models.CASCADE)
     # workers = models.ForeignKey(Worker, null=True, blank=True, on_delete=models.PROTECT)
 
+    @property
+    def get_html_url(self):
+        url = reverse('edit_contract', args=(self.id,))
+        return f'<a href="{url}"> {self.contract_name} </a>'
 
     # To return the name of the person on the django admin
     def __str__(self):

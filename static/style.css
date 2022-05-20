@@ -453,6 +453,112 @@ button{
     color: #000000;
 }
 
+
+/* NEXT BTN */
+.btn-next-icon{
+    width: 25px;
+    height: 25px;
+    float: right;
+    margin-right: 60px;
+}
+
+.btn-next-icon a:hover{
+    background-color: #FFFFFF;
+    padding: 10px;
+    border-radius: 100%;
+    color: #0540F2;
+    outline: 1px solid #0540F2;
+}
+
+.btn-next-icon a{
+    justify-content:center;
+    border-radius: 100%;
+    font-size: 34px;
+}
+
+.btn-next-icon .tooltip{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.btn-next-icon:hover .tooltip{
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.5s ease;
+}
+
+.btn-next-icon .tooltip{
+    position: relative;
+    left: -80px;
+    top: -25px;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    height: 35px;
+    width: 122px;
+    background: #FFFFFF;
+    line-height: 35px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0s;
+    opacity: 0;
+    pointer-events: none;
+    display: block;
+    color: #000000;
+}
+
+
+/* PREVIOUS BTN */
+.btn-prev-icon{
+    width: 25px;
+    height: 25px;
+    float: left;
+    margin-left: 60px;
+}
+
+.btn-prev-icon:hover a{
+    background-color: #FFFFFF;
+    padding: 10px;
+    border-radius: 100%;
+    color: #0540F2;
+    outline: 1px solid #0540F2;
+}
+
+.btn-prev-icon a{
+    justify-content:center;
+    border-radius: 100%;
+    font-size: 34px;
+}
+
+.btn-prev-icon .tooltip{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.btn-prev-icon:hover .tooltip{
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.5s ease;
+}
+
+.btn-prev-icon .tooltip{
+    position: relative;
+    left: 160px;
+    top: -25px;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    height: 35px;
+    width: 200px;
+    background: #FFFFFF;
+    line-height: 35px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0s;
+    opacity: 0;
+    pointer-events: none;
+    display: block;
+    color: #000000;
+}
+
 /*LOGIN BUTTON*/
 .btn-login{
     background-color: #0540F2;
@@ -637,8 +743,7 @@ label{
     font-weight: 600;
 }
 
-.received-a{
-    color: #0540F2;
+a .received{
     font-weight: 500;
 }
 
@@ -708,15 +813,7 @@ label{
 
 
 
-
-
-
-
-
-
-
-
-/* cal/static/cal/css/styles.css */
+/* CALENDAR */
 
 .calendar {
   width: 90%;
@@ -725,7 +822,7 @@ label{
 }
 
 .calendar tr, .calendar td {
-  border: 1px solid black;
+  border: 1px solid #D8E3F2;
 }
 
 .calendar th {
@@ -737,7 +834,7 @@ label{
 .calendar .calendar-td {
   width: 200px;
   height: 100px;
-  padding: 20px 0px 0px 5px;
+  padding: 20px 10px 0px 0px;
 }
 
 .month {
@@ -745,7 +842,10 @@ label{
 }
 
 .date {
+  padding-left: 10px;
   font-size: 16px;
+  color: #5E9FF2;
+  float: right;
 }
 
 .calendar-ul {
@@ -766,8 +866,10 @@ label{
     flex-direction: column;
 }
 
-.right{
-    float: right;
+.container-date h2{
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -798,4 +900,10 @@ label{
 .paying{
     color: #FFFFFF;
     background-color: #0540F2;
+}
+
+
+/* FLOAT TAG */
+.right{
+    float: right;
 }
