@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="container">
+
+        <div class="container-form">
+
+        <form method="post">
+          {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="btn btn-info right"> Submit </button>
+          </table>
+        </form>
+
+        </div>
+        <div class="container-descript">
+            <h2 class="h2-containter">Add here an event!</h2>
+            <img src="https://i.ibb.co/pX0bq35/Illustration.png" class="img-form">
+        </div>
+</div>
+{% endblock %}

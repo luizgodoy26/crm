@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+      <div class="container">
+
+            <div class="container-date">
+                  <div>
+                        <a href="{'% url 'cal:calendar' %}?{'{ prev_month }}"><button class="btn btn-next right" > Previous Month</button></a>
+                        <a href="{'% url 'cal:calendar' %}?{'{ next_month }}"><button class="btn btn-prev right" > Next Month</button></a>
+                  </div>
+                  {{ calendar  }}
+            </div>
+
+      </div>
+
+{% endblock %}

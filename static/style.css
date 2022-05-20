@@ -378,6 +378,10 @@ select{
 /*
 BUTTONS BUTTONS BUTTONS BUTTONS BUTTONS BUTTONS
 */
+.btn{
+    margin: 12px;
+}
+
 button{
     border-radius: 99px;
     padding-top: 5px;
@@ -490,6 +494,30 @@ button{
     border: 2px solid #0540F2;
 }
 
+/* NEXT AND PREV BUTTON */
+.btn-next{
+    background-color: #0540F2;
+    color: #FFFFFF;
+    border: 2px solid #0540F2;
+}
+
+.btn-next:hover{
+    background-color: #FFFFFF;
+    color: #0540F2;
+    border: 2px solid #0540F2;
+}
+
+.btn-prev{
+    background-color: #0540F2;
+    color: #FFFFFF;
+    border: 2px solid #0540F2;
+}
+
+.btn-prev:hover{
+    background-color: #FFFFFF;
+    color: #0540F2;
+    border: 2px solid #0540F2;
+}
 
 /*
     CONTAINER CONTAINER CONTAINER CONTAINER
@@ -677,3 +705,68 @@ label{
     align-items: center;
     justify-content: center;
 }
+
+
+
+
+
+
+
+
+
+
+
+/* cal/static/cal/css/styles.css */
+
+.calendar {
+  width: 98%;
+  margin: auto;
+  font-size: 13px;
+}
+
+.calendar tr, .calendar td {
+  border: 1px solid black;
+}
+
+.calendar th {
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.calendar .calendar-td {
+  width: 200px;
+  height: 150px;
+  padding: 20px 0px 0px 5px;
+}
+
+.month {
+  font-size: 25px;
+}
+
+.date {
+  font-size: 16px;
+}
+
+.calendar-ul {
+  height: 100%;
+  padding: 0px 5px 0px 20px;
+}
+
+
+.container-date{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: #FBFBFB;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
+    border-radius: 2rem;
+    flex-direction: column;
+}
+
+.right{
+    float: right;
+}
+
