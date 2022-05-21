@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 
+from clients.forms import FilesForm
 from clients.models import ClientCompany, ClientPerson
 from .models import Contract
 from django import forms

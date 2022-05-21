@@ -55,11 +55,30 @@ class Calendar(HTMLCalendar):
         contracts_paying_per_day = events.filter(payment_date__day=day)
         d = ''
         for contract in contracts_starting_per_day:
-                d += f"<li class='calendar-li starting'>{contract.get_html_url} {contract.contract_name}</li>"
+            if contract.company_client:
+                client = contract.company_client
+            elif contract.person_client:
+                client = contract.person_client
+            else:
+                client = '-'
+            d += f"<a href='http://127.0.0.1:8000/contracts/editct/{contract.id}'> <li class='calendar-li starting' title='{contract.contract_name}'> {contract.contract_name} <p class='calendar-p'> {client} </p> </li> </a>"
         for contract in contracts_ending_per_day:
-                d += f"<li class='calendar-li ending'> {contract.contract_name} </li>"
+            if contract.company_client:
+                client = contract.company_client
+            elif contract.person_client:
+                client = contract.person_client
+            else:
+                client = '-'
+            d += f"<a href='http://127.0.0.1:8000/contracts/editct/{contract.id}'> <li class='calendar-li ending' title='{contract.contract_name}'> {contract.contract_name} <p class='calendar-p'> {client} </p> </li> </a>"
         for contract in contracts_paying_per_day:
-                d += f"<li class='calendar-li paying'> {contract.contract_name} </li>"
+            if contract.company_client:
+                client = contract.company_client
+            elif contract.person_client:
+                client = contract.person_client
+            else:
+                client = '-'
+            d += f"<a href='http://127.0.0.1:8000/contracts/editct/{contract.id}'> <li class='calendar-li paying' title='{contract.contract_name}'> {contract.contract_name} <p class='calendar-p'> {client} </p> </li> </a>"
+
 
 
         if day != 0:

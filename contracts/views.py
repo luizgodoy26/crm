@@ -3,6 +3,7 @@ from datetime import datetime, date
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
+from clients.forms import FilesForm
 from .forms import ContractForm
 from .models import Contract
 
@@ -15,12 +16,13 @@ ADD A NEW FILE
 def new_contract(request):
     user = request.user
     form = ContractForm(request.POST or None, request.FILES or None, user=user)
+    files_form = FilesForm(request.POST or None, request.FILES or None, user=user)
 
     if form.is_valid():
         form = form.save(commit=False)
         form.user = request.user
         form.save()
-        return redirect('files_list')
+        return redirect('contract_list')
     return render(request, 'contract_form.html', {'form': form})
 
 

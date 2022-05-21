@@ -7,6 +7,20 @@
             <div class="container-date">
 
                         <h2>Calendar</h2>
+                        <ul class="guide-ul">
+                              <li class="guide-li">
+                                    <div class="guide-color light-blue"></div>
+                                    Starting contract
+                              </li>
+                              <li class="guide-li">
+                                    <div class="guide-color red"></div>
+                                    Ending contract
+                              </li>
+                              <li class="guide-li">
+                                    <div class="guide-color green"></div>
+                                    Paying contract
+                              </li>
+                        </ul>
                   <div>
                         <div class="btn-next-icon">
                               <a href="{% url 'calendar' %}?{{ next_month }}" class="new-client-icon">
