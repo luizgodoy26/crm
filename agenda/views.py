@@ -14,6 +14,7 @@ class CalendarView(LoginRequiredMixin, generic.ListView):
     model = Contract
     template_name = 'calendar.html'
 
+    # Send to calendar only the contracts that belongs to the user of the request
     def get_queryset(self):
         return Contract.objects.filter(user=self.request.user)
 
@@ -23,6 +24,7 @@ class CalendarView(LoginRequiredMixin, generic.ListView):
         # Get the actual month to display the calendar
         d = get_date(self.request.GET.get('month', None))
         agenda = Calendar(d.year, d.month)
+        # Send the contracts to the Calendar
         html_agenda = agenda.formatmonth(withyear=True, contracts=self.get_queryset())
         context['calendar'] = mark_safe(html_agenda)
         context['prev_month'] = prev_month(d)
