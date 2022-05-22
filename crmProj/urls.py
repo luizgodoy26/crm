@@ -5,11 +5,15 @@ from home import urls as home_urls
 from accounts import urls as accounts_urls
 from contracts import urls as contract_urls
 from agenda import urls as agenda_urls
+from dashboard import urls as dashboard_urls
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     # Home
     path('', include(home_urls)),
+
+    # Dash
+    path('dashboard/', include(dashboard_urls)),
 
     path('register/', include(accounts_urls)),
     path('contracts/', include(contract_urls)),

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'accounts',
     'contracts',
     'agenda',
+    'dashboard',
     'home'
 ]
 

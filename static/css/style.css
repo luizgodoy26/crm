@@ -954,3 +954,27 @@ a .received{
 .green {
     background-color: #22F29B;
 }
+
+
+/* DASHBOARD */
+.column{
+    display: flex;
+    flex-direction: column;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
+.md{
+    width: 500px;
+    height: 250px;
+    margin-bottom: 30px;
+}
+
+.lg{
+    width: 500px;
+    height: 530px;
+    margin-bottom: 30px;
+}
