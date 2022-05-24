@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Companies List
+{% endblock %}
+
+
+{% block main %}
+
+    <div class="box-row">
+        <!-- Active customers -->
+        <div class="info-box">
+            <h3 class="h3-info-total">Person clients</h3>
+            <h1 class="h1-info-total">{{ client_count }}</h1>
+        </div>
+
+        <!-- Pending amount -->
+        <div class="info-box">
+            <h3 class="h3-info-total">Pending amount</h3>
+            <h4 class="h4-info-total pending">R$</h4>
+            <h2 class="h2-info-total pending">{{ pending_payments_total|floatformat:2 }}</h2>
+        </div>
+
+        <!-- Received amount -->
+        <div class="info-box">
+            <h3 class="h3-info-total">Received amount</h3>
+            <h4 class="h4-info-total received">R$</h4>
+            <h2 class="h2-info-total received">{{ received_payments_total|floatformat:2 }}</h2>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="container-list">
+
+            <h2>Task list</h2>
+
+            <table class="client-table">
+
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Title</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for task in tasks %}
+                    <tr>
+                        <!-- STATUS -->
+                        <td>
+                            <a href="#">
+                                {% if task.completed == True %}
+                                    Done
+                                {% elif task.completed == False %}
+                                    Pending
+                                {% endif %}
+                            </a>
+                        </td>
+
+                        <!-- TITLE -->
+                        <td>
+                            <a href="#">{{ task.title }}</a>
+                        </td>
+
+                        <!-- START DATE -->
+                        <td>
+                            <a href="#">
+                                {% if task.start_time %} {{task.start_time}} {% else %} &nbsp; {% endif %}
+                            </a>
+                        </td>
+
+                        <!-- END DATE -->
+                        <td>
+                            <a href="#">
+                                {% if task.end_time %} {{task.end_time}} {% else %} &nbsp; {% endif %}
+                            </a>
+                        </td>
+
+
+                        <!-- OPTIONS -->
+                        <td>
+                            <a href="#" class="edit-icon">
+                                <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                            </a>
+
+                            <a href="#" class="delete-icon">
+                                <i class="fa-regular fa-trash-can fa-lg"></i>
+                                <i class="fa-solid fa-trash-can fa-lg"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+
+            <div class="add-new-client-btn">
+                <a href="{% url 'new_client_company' %}" class="new-client-icon">
+                    <i class="fa-solid fa-user-plus"></i>
+                </a>
+                <span class="tooltip">Add task</span>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

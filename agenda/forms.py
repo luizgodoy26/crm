@@ -1,23 +1,26 @@
-from django.forms import ModelForm, DateInput
-from .models import Event
+from django.forms import ModelForm, DateInput, CheckboxInput
+from .models import Task
 from django import forms
 
 class DateInput(forms.DateInput):
     input_type = 'date'
 
+class CheckboxInput(forms.CheckboxInput):
+    input_type = 'checkbox'
 
-class EventForm(ModelForm):
+
+class TaskForm(ModelForm):
   class Meta:
-    model = Event
-    # datetime-local is a HTML5 input type, format to make date time show on fields
+    model = Task
+    completed = forms.CheckboxInput()
     widgets = {
       'start_time': DateInput(),
       'end_time': DateInput(),
+      # 'completed': CheckboxInput(attrs={'class': 'checkbox'}),
     }
-    fields = '__all__'
+    fields = ['title', 'description', 'start_time', 'end_time', 'completed']
 
     def __init__(self, *args, **kwargs):
-      super(EventForm, self).__init__(*args, **kwargs)
-      # input_formats to parse HTML5 datetime-local input to datetime field
+      super(TaskForm, self).__init__(*args, **kwargs)
       self.fields['start_time'].input_formats = ('%Y-%m-%d',)
       self.fields['end_time'].input_formats = ('%Y-%m-%d',)

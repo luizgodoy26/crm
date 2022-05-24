@@ -1,11 +1,16 @@
 import calendar
 from datetime import datetime, date, timedelta
 
-
+from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
+from django.shortcuts import redirect, render
 from django.views import generic
 from django.utils.safestring import mark_safe
+from django.views.generic import FormView
 
 from contracts.models import Contract
+from .forms import TaskForm
+from .models import Task
 from .utils import Calendar
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -53,16 +58,32 @@ def next_month(d):
     return month
 
 
-# def todo(request, event_id=None):
-#     instance = Todo()
-#     if event_id:
-#         instance = get_object_or_404(Todo, pk=event_id)
-#     else:
-#         instance = Todo()
-#
-#     form = EventForm(request.POST or None, instance=instance)
-#     if request.POST and form.is_valid():
-#         form.save()
-#         return HttpResponseRedirect(reverse('calendar'))
-#     return render(request, 'event.html', {'form': form})
 
+
+
+"""
+ADD A NEW TOOD
+"""
+@login_required
+def new_task(request):
+    user = request.user
+    form = TaskForm(request.POST or None, request.FILES or None)
+
+    if form.is_valid():
+        form = form.save(commit=False)
+        form.user = request.user
+        form.save()
+        return redirect('person_list')
+    return render(request, 'add_task.html', {'form': form})
+
+
+"""
+LIST THE CLIENT PERSONS
+"""
+@login_required
+def task_list(request):
+    tasks = Task.objects.filter(user=request.user).order_by('completed')
+    pending_tasks = Task.objects.filter(user=request.user).aggregate(sum=Sum('completed'!=True))['sum'] or 0
+    return render(request, 'list_task.html', {'tasks': tasks,
+                                                       'pending_tasks': pending_tasks
+                                                       })

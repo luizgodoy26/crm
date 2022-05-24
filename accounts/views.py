@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login
 from django.views.generic import CreateView, FormView
 from django.shortcuts import redirect, render
 
@@ -15,6 +15,11 @@ class LoginView(NextUrlMixin, RequestFormAttachMixin, FormView):
     def form_valid(self, form):
         next_path = self.get_next_url()
         return redirect(next_path)
+
+
+def is_safe_url(redirect_path, param):
+    pass
+
 
 def login_page(request):
     form = LoginForm(request.POST or None)

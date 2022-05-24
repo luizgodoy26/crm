@@ -260,7 +260,7 @@ a{
 /*
  INPUT TEXTAREA
 */
-input, textarea{
+textarea{
     font-family: Poppins;
     outline: none;
     border-radius: 10px;
@@ -275,7 +275,34 @@ input, textarea{
     -webkit-appearance: none;
 }
 
+input{
+    font-family: Poppins;
+    outline: none;
+    border-radius: 10px;
+    padding-top: 3px;
+    padding-left: 10px;
+    padding-bottom: 3px;
+    border:none;
+    width: 25rem;
+    height: 35px;
+    background: #D8E3F2;
+    margin-bottom: 20px;
+}
 
+input[type='checkbox'] {
+    width: 3rem;
+ }
+
+input:hover[type='checkbox'] {
+    outline:none;
+    cursor: pointer;
+ }
+
+
+input:focus[type='checkbox']{
+    outline: 0;
+    background: none;
+}
 
 /* HIDE SPIN BUTTON */
 input::-webkit-outer-spin-button,
