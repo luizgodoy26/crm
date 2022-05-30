@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load mathfilters %}
+
+{% block title %}
+Companies List
+{% endblock %}
+
+
+{% block main %}
+
+    <div class="box-row">
+        <!-- Active customers -->
+        <div class="info-box">
+            <h3 class="h3-info-total">Total contracts</h3>
+            <h1 class="h1-info-total">{{ contracts_count }}</h1>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="container-list">
+
+            <h2>Contracts list</h2>
+
+            <table class="client-table">
+
+                <thead>
+                    <tr>
+                        <th>Contract name</th>
+                        <th>Client</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Total value</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for contract in contracts %}
+                    <tr>
+                        <!-- NAME -->
+                        <td>
+                            <a href="#}">{{ contract.contract_name }}</a>
+                        </td>
+
+                        <!-- Client (Displays mainly the company client) -->
+                        <td>
+                            <a href="#">
+                                {% if contract.company_client  %}
+                                    {{ contract.company_client }}
+                                {% elif contract.person_client  %}
+                                    {{ contract.person_client }}
+                                {% elif contract.person_client and contract.company_client %}
+                                    {{ contract.company_client }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </a>
+                        </td>
+                        <!-- STARTING DATE -->
+                        <td>
+                            <a href="#">{{ contract.start_time }}</a>
+                        </td>
+                        <!-- ENDING DATE -->
+                        <td>
+                            <a href="#">{{ contract.end_time }}</a>
+                        </td>
+                        <!-- TOTAL VALUE -->
+                        <td>
+                            <a href="#">{{ contract.total_value }}</a>
+                        </td>
+
+
+
+                        <!-- OPTIONS -->
+                        <td>
+                            <a href="{% url 'edit_generated_contracts' contract.id %}" class="edit-icon">
+                                <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                            </a>
+
+                            <a href="#" class="delete-icon">
+                                <i class="fa-regular fa-trash-can fa-lg"></i>
+                                <i class="fa-solid fa-trash-can fa-lg"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+
+            <div class="add-new-client-btn">
+                <a href="#" class="new-client-icon">
+                <i class="fa-solid fa-file-circle-plus"></i>
+                </a>
+                <span class="tooltip">Add contract</span>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

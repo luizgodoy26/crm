@@ -11,8 +11,6 @@ class Item(models.Model):
 
     item_name = models.CharField(max_length=90)
     item_type = models.CharField(max_length=90)
-    item_value = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
-    item_quantity = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
 
     # Unity options
     METERS = 'MT'
