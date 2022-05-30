@@ -9,7 +9,7 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 """
-FORM FOR CLIENT PERSON
+FORM FOR CONTRACT
 """
 class ContractForm(ModelForm):
     class Meta:

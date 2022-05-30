@@ -24,6 +24,8 @@ class Item(models.Model):
 
     unity = models.CharField(choices=UNITY_CHOICES, default=METERS, max_length=20)
 
+    def __str__(self):
+        return self.item_name
 
 
 class Clausule(models.Model):
@@ -35,7 +37,8 @@ class Clausule(models.Model):
     clausule_description = models.TextField(blank=True, null=True)
 
 
-
+    def __str__(self):
+        return self.clausule_name
 
 class ClientContract(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -66,3 +69,5 @@ class ClientContract(models.Model):
     clausules = models.ManyToManyField(Clausule, blank=True, null=True)
 
 
+    def __str__(self):
+        return self.contract_name

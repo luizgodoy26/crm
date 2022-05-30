@@ -10,7 +10,7 @@ from .models import Contract
 from django.db.models import Sum
 
 """
-ADD A NEW FILE
+ADD A NEW CONTRACT
 """
 @login_required
 def new_contract(request):

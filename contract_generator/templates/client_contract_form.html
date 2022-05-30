@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="container">
+
+        <div class="container-form">
+
+            <form method="POST" enctype="multipart/form-data" >
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit" class="btn-confirm">Confirm</button>
+            </form>
+        </div>
+
+
+        <div class="container-descript">
+            <h2 class="h2-containter">Generate your contract here!</h2>
+            <img src="https://i.ibb.co/pX0bq35/Illustration.png" class="img-form">
+
+        </div>
+
+</div>
+{% endblock %}
