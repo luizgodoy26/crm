@@ -4,34 +4,54 @@
 
 <div class="container column">
 
-        <div class="container row" >
+        <div class="row" >
             <div class="info-box">
+                <h3>Total clients</h3>
+                <span id="total_clients"></span>
             </div>
 
             <div class="info-box">
+                <h3>Total contracts</h3>
+                <span id="total_contracts"></span>
             </div>
 
             <div class="info-box">
+                <h3>Total received</h3>
+                <span id="total_received"></span>
             </div>
 
             <div class="info-box">
+                <h3>Total pending</h3>
+                <span id="total_pending"></span>
             </div>
         </div>
 
-        <div class="container row">
+        <div class="row" id="dash-row-2">
 
-            <div class="container column">
+            <div class="column">
                 <div class="info-box md">
                 </div>
                 <div class="info-box md">
                 </div>
             </div>
 
-            <div class="container column">
+            <div class="column">
                 <div class="info-box lg">
                 </div>
             </div>
 
         </div>
 </div>
+
+
+
+<script>
+    window.onload = function(event) {
+        render_total_clients('{% url "number_of_clients" %}')
+        render_total_contracts('{% url "number_of_contracts" %}')
+        render_total_received('{% url "total_amount_received" %}')
+        render_total_pending('{% url "total_amount_pending" %}')
+    }
+</script>
+
 {% endblock %}

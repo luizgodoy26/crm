@@ -229,9 +229,10 @@ form{
 }
 
 .page_content{
-    position: absolute;
+    position: relative;
     height: 100%;
     left: 120px;
+    justify-content: center;
     width: calc(100% - 200px);
     transition: all 0.5s ease;
 }
@@ -983,25 +984,30 @@ a .received{
 }
 
 
+
 /* DASHBOARD */
 .column{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    row-gap: 30px;
 }
 
 .row{
     display: flex;
     flex-direction: row;
+    column-gap: 30px;
+    width: 100%;
+    row-gap: 30px;
+    justify-content: center;
 }
 
 .md{
-    width: 500px;
+    width: 527px;
     height: 250px;
-    margin-bottom: 30px;
 }
 
 .lg{
-    width: 500px;
+    width: 527px;
     height: 530px;
-    margin-bottom: 30px;
 }
