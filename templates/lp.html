@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://kit.fontawesome.com/99c9ebe140.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+        {% block navbar %}
+            <ul>
+              <li><a href="default.asp">Home</a></li>
+              <li><a href="news.asp">News</a></li>
+              <li><a href="contact.asp">Contact</a></li>
+              <li><a href="about.asp">About</a></li>
+            </ul>
+        {% endblock %}
+
+    <div class="page_content">
+        {% block main %}
+        {% endblock %}
+    </div>
+
+
+
+</body>
+</html>

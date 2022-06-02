@@ -24,7 +24,8 @@ function render_total_received(url){
     }).then(function(result){
         return result.json()
     }).then(function(data){
-        document.getElementById('total_received').innerHTML = data.total
+        var decVal = parseFloat(data.total).toFixed(2);
+        document.getElementById('total_received').innerHTML = decVal
     })
 }
 
@@ -35,7 +36,9 @@ function render_total_pending(url){
     }).then(function(result){
         return result.json()
     }).then(function(data){
-        document.getElementById('total_pending').innerHTML = data.total
+    decVal
+        var decVal = parseFloat(data.total).toFixed(2);
+        document.getElementById('total_pending').innerHTML = decVal
     })
 }
 
