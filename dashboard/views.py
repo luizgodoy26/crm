@@ -45,7 +45,7 @@ def total_amount_pending(request):
 def total_month_income(request):
     label = []
     jan = Contract.objects.filter(user=request.user, status='PD', payment_date__month=1).aggregate(sum=Sum('value'))['sum'] or 0
-    fev = Contract.objects.filter(user=request.user, status='PD', payment_date__month=2).aggregate(sum=Sum('value'))['sum'] or 0
+    feb = Contract.objects.filter(user=request.user, status='PD', payment_date__month=2).aggregate(sum=Sum('value'))['sum'] or 0
     mar = Contract.objects.filter(user=request.user, status='PD', payment_date__month=3).aggregate(sum=Sum('value'))['sum'] or 0
     apr = Contract.objects.filter(user=request.user, status='PD', payment_date__month=4).aggregate(sum=Sum('value'))['sum'] or 0
     may = Contract.objects.filter(user=request.user, status='PD', payment_date__month=5).aggregate(sum=Sum('value'))['sum'] or 0
@@ -57,12 +57,9 @@ def total_month_income(request):
     nov = Contract.objects.filter(user=request.user, status='PD', payment_date__month=11).aggregate(sum=Sum('value'))['sum'] or 0
     dec = Contract.objects.filter(user=request.user, status='PD', payment_date__month=12).aggregate(sum=Sum('value'))['sum'] or 0
 
-    data = [jan, fev, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
-    label = ['jan','fev','mar','apr','may','jun','jul','aug','sep','oct','nov','dec']
+    data = [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
+    label = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 
-    x = list(zip(label, data))
-    x.sort(key=lambda x: x[1], reverse=True)
-    x = list(zip(*x))
 
     if request.method == 'GET':
-        return JsonResponse({'labels': x[0][:3], 'data': x[1][:3]})
+        return JsonResponse({'labels': label, 'data':data})

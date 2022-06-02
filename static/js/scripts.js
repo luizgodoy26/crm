@@ -53,7 +53,7 @@ function render_month_received(url){
                 data: {
                     labels: data.labels,
                     datasets: [{
-                        label: 'Despesas',
+                        label: 'Income',
                         data: data.data,
                         borderWidth: 1,
                         backgroundColor: [
@@ -69,8 +69,20 @@ function render_month_received(url){
                     plugins: {
                         legend: {
                             display: false,
-                            labels: {
-                                color: 'rgb(255, 99, 132)'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                         },
+                        y: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                display: false
                             }
                         }
                     }
