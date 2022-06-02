@@ -38,3 +38,45 @@ function render_total_pending(url){
         document.getElementById('total_pending').innerHTML = data.total
     })
 }
+
+
+function render_month_received(url){
+        fetch(url, {
+            method: 'get',
+        }).then(function(result){
+            return result.json()
+        }).then(function(data){
+
+            const ctx = document.getElementById('month_income');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Despesas',
+                        data: data.data,
+                        borderWidth: 1,
+                        backgroundColor: [
+                          'rgba(242, 82, 82)',
+                          'rgba(34, 242, 155)',
+                          'rgba(100, 61, 242)',
+                          'rgba(217, 85, 181)',
+                        ],
+                        borderRadius: 10,
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false,
+                            labels: {
+                                color: 'rgb(255, 99, 132)'
+                            }
+                        }
+                    }
+                }
+
+            });
+
+        })
+}

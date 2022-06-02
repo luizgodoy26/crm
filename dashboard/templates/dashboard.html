@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
+{% block title %}Dashboard{% endblock %}
+
 {% block main %}
 
 <div class="container column">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <div class="row" >
             <div class="info-box">
@@ -29,8 +32,12 @@
         <div class="row" id="dash-row-2">
 
             <div class="column">
+
                 <div class="info-box md">
+                    <h3>Monthly income</h3>
+                    <canvas id="month_income" height="100px"></canvas>
                 </div>
+
                 <div class="info-box md">
                 </div>
             </div>
@@ -51,6 +58,8 @@
         render_total_contracts('{% url "number_of_contracts" %}')
         render_total_received('{% url "total_amount_received" %}')
         render_total_pending('{% url "total_amount_pending" %}')
+
+        render_month_received('{% url "total_month_income" %}')
     }
 </script>
 
