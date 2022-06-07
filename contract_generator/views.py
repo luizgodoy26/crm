@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
 from contract_generator.forms import ClientContractForm, ClausuleForm, ItemForm
-from contract_generator.models import ClientContract
+from contract_generator.models import ClientContract, Clausule
 
 
 @login_required
@@ -71,3 +71,13 @@ def edit_generated_contracts(request, id):
     return render(request, 'client_contract_form.html', {'form': form,
                                                          'contract': contract
                                                          })
+
+
+"""
+DETAIL CONTRACT
+"""
+@login_required
+def detail_generated_contract(request, id):
+    contract = get_object_or_404(ClientContract.objects.filter(user=request.user), pk=id)
+
+    return render(request, 'detail_generated_contract.html', {'contract': contract})

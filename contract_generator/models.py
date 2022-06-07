@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 
 from clients.models import ClientPerson, ClientCompany
+from contracts.models import Contract
 
 User = settings.AUTH_USER_MODEL
 
@@ -38,27 +39,32 @@ class Clausule(models.Model):
     def __str__(self):
         return self.clausule_name
 
+
+
+
 class ClientContract(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    original_contract = models.ForeignKey(Contract, on_delete=models.CASCADE, null=True, blank=True)
 
     contract_name = models.CharField(max_length=60)
 
     # Client related information
-    person_client = models.ForeignKey(ClientPerson, null=True, blank=True, on_delete=models.PROTECT)
-    company_client = models.ForeignKey(ClientCompany, null=True, blank=True, on_delete=models.PROTECT)
+    # person_client = models.ForeignKey(ClientPerson, null=True, blank=True, on_delete=models.PROTECT)
+    # company_client = models.ForeignKey(ClientCompany, null=True, blank=True, on_delete=models.PROTECT)
 
     # Contact related information
-    phone = models.IntegerField(null=True, blank=True)
-    email = models.EmailField(null=True, blank=True)
+    # phone = models.IntegerField(null=True, blank=True)
+    # email = models.EmailField(null=True, blank=True)
     address = models.TextField(blank=True, null=True)
 
     # Date related information
-    start_time = models.DateField(null=True, blank=True)
-    end_time = models.DateField(null=True, blank=True)
+    # start_time = models.DateField(null=True, blank=True)
+    # end_time = models.DateField(null=True, blank=True)
 
 
     # Value related information
-    total_value = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
+    # total_value = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     installments = models.IntegerField(null=True, blank=True)
 
 

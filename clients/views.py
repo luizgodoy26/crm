@@ -209,7 +209,7 @@ ADD A NEW FILE IN CLIENT DETAIL
 def new_file_detail(request, id):
     user = request.user
     client = get_object_or_404(ClientPerson, pk=id)
-    form = FilesForm(request.POST or None, request.FILES or None, user=user, instance=client, initial={'person_client': client})
+    form = FilesForm(request.POST or None, request.FILES or None, user=user, instance=client, initial={'client_person': client})
 
     if form.is_valid():
         form = form.save(commit=False)

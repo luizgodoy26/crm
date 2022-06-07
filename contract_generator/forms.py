@@ -1,6 +1,7 @@
 from django.forms import ModelForm, DateInput, CheckboxInput
 
 from clients.models import ClientCompany, ClientPerson
+from contracts.models import Contract
 from .models import Item, Clausule, ClientContract
 from django import forms
 
@@ -34,17 +35,14 @@ class ItemForm(ModelForm):
         super(ClausuleForm, self).__init__(*args, **kwargs)
 
 
+#TODO: adjust the choiche field to display multiple choices fields
+
 class ClientContractForm(ModelForm):
   class Meta:
     model = ClientContract
+    clausules = widget=forms.CheckboxSelectMultiple()
 
-    widgets = {
-        'start_time': DateInput(),
-        'end_time': DateInput(),
-    }
-
-    fields = ['contract_name', 'person_client', 'company_client', 'phone',
-              'email', 'address', 'start_time', 'end_time', 'total_value',
+    fields = ['original_contract', 'contract_name', 'address',
               'installments', 'items', 'clausules']
 
 
@@ -54,5 +52,6 @@ class ClientContractForm(ModelForm):
         super(ClausuleForm, self).__init__(*args, **kwargs)
         self.fields['clausules'].queryset = Clausule.objects.filter(user=self.user)
         self.fields['items'].queryset = Item.objects.filter(user=self.user)
-        self.fields['company_client'].queryset = ClientCompany.objects.filter(user=self.user)
-        self.fields['person_client'].queryset = ClientPerson.objects.filter(user=self.user)
+        self.fields['original_contract'].queryset = Contract.objects.filter(user=self.user)
+        # self.fields['company_client'].queryset = ClientCompany.objects.filter(user=self.user)
+        # self.fields['person_client'].queryset = ClientPerson.objects.filter(user=self.user)

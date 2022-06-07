@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+{% block main %}
+
+<div class="container-detail">
+
+        <h1>{{ contract.contract_name }}</h1>
+        <h2>{{ user.full_name }}</h2>
+            {{ contract.clausules }}
+
+
+
+            <div class="add-new-client-btn" style="margin-bottom:30px;">
+                <a href="{% url 'new_contract' %}" class="new-client-icon">
+                <i class="fa-solid fa-file-circle-plus"></i>
+                </a>
+                <span class="tooltip">Add contract</span>
+            </div>
+</div>
+{% endblock %}
