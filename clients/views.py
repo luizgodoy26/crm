@@ -194,10 +194,11 @@ DETAIL CLIENT
 def detail_client_person(request, id):
     client = get_object_or_404(ClientPerson.objects.filter(user=request.user), pk=id)
     client_files = ClientDocuments.objects.filter(user=request.user, client_person=client)
+    contracts = Contract.objects.filter(user=request.user, person_client=client)
     total_received = Contract.objects.filter(user=request.user, person_client=client, status='PD').aggregate(sum=Sum('value'))['sum'] or 0
     total_pending = Contract.objects.filter(user=request.user, person_client=client).aggregate(sum=Sum('value'))['sum'] or 0
 
-    return render(request, 'detail_client_person.html', {'client': client, 'client_files': client_files, "total_received": total_received, "total_pending": total_pending})
+    return render(request, 'detail_client_person.html', {'client': client, 'client_files': client_files, 'contracts': contracts, "total_received": total_received, "total_pending": total_pending})
 
 
 

@@ -737,7 +737,7 @@ label{
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 1em;
-    min-width: 1000px;
+    min-width: 90%;
     border-radius: 12px 12px 0 0;
     overflow: hidden;
 }
@@ -1021,4 +1021,21 @@ a .received{
     display: flex;
     flex-direction: column;
     text-align: left;
+    justify-content: center;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
+    padding: 2rem;
+    border-radius: 2rem;
+}
+
+.container-detail .client-table{
+    align-items: center;
+    table-layout: fixed;
+    justify-content: center;
+}
+
+
+.container-detail h3{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }

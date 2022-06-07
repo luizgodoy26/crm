@@ -6,7 +6,7 @@
 <div class="container-detail">
 
         <h1>{{ client.first_name }} {{ client.last_name }}</h1>
-        <table class="detail client-table">
+        <table class="client-table">
                 <thead>
                     <tr>
                         <th>Client data</th>
@@ -49,8 +49,10 @@
         </tbody>
         </table>
 
-        <table class="client-table">
 
+
+        <h3>Files list</h3>
+        <table class="client-table" style="margin-top:-10px">
                 <thead>
                     <tr>
                         <th>File name</th>
@@ -94,12 +96,120 @@
 
             </table>
 
-            <div class="add-new-client-btn">
+
+
+            <div class="add-new-client-btn" style="margin-bottom: 60px;">
                 <a href="{% url 'new_file_detail' client.id %}" class="new-client-icon">
                     <i class="fa-solid fa-paperclip"></i>
                 </a>
                 <span class="tooltip">Add file</span>
             </div>
 
+
+
+
+
+            <table class="client-table" style="margin-top:-10px">
+            <h3 >Contract list</h3>
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Client</th>
+                        <th>Contract name</th>
+                        <th>Days since start</th>
+                        <th>Payment date</th>
+                        <th>Invoice</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for contract in contracts %}
+                    <tr>
+                        <!-- NAME -->
+                        <td>
+                            <a href="{% url 'edit_contract' contract.id %}">{{ contract.get_status_display }}</a>
+                        </td>
+
+                        <!-- Client (Displays mainly the company client) -->
+                        <td>
+                            <a href="{% url 'edit_contract' contract.id %}">
+                                {% if contract.company_client  %}
+                                    {{ contract.company_client }}
+                                {% elif contract.person_client  %}
+                                    {{ contract.person_client }}
+                                {% elif contract.person_client and contract.company_client %}
+                                    {{ contract.company_client }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </a>
+                        </td>
+
+                        <!-- Client (Displays mainly the company client) -->
+                        <td>
+                            <a href="{% url 'edit_contract' contract.id %}">
+                                {% if contract.contract_name  %}
+                                    {{ contract.contract_name }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'edit_contract' contract.id %}">
+                                {% if contract.status == 'PN'  %}
+                                    {{ today |timeuntil:contract.starting_date  }}
+                                {% elif contract.status == 'PD'  %}
+                                    Payd
+                                {% else %}
+                                    Canceled
+                                {% endif %}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'edit_contract' contract.id %}">
+                                {% if contract.status == 'PD'  %}
+                                    {{ contract.payment_date }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'edit_contract' contract.id %}">
+                                {% if contract.invoice  %}
+                                    {{ contract.invoice }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </a>
+                        </td>
+
+
+                        <!-- OPTIONS -->
+                        <td>
+                            <a href="{% url 'edit_contract' contract.id %}" class="edit-icon">
+                                <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                            </a>
+
+                            <a href="{% url 'delete_contract' contract.id %}" class="delete-icon">
+                                <i class="fa-regular fa-trash-can fa-lg"></i>
+                                <i class="fa-solid fa-trash-can fa-lg"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+
+            <div class="add-new-client-btn" style="margin-bottom:30px;">
+                <a href="{% url 'new_contract' %}" class="new-client-icon">
+                <i class="fa-solid fa-file-circle-plus"></i>
+                </a>
+                <span class="tooltip">Add contract</span>
+            </div>
 </div>
 {% endblock %}
