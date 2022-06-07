@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load humanize %}
+
 {% block title %}
 Client person List
 {% endblock %}
@@ -17,14 +19,14 @@ Client person List
         <div class="info-box">
             <h3 class="h3-info-total">Pending amount</h3>
             <h4 class="h4-info-total pending">R$</h4>
-            <h2 class="h2-info-total pending">{{ pending_payments_total|floatformat:2 }}</h2>
+            <h2 class="h2-info-total pending">{{ pending_payments_total|floatformat:2|intcomma }}</h2>
         </div>
 
         <!-- Received amount -->
         <div class="info-box">
             <h3 class="h3-info-total">Received amount</h3>
             <h4 class="h4-info-total received">R$</h4>
-            <h2 class="h2-info-total received">{{ received_payments_total|floatformat:2 }}</h2>
+            <h2 class="h2-info-total received">{{ received_payments_total|floatformat:2|intcomma }}</h2>
         </div>
 
 
@@ -64,46 +66,46 @@ Client person List
                     <tr>
                         <!-- NAME -->
                         <td>
-                            <a href="{% url 'edit_client_person' client.id %}">{{ client.first_name }} {{ client.last_name }}</a>
+                            <a href="{% url 'detail_client_person' client.id %}">{{ client.first_name }} {{ client.last_name }}</a>
                         </td>
 
                         <!-- CPF -->
                         <td>
-                            <a href="{% url 'edit_client_person' client.id %}">{{ client.cpf }}</a>
+                            <a href="{% url 'detail_client_person' client.id %}">{{ client.cpf }}</a>
                         </td>
 
                         <!-- PHONE -->
                         <td>
-                            <a href="{% url 'edit_client_person' client.id %}">
+                            <a href="{% url 'detail_client_person' client.id %}">
                                 {% if client.phone %} {{client.phone}} {% else %} &nbsp; {% endif %}
                             </a>
                         </td>
 
                         <!-- EMAIL -->
                         <td>
-                            <a href="{% url 'edit_client_person' client.id %}">
+                            <a href="{% url 'detail_client_person' client.id %}">
                                 {% if client.email %} {{client.email}} {% else %} &nbsp; {% endif %}
                             </a>
                         </td>
 
                         <!-- COMPANY -->
                         <td>
-                            <a href="{% url 'edit_client_person' client.id %}">
+                            <a href="{% url 'detail_client_person' client.id %}">
                                 {% if client.person_company %} {{client.person_company}} {% else %} &nbsp; {% endif %}
                             </a>
                         </td>
 
                         <!-- PENDING PAYMENTS -->
                         <td>
-                            <a href="{% url 'edit_client_person' client.id %}" class="pending-a">
-                                {% if client.pending_payments %} {{client.pending_payments}} {% else %} &nbsp; {% endif %}
+                            <a href="{% url 'detail_client_person' client.id %}" class="pending-a">
+                                {% if client.pending_payments %} {{client.pending_payments|floatformat:2|intcomma }} {% else %} &nbsp; {% endif %}
                             </a>
                         </td>
 
                         <!-- RECEIVED PAYMENTS -->
                         <td>
-                            <a href="{% url 'edit_client_person' client.id %}" class="received-a">
-                                {% if client.received_payments %} {{client.received_payments}} {% else %} &nbsp; {% endif %}
+                            <a href="{% url 'detail_client_person' client.id %}" class="received-a">
+                                {% if client.received_payments %} {{client.received_payments|floatformat:2|intcomma}} {% else %} &nbsp; {% endif %}
                             </a>
                         </td>
 

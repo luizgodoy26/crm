@@ -824,7 +824,7 @@ a .received{
 }
 
 .received{
-    color: #22F29B;
+    color: #0540F2;
 }
 
 .pending{
@@ -1014,4 +1014,11 @@ a .received{
 
 .chart-md{
     width: 90%;
+}
+
+
+.container-detail{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }

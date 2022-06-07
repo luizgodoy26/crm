@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
+
+from contracts.models import Contract
 from .models import ClientCompany, ClientPerson, ClientDocuments
 from .forms import ClientCompanyForm, ClientPersonForm, FilesForm
 from django.contrib.auth.decorators import login_required
@@ -102,6 +104,7 @@ def new_file(request):
     return render(request, 'file_form.html', {'form': form})
 
 
+
 #TODO set the client edit to user
 """
 EDIT COMPANY CLIENT
@@ -180,3 +183,36 @@ def delete_file(request, id):
         return redirect('files_list')
 
     return render(request, 'deletion_file_confirm.html', {'file': file, 'user':user})
+
+
+
+
+"""
+DETAIL CLIENT
+"""
+@login_required
+def detail_client_person(request, id):
+    client = get_object_or_404(ClientPerson.objects.filter(user=request.user), pk=id)
+    client_files = ClientDocuments.objects.filter(user=request.user, client_person=client)
+    total_received = Contract.objects.filter(user=request.user, person_client=client, status='PD').aggregate(sum=Sum('value'))['sum'] or 0
+    total_pending = Contract.objects.filter(user=request.user, person_client=client).aggregate(sum=Sum('value'))['sum'] or 0
+
+    return render(request, 'detail_client_person.html', {'client': client, 'client_files': client_files, "total_received": total_received, "total_pending": total_pending})
+
+
+
+"""
+ADD A NEW FILE IN CLIENT DETAIL
+"""
+@login_required
+def new_file_detail(request, id):
+    user = request.user
+    client = get_object_or_404(ClientPerson, pk=id)
+    form = FilesForm(request.POST or None, request.FILES or None, user=user, instance=client, initial={'person_client': client})
+
+    if form.is_valid():
+        form = form.save(commit=False)
+        form.user = request.user
+        form.save()
+        return redirect('files_list')
+    return render(request, 'file_form.html', {'form': form, 'client': client})

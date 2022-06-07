@@ -1,37 +1,55 @@
 {% extends 'base.html' %}
 
-{% block title %}
-Files List
-{% endblock %}
-
+{% load humanize %}
 {% block main %}
 
-    <div class="box-row" id="two">
-        <!-- Total files -->
-        <div class="info-box">
-            <h3 class="h3-info-total">Total files</h3>
-            <h1 class="h1-info-total">{{ files_count }}</h1>
-        </div>
+<div class="container-detail">
 
+        <h1>{{ client.first_name }} {{ client.last_name }}</h1>
+        <table class="detail client-table">
+                <thead>
+                    <tr>
+                        <th>Client data</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+        <tbody>
+            <tr>
+                <th>Client CPF:</th>
+                <td>{{ client.cpf }}</td>
+            </tr>
 
+            <tr>
+                <th>Phone:</th>
+                    <td>{{ client.phone }}</td>
+                <th>Email:</th>
+                    <td>{{ client.email }}</td>
+            </tr>
 
-    </div>
+            <tr>
+                <th>Company:</th>
+                    <td>{{ client.person_company }}</td>
+            </tr>
 
+            <tr>
+                <th>Total pending payments:</th>
+                    <td class="pending-a">{{ total_received|intcomma }}</td>
 
-    <div class="container">
-        <div class="container-list" id="one">
+                <th>Total received payments:</th>
+                <td class="received">{{ total_pending|intcomma }}</td>
+            </tr>
 
-            <h2>Files list</h2>
+            <tr>
+                <th>Client description:</th>
+                <td>{{ client.description }}</td>
+            </tr>
 
+        </tbody>
+        </table>
 
-<!--            <div class="add-new-client-btn">-->
-<!--                <a href="{% url 'new_client_company' %}" class="new-client-icon">-->
-<!--                    <i class="fa-solid fa-user-plus"></i>-->
-<!--                </a>-->
-<!--                <span class="tooltip">Add client</span>-->
-<!--            </div>-->
-
-            <table class="client-table">
+        <table class="client-table">
 
                 <thead>
                     <tr>
@@ -43,7 +61,7 @@ Files List
                 </thead>
 
                 <tbody>
-                    {% for file in files %}
+                    {% for file in client_files %}
                     <tr>
                         <!-- NAME -->
                         <td>
@@ -77,14 +95,11 @@ Files List
             </table>
 
             <div class="add-new-client-btn">
-                <a href="{% url 'new_file' %}" class="new-client-icon">
+                <a href="{% url 'new_file_detail' client.id %}" class="new-client-icon">
                     <i class="fa-solid fa-paperclip"></i>
                 </a>
                 <span class="tooltip">Add file</span>
             </div>
 
-        </div>
-    </div>
-
-
+</div>
 {% endblock %}
