@@ -25,7 +25,7 @@ function render_total_received(url){
         return result.json()
     }).then(function(data){
         var decVal = parseFloat(data.total).toFixed(2);
-        document.getElementById('total_received').innerHTML = decVal
+        document.getElementById('total_received').innerHTML = decVal.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
     })
 }
 
@@ -38,7 +38,7 @@ function render_total_pending(url){
     }).then(function(data){
     decVal
         var decVal = parseFloat(data.total).toFixed(2);
-        document.getElementById('total_pending').innerHTML = decVal
+        document.getElementById('total_pending').innerHTML = decVal.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
     })
 }
 

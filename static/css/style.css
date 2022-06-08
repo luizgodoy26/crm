@@ -358,6 +358,9 @@ select{
     font-family: Poppins;
 }
 
+#id_items, #id_clausules{
+    height: 5rem;
+}
 /*
  ICONS ICONS ICONS ICONS ICONS
 */
@@ -1072,3 +1075,13 @@ ol li:before {
   counter-increment: item;
 }
 
+.hr-full{
+    bcolor: gray;
+    width: 100%;
+}
+
+.hr-signature{
+    border: 1px solid gray;
+    border-width: 1px;
+    width: 120px;
+}
