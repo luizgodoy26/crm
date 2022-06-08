@@ -79,5 +79,8 @@ DETAIL CONTRACT
 @login_required
 def detail_generated_contract(request, id):
     contract = get_object_or_404(ClientContract.objects.filter(user=request.user), pk=id)
+    contract_clausules = contract.clausules.all()
+    contract_items = contract.items.all()
 
-    return render(request, 'detail_generated_contract.html', {'contract': contract})
+
+    return render(request, 'detail_generated_contract.html', {'contract': contract, 'contract_clausules': contract_clausules, 'contract_items': contract_items})

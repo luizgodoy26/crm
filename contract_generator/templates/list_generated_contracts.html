@@ -40,7 +40,7 @@ Companies List
                     <tr>
                         <!-- NAME -->
                         <td>
-                            <a href="#}">{{ contract.contract_name }}</a>
+                            <a href="{% url 'detail_generated_contract' contract.id %}">{{ contract.contract_name }}</a>
                         </td>
 
                         <!-- Client (Displays mainly the company client) -->

@@ -1039,3 +1039,36 @@ a .received{
     align-items: center;
     justify-content: center;
 }
+
+
+.container-detail .subheader{
+    text-align: left;
+    align-items: left;
+    justify-content: left;
+    margin-top: 12px;
+    margin-bottim: 12px;
+}
+
+.container-detail p{
+    margin-top: 3px;
+    margin-bottim: 3px;
+    display: inline-block;
+    vertical-align: top;
+}
+.bolded {
+    font-weight: bold;
+}
+
+ol {
+  counter-reset: item;
+}
+
+ol li {
+  display: block;
+}
+
+ol li:before {
+  content: counters(item, ".") " ";
+  counter-increment: item;
+}
+

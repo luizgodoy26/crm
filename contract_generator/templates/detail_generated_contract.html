@@ -4,18 +4,133 @@
 {% block main %}
 
 <div class="container-detail">
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jautocalc@1.3.1/dist/jautocalc.js"></script>
 
         <h1>{{ contract.contract_name }}</h1>
         <h2>{{ user.full_name }}</h2>
-            {{ contract.clausules }}
+
+        <h2>Client data:</h2>
+        {% if contract.original_contract.company_client %}
+        <h3 class="subheader">Company: </h3>
+            <p><span class="bolded">Company name: </span>{{ contract.original_contract.company_client.company_name }}</p>
+            <p><span class="bolded">CNPJ: </span>{{ contract.original_contract.company_client.company_cnpj }}</p>
+            {% if contract.original_contract.company_client.phone %}
+                <p><span class="bolded">Phone: </span>{{ contract.original_contract.company_client.phone }}</p>
+            {% endif %}
+            {% if contract.original_contract.company_client.email %}
+                <p><span class="bolded">Email: </span>{{ contract.original_contract.company_client.email }}</p>
+            {% endif %}
+        {% endif %}
+
+
+        {% if contract.original_contract.person_client %}
+        <h3 class="subheader">Person: </h3>
+            <p><span class="bolded">Name: </span>{{ contract.original_contract.person_client.first_name }} {{ contract.original_contract.person_client.last_name }}</p>
+            <p><span class="bolded">CPF: </span>{{ contract.original_contract.person_client.cpf }}</p>
+            {% if contract.original_contract.person_client.phone %}
+                <p><span class="bolded">Phone: </span>{{ contract.original_contract.person_client.phone }}</p>
+            {% endif %}
+            {% if contract.original_contract.person_client.email %}
+                <p><span class="bolded">Email: </span>{{ contract.original_contract.person_client.email }}</p>
+            {% endif %}
+        {% endif %}
+
+        <h2>Contract clausules</h2>
+            <ol>
+                {% for clausule in contract_clausules %}
+                    <li>{{ clausule }}
+                        <ol>
+                            <li>{{ clausule.clausule_description }}</li>
+                        </ol>
+                        <br>
+                    </li>
+                {% endfor %}
+            </ol>
+
+
+    <form id="item_table">
+        <h2>Contract items</h2>
+                <table class="client-table" name="item_table">
+                    <thead>
+                        <tr>
+                            <th>Item name</th>
+                            <th>Item value</th>
+                            <th>Quantity</th>
+                            <th>Unity</th>
+                            <th>Type</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for item in contract_items %}
+                            <tr class="line_items">
+                                <td>{{ item }}</td>
+                                <td><input type="number" style="width: 90px;" placeholder="Item value" name="item_value"></td>
+                                <td><input type="number" style="width: 90px;" placeholder="Item qt" name="item_qt"></td>
+                                <td>{{ item.unity }}</td>
+                                <td>{{ item.item_type }}</td>
+			                    <td><input type="text" name="item_total" style="width: 90px;" value="" jAutoCalc="{item_value} * {item_qt}"></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
 
 
 
             <div class="add-new-client-btn" style="margin-bottom:30px;">
-                <a href="{% url 'new_contract' %}" class="new-client-icon">
-                <i class="fa-solid fa-file-circle-plus"></i>
+                <a href="#" class="new-client-icon">
+                <i class="fa-solid fa-print"></i>
                 </a>
-                <span class="tooltip">Add contract</span>
+                <span class="tooltip">Print</span>
             </div>
+    </form>
+
 </div>
+
+<script>
+    var calculateForm = function () {
+        document.getElementById("item_total").value =
+        (
+            Number(document.getElementById("item_value").value) *
+            Number(document.getElementById("item_qt").value)
+        )
+    };
+
+    $(function() {
+
+			function autoCalcSetup() {
+				$('form#item_table').jAutoCalc('destroy');
+				$('form#item_table tr.line_items').jAutoCalc({keyEventsFire: true, decimalPlaces: 2, emptyAsZero: true});
+				$('form#item_table').jAutoCalc({decimalPlaces: 2});
+			}
+			autoCalcSetup();
+
+
+			$('button.row-remove').on("click", function(e) {
+				e.preventDefault();
+
+				var form = $(this).parents('form')
+				$(this).parents('tr').remove();
+				autoCalcSetup();
+
+			});
+
+			$('button.row-add').on("click", function(e) {
+				e.preventDefault();
+
+				var $table = $(this).parents('table');
+				var $top = $table.find('tr.line_items').first();
+				var $new = $top.clone(true);
+
+				$new.jAutoCalc('destroy');
+				$new.insertBefore($top);
+				$new.find('input[type=text]').val('');
+				autoCalcSetup();
+
+			});
+		});
+</script>
 {% endblock %}
