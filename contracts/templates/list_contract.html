@@ -13,13 +13,13 @@ Companies List
     <div class="box-row">
         <!-- Active customers -->
         <div class="info-box">
-            <h3 class="h3-info-total">Total contracts</h3>
+            <h3 class="h3-info-total">Total work orders</h3>
             <h1 class="h1-info-total">{{ contracts_count }}</h1>
         </div>
 
         <!-- Pending amount -->
         <div class="info-box">
-            <h3 class="h3-info-total">Total contracts amount</h3>
+            <h3 class="h3-info-total">Work orders total value</h3>
             <h4 class="h4-info-total received">R$</h4>
             <h2 class="h2-info-total received">{{ total_contracts_value|floatformat:2|intcomma }}</h2>
         </div>
@@ -29,7 +29,7 @@ Companies List
     <div class="container">
         <div class="container-list">
 
-            <h2>Contracts list</h2>
+            <h2>Work order list</h2>
 
             <table class="client-table">
 
@@ -37,7 +37,7 @@ Companies List
                     <tr>
                         <th>Status</th>
                         <th>Client</th>
-                        <th>Contract name</th>
+                        <th>Work order name</th>
                         <th>Days since start</th>
                         <th>Payment date</th>
                         <th>Invoice</th>

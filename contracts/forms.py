@@ -19,6 +19,9 @@ class ContractForm(ModelForm):
             'ending_date': DateInput(),
             'payment_date': DateInput(),
         }
+        labels = {
+            'contract_name': ('Work order name'),
+        }
         fields = ['contract_name', 'person_client', 'company_client', 'starting_date', 'ending_date', 'payment_date', 'payment_method', 'status', 'value', 'invoice', 'description', 'file']
 
     def __init__(self,  *args, **kwargs):

@@ -454,6 +454,7 @@ button{
     padding: 10px;
     border-radius: 12px;
     color: #FFFFFF;
+    cursor: pointer;
 }
 
 
@@ -463,6 +464,7 @@ button{
     border-radius: 12px;
     color: #0540F2;
     outline: 1px solid #0540F2;
+
 }
 
 .add-new-client-btn .tooltip{
@@ -1083,5 +1085,16 @@ ol li:before {
 .hr-signature{
     border: 1px solid gray;
     border-width: 1px;
-    width: 120px;
+    width: 300px;
+}
+
+.container .center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container .center{
+    margin-top: 60px;
 }
