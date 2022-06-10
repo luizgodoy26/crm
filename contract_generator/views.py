@@ -1,10 +1,23 @@
 from datetime import date
 
 from django.contrib.auth.decorators import login_required
+from django.db.models import Model
+from django.forms import modelformset_factory, ModelForm
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views import View
 
-from contract_generator.forms import ClientContractForm, ClausuleForm, ItemForm
-from contract_generator.models import ClientContract, Clausule
+from contract_generator.forms import ClientContractForm, ClausuleForm, ItemForm, ItemFormDetail
+from contract_generator.models import ClientContract, Clausule, Item
+
+# xhtml2pdf imports
+import os
+from django.conf import settings
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.contrib.staticfiles import finders
+
 
 
 @login_required
@@ -82,5 +95,59 @@ def detail_generated_contract(request, id):
     contract_clausules = contract.clausules.all()
     contract_items = contract.items.all()
 
+    # Formset = modelformset_factory(Model, form=ModelForm, extra=0)
+    form = ItemFormDetail(request.POST or None, request.FILES or None, instance=contract)
+    ItemFormDetailset = modelformset_factory(Item, form=ItemFormDetail, extra=0)
+    formset = ItemFormDetailset(request.POST or None, queryset=contract_items)
 
-    return render(request, 'detail_generated_contract.html', {'contract': contract, 'contract_clausules': contract_clausules, 'contract_items': contract_items})
+    context = {'contract': contract,
+               'form': form,
+               'formset': formset,
+               'contract_clausules': contract_clausules,
+               'contract_items': contract_items
+    }
+
+    if all([form.is_valid(), formset.is_valid()]):
+        parent = form.save(commit=False)
+        parent.save()
+        for form in formset:
+            child = form.save(commit=False)
+            child.contract = parent
+            child.save()
+        return redirect('contract_to_pdf', id)
+    else:
+        print(formset.errors)
+        print(form.errors)
+
+    return render(request, 'detail_generated_contract.html', context)
+
+
+
+class ContractToPdf(View):
+    def get(self, request, *args, **kwargs):
+        template_path = 'generated_contract.html'
+        template = get_template(template_path)
+
+        def get_queryset(self):
+            owner = get_object_or_404(ClientContract.objects.filter(user=self.request.user, pk=self.kwargs['id']))
+            return owner.user.full_name
+
+        context = {
+            'contract': ClientContract.objects.get(pk=self.kwargs['id']),
+            'contract_items': ClientContract.objects.get(pk=self.kwargs['id']).items.all(),
+            'contract_clausules': ClientContract.objects.get(pk=self.kwargs['id']).clausules.all(),
+            'user': get_queryset(self),
+        }
+        html = template.render(context)
+
+        # Create a Django response object, and specify content_type as pdf
+        response = HttpResponse(content_type='application/pdf')
+        # response['Content-Disposition'] = 'attachment; filename="Contract.pdf"'
+
+        # create a pdf
+        pisa_status = pisa.CreatePDF(
+            html, dest=response)
+        # if error then show some funny view
+        if pisa_status.err:
+            return HttpResponse('We had some errors <pre>' + html + '</pre>')
+        return response

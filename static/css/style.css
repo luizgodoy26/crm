@@ -276,6 +276,16 @@ textarea{
     -webkit-appearance: none;
 }
 
+
+
+#id_item_qt{
+    width: 90px;
+}
+
+#id_item_value, #id_item_total, #id_total{
+    width: 110px;
+}
+
 input{
     font-family: Poppins;
     outline: none;

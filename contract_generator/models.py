@@ -13,6 +13,11 @@ class Item(models.Model):
     item_name = models.CharField(max_length=90)
     item_type = models.CharField(max_length=90)
 
+    item_value = models.FloatField(blank=True, null=True, max_length=12)
+    item_qt = models.FloatField(blank=True, null=True, max_length=12)
+    item_total = models.FloatField(blank=True, null=True, max_length=12)
+    total = models.FloatField(blank=True, null=True, max_length=12)
+
     # Unity options
     METERS = 'MT'
     LITERS = 'LT'
