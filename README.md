@@ -11,3 +11,7 @@ The system provides management for:
 
 For this project, i've made a little research with my stepdad to watch his current workflow, his biggest struggles, and pains.
 So as i have been the PO, PM, Designer, Developer and tester of the project.
+
+
+ONGOING:
+Develop a system to generate PDFs from the created contracts
