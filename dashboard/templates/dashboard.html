@@ -10,22 +10,22 @@
         <div class="row" >
             <div class="info-box">
                 <h3>Total clients</h3>
-                <span id="total_clients"></span>
+                <h2><span id="total_clients"></span></h2>
             </div>
 
             <div class="info-box">
                 <h3>Total contracts</h3>
-                <span id="total_contracts"></span>
+                <h2><span id="total_contracts"></span></h2>
             </div>
 
             <div class="info-box">
                 <h3>Total received</h3>
-                <span id="total_received"></span>
+                <h2 class="received"><b>R$ </b><span class="dash-info-value" id="total_received"></span></h2>
             </div>
 
             <div class="info-box">
                 <h3>Total pending</h3>
-                <span id="total_pending"></span>
+                <h2 class="pending"><b>R$ </b><span class="dash-info-value" id="total_pending"></span></h2>
             </div>
         </div>
 
@@ -60,7 +60,6 @@
         render_total_contracts('{% url "number_of_contracts" %}')
         render_total_received('{% url "total_amount_received" %}')
         render_total_pending('{% url "total_amount_pending" %}')
-
         render_month_received('{% url "total_month_income" %}')
     }
 </script>

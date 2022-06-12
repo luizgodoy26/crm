@@ -807,6 +807,16 @@ a .received{
     flex-direction: column;
 }
 
+.info-box h3{
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+.info-box h2{
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
 .h1-info-total{
     padding: 0;
     margin-top: 0;

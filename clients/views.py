@@ -15,12 +15,22 @@ LIST THE CLIENT COMPANIES
 @login_required
 def client_company_list(request):
     clients = ClientCompany.objects.filter(user=request.user)
-    pending_payments_total = ClientCompany.objects.filter(user=request.user).aggregate(sum=Sum('pending_payments'))['sum'] or 0
-    received_payments_total = ClientCompany.objects.filter(user=request.user).aggregate(sum=Sum('received_payments'))['sum'] or 0
+    contracts = Contract.objects.filter(user=request.user)
+
+    total_received = 0
+    total_pending = 0
+    for client in clients:
+        total_received += Contract.objects.filter(user=request.user, company_client=client, status='PD').aggregate(sum=Sum('value'))['sum'] or 0
+        total_pending += Contract.objects.filter(user=request.user, company_client=client, status='PN').aggregate(sum=Sum('value'))['sum'] or 0
+
+        client.received_payments = Contract.objects.filter(user=request.user, company_client=client, status='PD').aggregate(sum=Sum('value'))['sum'] or 0
+        client.pending_payments = Contract.objects.filter(user=request.user, company_client=client, status='PN').aggregate(sum=Sum('value'))['sum'] or 0
+
     client_count = ClientCompany.objects.filter(user=request.user).count()
     return render(request, 'list_client_company.html', {'clients': clients,
-                                                       'pending_payments_total': pending_payments_total,
-                                                       'received_payments_total': received_payments_total,
+                                                       'pending_payments_total': total_received,
+                                                       'received_payments_total': total_pending,
+                                                       'contracts': contracts,
                                                        'client_count': client_count})
 
 
@@ -31,12 +41,20 @@ LIST THE CLIENT PERSONS
 @login_required
 def client_person_list(request):
     clients = ClientPerson.objects.filter(user=request.user)
-    pending_payments_total = ClientPerson.objects.filter(user=request.user).aggregate(sum=Sum('pending_payments'))['sum'] or 0
-    received_payments_total = ClientPerson.objects.filter(user=request.user).aggregate(sum=Sum('received_payments'))['sum'] or 0
+
+    total_received = 0
+    total_pending = 0
+    for client in clients:
+        total_received += Contract.objects.filter(user=request.user, person_client=client, status='PD').aggregate(sum=Sum('value'))['sum'] or 0
+        total_pending += Contract.objects.filter(user=request.user, person_client=client, status='PN').aggregate(sum=Sum('value'))['sum'] or 0
+
+        client.received_payments = Contract.objects.filter(user=request.user, person_client=client, status='PD').aggregate(sum=Sum('value'))['sum'] or 0
+        client.pending_payments = Contract.objects.filter(user=request.user, person_client=client, status='PN').aggregate(sum=Sum('value'))['sum'] or 0
+
     client_count = ClientPerson.objects.filter(user=request.user).count()
     return render(request, 'list_client_person.html', {'clients': clients,
-                                                       'pending_payments_total': pending_payments_total,
-                                                       'received_payments_total': received_payments_total,
+                                                       'pending_payments_total': total_received,
+                                                       'received_payments_total': total_pending,
                                                        'client_count': client_count
                                                        })
 
@@ -188,7 +206,7 @@ def delete_file(request, id):
 
 
 """
-DETAIL CLIENT
+DETAIL CLIENT PERSON
 """
 @login_required
 def detail_client_person(request, id):
@@ -196,9 +214,24 @@ def detail_client_person(request, id):
     client_files = ClientDocuments.objects.filter(user=request.user, client_person=client)
     contracts = Contract.objects.filter(user=request.user, person_client=client)
     total_received = Contract.objects.filter(user=request.user, person_client=client, status='PD').aggregate(sum=Sum('value'))['sum'] or 0
-    total_pending = Contract.objects.filter(user=request.user, person_client=client).aggregate(sum=Sum('value'))['sum'] or 0
+    total_pending = Contract.objects.filter(user=request.user, person_client=client, status='PN').aggregate(sum=Sum('value'))['sum'] or 0
 
     return render(request, 'detail_client_person.html', {'client': client, 'client_files': client_files, 'contracts': contracts, "total_received": total_received, "total_pending": total_pending})
+
+
+
+"""
+DETAIL CLIENT COMPANY
+"""
+@login_required
+def detail_client_company(request, id):
+    client = get_object_or_404(ClientCompany.objects.filter(user=request.user), pk=id)
+    client_files = ClientDocuments.objects.filter(user=request.user, client_company=client)
+    contracts = Contract.objects.filter(user=request.user, company_client=client)
+    total_received = Contract.objects.filter(user=request.user, company_client=client, status='PD').aggregate(sum=Sum('value'))['sum'] or 0
+    total_pending = Contract.objects.filter(user=request.user, company_client=client, status='PN').aggregate(sum=Sum('value'))['sum'] or 0
+
+    return render(request, 'detail_client_company.html', {'client': client, 'client_files': client_files, 'contracts': contracts, "total_received": total_received, "total_pending": total_pending})
 
 
 

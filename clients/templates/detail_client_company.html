@@ -5,7 +5,7 @@
 
 <div class="container-detail">
 
-        <h1>{{ client.first_name }} {{ client.last_name }}</h1>
+        <h1>{{ client.company_name }}</h1>
         <table class="client-table">
                 <thead>
                     <tr>
@@ -17,8 +17,8 @@
                 </thead>
         <tbody>
             <tr>
-                <th>Client CPF:</th>
-                <td>{{ client.cpf }}</td>
+                <th>Client CNPJ:</th>
+                <td>{{ client.company_cnpj }}</td>
             </tr>
 
             <tr>
@@ -26,11 +26,6 @@
                     <td>{{ client.phone }}</td>
                 <th>Email:</th>
                     <td>{{ client.email }}</td>
-            </tr>
-
-            <tr>
-                <th>Company:</th>
-                    <td>{{ client.person_company }}</td>
             </tr>
 
             <tr>
@@ -47,12 +42,12 @@
         <h3 style="text-align:left;">Client description: </h3>
         <p class="description">{{ client.description }}</p>
 
+
         <h3>Files list</h3>
         <table class="client-table" style="margin-top:-10px">
                 <thead>
                     <tr>
                         <th>File name</th>
-                        <th>Company</th>
                         <th>Client</th>
                         <th>Options</th>
                     </tr>
@@ -64,10 +59,6 @@
                         <!-- NAME -->
                         <td>
                             <a href="#">{{ file.name }}</a>
-                        </td>
-                        <!-- Company -->
-                        <td>
-                            <a href="#">{{ file.client_company }}</a>
                         </td>
                         <!-- Person -->
                         <td>

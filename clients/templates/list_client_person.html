@@ -98,13 +98,13 @@ Client person List
                         <!-- PENDING PAYMENTS -->
                         <td>
                             <a href="{% url 'detail_client_person' client.id %}" class="pending-a">
-                                {% if client.pending_payments %} {{client.pending_payments|floatformat:2|intcomma }} {% else %} &nbsp; {% endif %}
+                                {% if client.pending_payments %} {{ client.pending_payments|floatformat:2|intcomma }} {% else %} &nbsp; {% endif %}
                             </a>
                         </td>
 
                         <!-- RECEIVED PAYMENTS -->
                         <td>
-                            <a href="{% url 'detail_client_person' client.id %}" class="received-a">
+                            <a href="{% url 'detail_client_person' client.id %}" class="received">
                                 {% if client.received_payments %} {{client.received_payments|floatformat:2|intcomma}} {% else %} &nbsp; {% endif %}
                             </a>
                         </td>

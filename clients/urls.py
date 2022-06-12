@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import client_company_list, client_person_list, new_client_company, new_client_person, edit_client_company, \
     edit_client_person, delete_client_company, delete_client_person, files_list, new_file, delete_file, \
-    detail_client_person, new_file_detail
+    detail_client_person, new_file_detail, detail_client_company
 
 urlpatterns = [
     # List
@@ -11,6 +11,7 @@ urlpatterns = [
 
     # Detail
     path('detail_client_person/<int:id>', detail_client_person, name='detail_client_person'),
+    path('detail_client_company/<int:id>', detail_client_company, name='detail_client_company'),
 
     # Create
     path('newc/', new_client_company, name='new_client_company'),

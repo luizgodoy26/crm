@@ -95,3 +95,40 @@ function render_month_received(url){
 
         })
 }
+
+function render_client_received(url){
+        fetch(url, {
+            method: 'doughnut',
+        }).then(function(result){
+            return result.json()
+        }).then(function(data){
+
+            const ctx = document.getElementById('client_income');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Income',
+                        data: data.data,
+                        borderWidth: 1,
+                        backgroundColor: [
+                          'rgba(242, 82, 82)',
+                          'rgba(34, 242, 155)',
+                          'rgba(100, 61, 242)',
+                          'rgba(217, 85, 181)',
+                        ],
+                        hoverOffset: 4,
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false,
+                        }
+                    },
+                }
+            });
+
+        })
+}

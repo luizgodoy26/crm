@@ -16,7 +16,6 @@ class Item(models.Model):
     item_value = models.FloatField(blank=True, null=True, max_length=12)
     item_qt = models.FloatField(blank=True, null=True, max_length=12)
     item_total = models.FloatField(blank=True, null=True, max_length=12)
-    total = models.FloatField(blank=True, null=True, max_length=12)
 
     # Unity options
     METERS = 'MT'
@@ -49,29 +48,13 @@ class Clausule(models.Model):
 
 class ClientContract(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
     original_contract = models.ForeignKey(Contract, on_delete=models.CASCADE, null=True, blank=True)
-
     contract_name = models.CharField(max_length=60)
-
-    # Client related information
-    # person_client = models.ForeignKey(ClientPerson, null=True, blank=True, on_delete=models.PROTECT)
-    # company_client = models.ForeignKey(ClientCompany, null=True, blank=True, on_delete=models.PROTECT)
-
-    # Contact related information
-    # phone = models.IntegerField(null=True, blank=True)
-    # email = models.EmailField(null=True, blank=True)
     address = models.TextField(blank=True, null=True)
 
-    # Date related information
-    # start_time = models.DateField(null=True, blank=True)
-    # end_time = models.DateField(null=True, blank=True)
-
-
     # Value related information
-    # total_value = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
+    total_value = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     installments = models.IntegerField(null=True, blank=True)
-
 
     # Items and clausules of the contract
     items = models.ManyToManyField(Item, blank=True, null=True)

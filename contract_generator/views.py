@@ -1,14 +1,13 @@
 from datetime import date
 
 from django.contrib.auth.decorators import login_required
-from django.db.models import Model
-from django.forms import modelformset_factory, ModelForm
-from django.http import HttpResponse
+from django.db.models import Sum
+from django.forms import inlineformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 
-from contract_generator.forms import ClientContractForm, ClausuleForm, ItemForm, ItemFormDetail
-from contract_generator.models import ClientContract, Clausule, Item
+from contract_generator.forms import ClientContractForm, ClausuleForm, ItemForm
+from contract_generator.models import ClientContract, Item
 
 # xhtml2pdf imports
 import os
@@ -94,32 +93,36 @@ def detail_generated_contract(request, id):
     contract = get_object_or_404(ClientContract.objects.filter(user=request.user), pk=id)
     contract_clausules = contract.clausules.all()
     contract_items = contract.items.all()
-
-    # Formset = modelformset_factory(Model, form=ModelForm, extra=0)
-    form = ItemFormDetail(request.POST or None, request.FILES or None, instance=contract)
-    ItemFormDetailset = modelformset_factory(Item, form=ItemFormDetail, extra=0)
-    formset = ItemFormDetailset(request.POST or None, queryset=contract_items)
+    # total_value = ClientContract.objects.filter(user=request.user, pk=id).aggregate(sum=Sum('item_total'))['sum'] or 0
 
     context = {'contract': contract,
-               'form': form,
-               'formset': formset,
                'contract_clausules': contract_clausules,
-               'contract_items': contract_items
+               'contract_items': contract_items,
+               # 'total_value': total_value,
     }
 
-    if all([form.is_valid(), formset.is_valid()]):
-        parent = form.save(commit=False)
-        parent.save()
-        for form in formset:
-            child = form.save(commit=False)
-            child.contract = parent
-            child.save()
-        return redirect('contract_to_pdf', id)
-    else:
-        print(formset.errors)
-        print(form.errors)
-
     return render(request, 'detail_generated_contract.html', context)
+
+
+
+
+@login_required
+def adjust_values(request, id):
+    ItemFormSet = inlineformset_factory(ClientContract, Item, fields=('item_value', 'item_qt', 'item_total'))
+    contract = get_object_or_404(ClientContract.objects.filter(user=request.user), pk=id)
+    # contract_items = contract.items.all()
+    formset = ItemFormSet(instance=contract)
+
+    # form = ItemForm()
+    if request.method == 'POST':
+        formset.ItemForm(request.POST)
+        if formset.is_valid():
+            formset.save()
+            return redirect('/')
+
+    context = {'formset': formset}
+    return render(request, 'item_formset.html', context)
+
 
 
 

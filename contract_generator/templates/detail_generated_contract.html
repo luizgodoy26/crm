@@ -70,6 +70,7 @@
                             <th>Unity</th>
                             <th>Type</th>
                             <th>Total</th>
+                            <th>Options</th>
                         </tr>
                     </thead>
 
@@ -77,24 +78,23 @@
                         {% for item in contract_items %}
                             {% csrf_token %}
                             <tr class="line_items">
-
                                 <td>{{ item }}</td>
-                                <td>
-                                    {% if formset %}
-                                        {{ formset.form.item_value }}
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% if formset %}
-                                        {{ formset.form.item_qt }}
-                                    {% endif %}
-                                </td>
+                                <td>{{ item_value }}</td>
+                                <td>{{ item_qt }}</td>
                                 <td>{{ item.unity }}</td>
                                 <td>{{ item.item_type }}</td>
-			                    <td>
-                                    {% if formset %}
-                                        {{ formset.form.item_total }}
-                                    {% endif %}
+			                    <td>{{ item_total }}</td>
+
+                                <td>
+                                    <a href="{% url 'adjust_values' contract.id %}" class="edit-icon">
+                                        <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                    </a>
+
+                                    <a href="#" class="delete-icon">
+                                        <i class="fa-regular fa-trash-can fa-lg"></i>
+                                        <i class="fa-solid fa-trash-can fa-lg"></i>
+                                    </a>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -105,11 +105,10 @@
                                 <td></td>
                                 <td></td>
                                 <td>
-                                    {% if formset %}
-                                        {{ formset.form.total }}
-                                    {% endif %}
+                                    {{ contract.total }}
                                 </td>
                             </tr>
+
                     </tbody>
                 </table>
 

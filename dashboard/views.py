@@ -1,3 +1,5 @@
+from datetime import datetime, date
+
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from django.http import HttpResponse, JsonResponse
@@ -59,6 +61,28 @@ def total_month_income(request):
 
     data = [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
     label = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+
+
+    if request.method == 'GET':
+        return JsonResponse({'labels': label, 'data':data})
+
+
+#TODO get the top 5 contracts income
+def total_client_income(request):
+    label = []
+    today = date.today()
+    month = Contract.objects.filter(user=request.user, status='PD', starting_date__year=today.year, starting_date__month=today.month)#.aggregate(sum=Sum('value'))['sum'] or 0
+
+    for client in month:
+        client.received_payments = Contract.objects.filter(user=request.user, company_client=client, status='PD').aggregate(sum=Sum('value'))['sum'] or 0
+        client.pending_payments = Contract.objects.filter(user=request.user, company_client=client, status='PN').aggregate(sum=Sum('value'))['sum'] or 0
+
+
+    teste = month.oder_by('received_payments').head(5)
+    print(month)
+
+    data = [month]
+    label = ['month']
 
 
     if request.method == 'GET':
