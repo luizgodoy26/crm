@@ -18,8 +18,9 @@ Develop a system to generate PDFs from the created contracts
 
 
 TODO:
-Fix the save in the form list
-Add the export function to the contract
-Add the logos to the contract
-Style the contract
-Create dark mode
+- Fix the save in the form list
+- Add the export function to the contract
+- Add the logos to the contract
+- Style the contract
+- Style dark mode
+- Create logged out interface
