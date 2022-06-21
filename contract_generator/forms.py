@@ -28,7 +28,8 @@ class ClausuleForm(ModelForm):
 class ItemForm(ModelForm):
   class Meta:
     model = Item
-    fields = ['item_name', 'item_type', 'unity', 'item_value', 'item_qt', 'item_total']
+
+    fields = ['item_name', 'item_type', 'unity', 'item_qt', 'item_value']
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)

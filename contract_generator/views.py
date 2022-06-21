@@ -2,7 +2,6 @@ from datetime import date
 
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
-from django.forms import inlineformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 
@@ -93,12 +92,18 @@ def detail_generated_contract(request, id):
     contract = get_object_or_404(ClientContract.objects.filter(user=request.user), pk=id)
     contract_clausules = contract.clausules.all()
     contract_items = contract.items.all()
-    # total_value = ClientContract.objects.filter(user=request.user, pk=id).aggregate(sum=Sum('item_total'))['sum'] or 0
+
+    total = 0
+    for item in contract_items:
+        item_total_qt = item.item_qt or 0
+        item_total_value = item.item_value or 0
+        total += item_total_qt * item_total_value
+
 
     context = {'contract': contract,
                'contract_clausules': contract_clausules,
                'contract_items': contract_items,
-               # 'total_value': total_value,
+               'total': total,
     }
 
     return render(request, 'detail_generated_contract.html', context)
@@ -108,20 +113,14 @@ def detail_generated_contract(request, id):
 
 @login_required
 def adjust_values(request, id):
-    ItemFormSet = inlineformset_factory(ClientContract, Item, fields=('item_value', 'item_qt', 'item_total'))
-    contract = get_object_or_404(ClientContract.objects.filter(user=request.user), pk=id)
-    # contract_items = contract.items.all()
-    formset = ItemFormSet(instance=contract)
+    item = get_object_or_404(Item, pk=id)
+    # Using instance, the form already start with the data from the client received
+    form = ItemForm(request.POST or None, request.FILES or None, instance=item)
 
-    # form = ItemForm()
-    if request.method == 'POST':
-        formset.ItemForm(request.POST)
-        if formset.is_valid():
-            formset.save()
-            return redirect('/')
-
-    context = {'formset': formset}
-    return render(request, 'item_formset.html', context)
+    if form.is_valid():
+        form.save()
+        return redirect('companies_list')
+    return render(request, 'item_form.html', {'form': form, 'item': item})
 
 
 
@@ -131,6 +130,15 @@ class ContractToPdf(View):
         template_path = 'generated_contract.html'
         template = get_template(template_path)
 
+        contract = ClientContract.objects.get(pk=self.kwargs['id'])
+        contract_items = contract.items.all()
+
+        total = 0
+        for item in contract_items:
+            item_total_qt = item.item_qt or 0
+            item_total_value = item.item_value or 0
+            total += item_total_qt * item_total_value
+
         def get_queryset(self):
             owner = get_object_or_404(ClientContract.objects.filter(user=self.request.user, pk=self.kwargs['id']))
             return owner.user.full_name
@@ -139,6 +147,7 @@ class ContractToPdf(View):
             'contract': ClientContract.objects.get(pk=self.kwargs['id']),
             'contract_items': ClientContract.objects.get(pk=self.kwargs['id']).items.all(),
             'contract_clausules': ClientContract.objects.get(pk=self.kwargs['id']).clausules.all(),
+            'total': total,
             'user': get_queryset(self),
         }
         html = template.render(context)

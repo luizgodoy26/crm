@@ -3,7 +3,7 @@
 {% load humanize %}
 {% block title %}Contract detail{% endblock %}
 {% block main %}
-
+{% load mathfilters %}
 <div class="container-detail">
 
 
@@ -78,7 +78,7 @@
                                 <td>{{ item.item_qt }}</td>
                                 <td>{{ item.unity }}</td>
                                 <td>{{ item.item_type }}</td>
-			                    <td name="item_total"></td>
+			                    <td>{{item.item_value|mul:item.item_qt}}</td>
                             </tr>
                         {% endfor %}
                             <tr>
@@ -87,7 +87,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td>{{ item.total }}</td>
+                                <td>{{ total }}</td>
                             </tr>
                     </tbody>
                 </table>
