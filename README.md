@@ -24,3 +24,4 @@ TODO:
 - Style the contract
 - Style dark mode
 - Create logged out interface
+- Humanize contract details
