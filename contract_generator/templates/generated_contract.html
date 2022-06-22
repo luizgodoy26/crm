@@ -1,9 +1,67 @@
 {% extends 'logged_out.html' %}
 
+{% load mathfilters %}
 {% load humanize %}
 {% block title %}Contract detail{% endblock %}
+
+
 {% block main %}
-{% load mathfilters %}
+<style>
+    @page {
+        @frame content_frame {          /* Content Frame */
+            left: 30px; right: 30px; width: 512pt; top: 50px;
+        }
+    }
+
+    html {
+      font-size: 12px;
+      font-weight: normal;
+      color: #4A4A4A;
+    }
+
+    h1{
+        color: #0540F2;
+        font-family: Poppins;
+    }
+
+    table, th, td {
+        border: 1px solid;
+        border-color: #0540F2;
+        text-align: center;
+        padding-top: 3px;
+    }
+
+    .no-row {
+        border: 0px;
+        text-align: center;
+        padding-top: 3px;
+    }
+
+    .bottom{
+        height: 50px;
+        border-color: #FFFFFF;
+        border-bottom: 1px solid #0540F2;
+        white-space: 50px;
+    }
+
+    .highlight{
+        background-color: #c1cef5;
+    }
+
+    .bolded{
+        font-weight: 500;
+    }
+
+    .detail{
+        margin-left: 30px;
+    }
+
+    .center{
+        text-align: center;
+    }
+</style>
+
+
 <div class="container-detail">
 
 
@@ -18,25 +76,29 @@
         <h2>Client data:</h2>
         {% if contract.original_contract.company_client %}
         <h3 class="subheader">Company client: </h3>
-            <p><span class="bolded">Company name: </span>{{ contract.original_contract.company_client.company_name }}</p>
-            <p><span class="bolded">CNPJ: </span>{{ contract.original_contract.company_client.company_cnpj }}</p>
-            {% if contract.original_contract.company_client.phone %}
-                <p><span class="bolded">Phone: </span>{{ contract.original_contract.company_client.phone }}</p>
-            {% endif %}
-            {% if contract.original_contract.company_client.email %}
-                <p><span class="bolded">Email: </span>{{ contract.original_contract.company_client.email }}</p>
-            {% endif %}
+            <div class="detail">
+                <p><span class="bolded">Company name: </span>{{ contract.original_contract.company_client.company_name }}</p>
+                <p><span class="bolded">CNPJ: </span>{{ contract.original_contract.company_client.company_cnpj }}</p>
+                {% if contract.original_contract.company_client.phone %}
+                    <p><span class="bolded">Phone: </span>{{ contract.original_contract.company_client.phone }}</p>
+                {% endif %}
+                {% if contract.original_contract.company_client.email %}
+                    <p><span class="bolded">Email: </span>{{ contract.original_contract.company_client.email }}</p>
+                {% endif %}
+            </div>
         {% endif %}
         {% if contract.original_contract.person_client %}
         <h3 class="subheader">Person client: </h3>
-            <p><span class="bolded">Name: </span>{{ contract.original_contract.person_client.first_name }} {{ contract.original_contract.person_client.last_name }}</p>
-            <p><span class="bolded">CPF: </span>{{ contract.original_contract.person_client.cpf }}</p>
-            {% if contract.original_contract.person_client.phone %}
-                <p><span class="bolded">Phone: </span>{{ contract.original_contract.person_client.phone }}</p>
-            {% endif %}
-            {% if contract.original_contract.person_client.email %}
-                <p><span class="bolded">Email: </span>{{ contract.original_contract.person_client.email }}</p>
-            {% endif %}
+            <div class="detail">
+                <p><span class="bolded">Name: </span>{{ contract.original_contract.person_client.first_name }} {{ contract.original_contract.person_client.last_name }}</p>
+                <p><span class="bolded">CPF: </span>{{ contract.original_contract.person_client.cpf }}</p>
+                {% if contract.original_contract.person_client.phone %}
+                    <p><span class="bolded">Phone: </span>{{ contract.original_contract.person_client.phone }}</p>
+                {% endif %}
+                {% if contract.original_contract.person_client.email %}
+                    <p><span class="bolded">Email: </span>{{ contract.original_contract.person_client.email }}</p>
+                {% endif %}
+            </div>
         {% endif %}
 
 
@@ -45,22 +107,21 @@
 
 <!--  CONTRACT DESCRIPTION -->
         <h2>Contract description</h2>
-        <p>
-            {{ contract.original_contract.description }}
-        </p>
-
+        <div class="detail">
+            <p>{{ contract.original_contract.description }}</p>
+        </div>
 
     <div><hr class="hr-full"></div>
 
 
 <!-- DISPLAY ALL THE ITEMS FROM THE CONTRACT -->
-    <div id="item_table">
+    <div>
 
 
         <h2>Contract items</h2>
-                <table class="client-table" name="item_table">
+                <table>
                     <thead>
-                        <tr>
+                        <tr class="highlight">
                             <th>Item name</th>
                             <th>Item value</th>
                             <th>Quantity</th>
@@ -72,22 +133,22 @@
 
                     <tbody>
                         {% for item in contract_items %}
-                            <tr class="line_items">
+                            <tr>
                                 <td>{{ item }}</td>
-                                <td>{{ item.item_value }}</td>
-                                <td>{{ item.item_qt }}</td>
+                                <td>{{ item.item_value|floatformat:2|intcomma }}</td>
+                                <td>{{ item.item_qt|floatformat:2|intcomma }}</td>
                                 <td>{{ item.unity }}</td>
                                 <td>{{ item.item_type }}</td>
-			                    <td>{{item.item_value|mul:item.item_qt}}</td>
+			                    <td>{{item.item_value|mul:item.item_qt|floatformat:2|intcomma}}</td>
                             </tr>
                         {% endfor %}
-                            <tr>
-                                <td class="bolded">Items total value</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>{{ total }}</td>
+                            <tr class="highlight">
+                                <td style="border: 0px ;">Items total value</td>
+                                <td style="border: 0px ;"></td>
+                                <td style="border: 0px ;"></td>
+                                <td style="border: 0px ;"></td>
+                                <td style="border: 0px ;"></td>
+                                <td style="border: 0px ;">{{ total|floatformat:2|intcomma }}</td>
                             </tr>
                     </tbody>
                 </table>
@@ -96,57 +157,76 @@
 
 <!-- DISPLAY ALL THE CLAUSULES OF THE CONTRACT -->
         <h2>Contract clausules</h2>
-            <ol>
-                {% for clausule in contract_clausules %}
-                    <li>{{ clausule }}
-                        <ol>
-                            <li>{{ clausule.clausule_description }}</li>
-                        </ol>
-                        <br>
-                    </li>
-                {% endfor %}
-            </ol>
-
+            <div class="detail">
+                <ol>
+                    {% for clausule in contract_clausules %}
+                        <li>{{ clausule }}
+                            <ol>
+                                <li>{{ clausule.clausule_description }}</li>
+                            </ol>
+                            <br>
+                        </li>
+                    {% endfor %}
+                </ol>
+            </div>
     <div><hr class="hr-full"></div>
 
 <!--    CONTRACT DATES    -->
 
-
-            <h2>Contract dates</h2>
-            <p>{{ contract.original_contract.starting_date }}</p>
-            <p><span class="bolded">Ending date: </span>{{ contract.original_contract.ending_date }}</p>
-            <p><span class="bolded">Payment date date: </span>{{ contract.original_contract.payment_date }}</p>
-
+            <div id="dates">
+                <h2>Contract dates</h2>
+                <div class="detail">
+                    <p><span class="bolded">Starting date: </span>{{ contract.original_contract.starting_date }}</p>
+                    <p><span class="bolded">Ending date: </span>{{ contract.original_contract.ending_date }}</p>
+                    <p><span class="bolded">Payment date date: </span>{{ contract.original_contract.payment_date }}</p>
+                </div>
+            </div>
 
 <!--    COMPANY SIGNATURE    -->
             <div><hr class="hr-full"></div>
+            <pdf:nextpage />
 
+            <h1 class="center">Signatures</h1>
 
-            <h3>Signatures</h3>
-            <div class="container center">
-                <div class="column center">
-                    <p class="hr-signature"></p>
-                    <span class="bolded">{{ user.full_name }}</span>
-                    <span>{{ user }}</span>
-                </div>
-                <div class="column center">
-                    <p class="hr-signature"></p>
-                    <span class="bolded">{{ contract.original_contract.person_client.first_name }} {{ contract.original_contract.person_client.last_name }}</span>
-                    <span>{{ contract.original_contract.person_client.cpf }}</span>
-                </div>
-            </div>
-            <div class="container center">
-                <div class="column center">
-                    <p class="hr-signature"></p>
-                    <span class="bolded">Witness</span>
-                </div>
-                <div class="column center">
-                    <p class="hr-signature"></p>
-                    <span class="bolded">Witness</span>
-                </div>
-            </div>
+            <table class="no-row">
+                <thead>
+                    <tr class="no-row">
+                        <td class="bottom"></td>
+                        <td class="no-row"></td>
+                        <td class="bottom"></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="no-row">
+                        <td class="bolded no-row">{{ user }}</td>
+                        <td class="no-row"></td>
+                        <td class="bolded no-row">{{ contract.original_contract.person_client.first_name }} {{ contract.original_contract.person_client.last_name }}</td>
+                    </tr>
+                    <tr class="no-row">
+                        <td class="no-row" style="text-align: left; padding-left: 10px;">CPF: <span class="bolded">{{ user.full_name }}</span></td>
+                        <td class="no-row"></td>
+                        <td class="no-row" style="text-align: left; padding-left: 10px;">CPF: <span class="bolded">{{ contract.original_contract.person_client.cpf }}</span></td>
+                    </tr>
 
+                    <tr>
+                        <td class="bottom"></td>
+                        <td class="no-row"></td>
+                        <td class="bottom"></td>
+                    </tr>
 
+                    <tr class="no-row ">
+                        <td class="bolded no-row">Witness</td>
+                        <td class="no-row"></td>
+                        <td class="bolded no-row">Witness</td>
+                    </tr>
+
+                    <tr class="no-row ">
+                        <td class="no-row" style="text-align: left; padding-left: 10px;">CPF:</td>
+                        <td class="no-row"></td>
+                        <td class="no-row" style="text-align: left; padding-left: 10px;">CPF:</td>
+                    </tr>
+                </tbody>
+            </table>
     </div>
 </div>
 {% endblock %}

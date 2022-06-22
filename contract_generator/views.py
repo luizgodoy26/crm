@@ -8,13 +8,10 @@ from django.views import View
 from contract_generator.forms import ClientContractForm, ClausuleForm, ItemForm
 from contract_generator.models import ClientContract, Item
 
-# xhtml2pdf imports
-import os
-from django.conf import settings
+
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
-from django.contrib.staticfiles import finders
 
 
 
