@@ -46,12 +46,12 @@ Companies List
                         <!-- Client (Displays mainly the company client) -->
                         <td>
                             <a href="#">
-                                {% if contract.company_client  %}
-                                    {{ contract.company_client }}
-                                {% elif contract.person_client  %}
-                                    {{ contract.person_client }}
-                                {% elif contract.person_client and contract.company_client %}
-                                    {{ contract.company_client }}
+                                {% if contract.work_order.company_client  %}
+                                    {{ contract.work_order.company_client.company_name }}
+                                {% elif contract.work_order.person_client  %}
+                                    {{ contract.work_order.person_client.first_name }} {{ contract.work_order.person_client.last_name }}
+                                {% elif contract.person_client and contract.work_order.company_client %}
+                                    {{ contract.work_order.company_client.company_name }}
                                 {% else %}
                                     -
                                 {% endif %}
@@ -59,21 +59,25 @@ Companies List
                         </td>
                         <!-- STARTING DATE -->
                         <td>
-                            <a href="#">{{ contract.start_time }}</a>
+                            <a href="#">{{ contract.work_order.starting_date }}</a>
                         </td>
                         <!-- ENDING DATE -->
                         <td>
-                            <a href="#">{{ contract.end_time }}</a>
+                            <a href="#">{{ contract.work_order.ending_date }}</a>
                         </td>
                         <!-- TOTAL VALUE -->
                         <td>
-                            <a href="#">{{ contract.total_value }}</a>
+                            <a href="#">{{ contract.work_order.value }}</a>
                         </td>
 
 
 
                         <!-- OPTIONS -->
                         <td>
+                            <a href="{% url 'contract_to_pdf' contract.id %}" class="edit-icon">
+                                <i class="fa-solid fa-print"></i>
+                            </a>
+
                             <a href="{% url 'edit_generated_contracts' contract.id %}" class="edit-icon">
                                 <i class="fa-regular fa-pen-to-square fa-lg"></i>
                                 <i class="fa-solid fa-pen-to-square fa-lg"></i>

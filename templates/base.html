@@ -35,7 +35,28 @@
                         <i class="fa-solid fa-coins"></i>
                         <span class="links_name">Work orders</span>
                     </a>
-                    <span class="tooltip">Work orders</span>
+                    <span class="tooltip" style="width: 180px; margin-left: 30px;">Work orders</span>
+                </li>
+                <li>
+                    <a href="{% url 'list_generated_contracts' %}">
+                        <i class="fa-solid fa-file-contract"></i>
+                        <span class="links_name">Generate contract</span>
+                    </a>
+                    <span class="tooltip" style="width: 180px; margin-left: 30px;">Generate contract</span>
+                </li>
+                <li>
+                    <a href="{% url 'list_items' %}">
+                        <i class="fa-solid fa-box"></i>
+                        <span class="links_name">List items</span>
+                    </a>
+                    <span class="tooltip">Items</span>
+                </li>
+                <li>
+                    <a href="{% url 'list_generated_contracts' %}">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                        <span class="links_name">Clausules</span>
+                    </a>
+                    <span class="tooltip">Clausules</span>
                 </li>
                 <li>
                     <a href="{% url 'companies_list' %}">
@@ -71,13 +92,6 @@
                         <span class="links_name">Dashboard</span>
                     </a>
                     <span class="tooltip">Dashboard</span>
-                </li>
-                <li>
-                    <a href="{% url 'list_generated_contracts' %}">
-                        <i class="fa-solid fa-file-contract"></i>
-                        <span class="links_name">Generate contract</span>
-                    </a>
-                    <span class="tooltip" style="width: 180px; margin-left: 30px;">Generate contract</span>
                 </li>
             </ul>
             <div class="profile_content">

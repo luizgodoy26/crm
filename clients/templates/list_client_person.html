@@ -18,15 +18,13 @@ Client person List
         <!-- Pending amount -->
         <div class="info-box">
             <h3 class="h3-info-total">Pending amount</h3>
-            <h4 class="h4-info-total pending">R$</h4>
-            <h2 class="h2-info-total pending">{{ pending_payments_total|floatformat:2|intcomma }}</h2>
+            <h2 class="h2-info-total pending">R$ {{ pending_payments_total|floatformat:2|intcomma }}</h2>
         </div>
 
         <!-- Received amount -->
         <div class="info-box">
             <h3 class="h3-info-total">Received amount</h3>
-            <h4 class="h4-info-total received">R$</h4>
-            <h2 class="h2-info-total received">{{ received_payments_total|floatformat:2|intcomma }}</h2>
+            <h2 class="h2-info-total received">R$ {{ received_payments_total|floatformat:2|intcomma }}</h2>
         </div>
 
 

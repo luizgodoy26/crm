@@ -380,16 +380,26 @@ select{
     color: #F25252;
     text-decoration: none;
     active: none;
+    transition: all 0.5s ease;
+    padding-right: 10px;
 }
-.fa-trash-can{
-    color: #F25252;
-    text-decoration: none;
-    active: none;
+
+.fa-print{
+    color: #D8E3F2;
+    transition: all 0.5s ease;
+    font-size: 18px;
+    padding-right: 10px;
+}
+
+.fa-print:hover{
+    color: #0540F2;
 }
 
 .delete-icon > .fa-regular + .fa-solid,
 .delete-icon:hover > .fa-regular {
   display: none;
+  transition: all 0.5s ease;
+
 }
 .delete-icon:hover > .fa-regular + .fa-solid {
   display: inline-block;
@@ -400,6 +410,7 @@ select{
     color: #0540F2;
     text-decoration: none;
     active: none;
+    padding-right: 10px;
 }
 .fa-pen-to-square{
     color: #0540F2;
@@ -1118,4 +1129,33 @@ ol li:before {
 
 .container .center{
     margin-top: 60px;
+}
+
+.st{
+    border: 1px solid;
+    border-radius: 20px;
+    padding-left: 9px;
+    padding-right: 9px;
+}
+
+.payd{
+
+    border-color: #0540F2;
+    color: #0540F2;
+}
+
+.pending {
+    padding-left: 9px;
+    padding-right: 9px;
+    border-color: #F29422;
+    border-radius: 20px;
+    color: #F29422;
+}
+
+.canceled{
+    padding-left: 9px;
+    padding-right: 9px;
+    border: 1px solid #F25252;
+    border-radius: 20px;
+    color: #F25252;
 }

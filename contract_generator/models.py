@@ -13,7 +13,6 @@ class Item(models.Model):
     contract = models.ForeignKey(Contract, blank=True, null=True, on_delete=models.CASCADE)
 
     item_name = models.CharField(max_length=90)
-    item_type = models.CharField(max_length=90)
 
     item_value = models.FloatField(blank=True, null=True, max_length=12)
     item_qt = models.FloatField(blank=True, null=True, max_length=12)
@@ -21,12 +20,27 @@ class Item(models.Model):
     # Unity options
     METERS = 'MT'
     LITERS = 'LT'
+    NOT_APPLY = 'NA'
     UNITY_CHOICES = [
         (METERS, 'Meters'),
         (LITERS, 'Liters'),
+        (NOT_APPLY, 'Na'),
     ]
 
     unity = models.CharField(choices=UNITY_CHOICES, default=METERS, max_length=20)
+
+    # Type options
+    EQUIPMENT = 'EQ'
+    LABOR = 'LB'
+    MATERIAL = 'MR'
+    TYPE_CHOICES = [
+        (EQUIPMENT, 'Equipment'),
+        (LABOR, 'Labor'),
+        (MATERIAL, 'Material'),
+    ]
+
+    item_type = models.CharField(choices=TYPE_CHOICES, default=MATERIAL, max_length=20)
+
 
     def __str__(self):
         return self.item_name
@@ -49,7 +63,7 @@ class Clausule(models.Model):
 
 class ClientContract(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    original_contract = models.ForeignKey(Contract, on_delete=models.CASCADE, null=True, blank=True)
+    work_order = models.ForeignKey(Contract, on_delete=models.CASCADE, null=True, blank=True)
     contract_name = models.CharField(max_length=60)
     address = models.TextField(blank=True, null=True)
 

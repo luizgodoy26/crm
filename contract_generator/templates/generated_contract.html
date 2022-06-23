@@ -65,7 +65,7 @@
 <div class="container-detail">
 
 
-        <h1 id="detail-pdf">{{ contract.original_contract.contract_name }}</h1>
+        <h1 id="detail-pdf">{{ contract.work_order.contract_name }}</h1>
         <h2>{{ user.full_name }}</h2>
 
 
@@ -74,29 +74,29 @@
 
 <!--  DISPLAY THE CLIENT DATA   -->
         <h2>Client data:</h2>
-        {% if contract.original_contract.company_client %}
+        {% if contract.work_order.company_client %}
         <h3 class="subheader">Company client: </h3>
             <div class="detail">
-                <p><span class="bolded">Company name: </span>{{ contract.original_contract.company_client.company_name }}</p>
-                <p><span class="bolded">CNPJ: </span>{{ contract.original_contract.company_client.company_cnpj }}</p>
-                {% if contract.original_contract.company_client.phone %}
-                    <p><span class="bolded">Phone: </span>{{ contract.original_contract.company_client.phone }}</p>
+                <p><span class="bolded">Company name: </span>{{ contract.work_order.company_client.company_name }}</p>
+                <p><span class="bolded">CNPJ: </span>{{ contract.work_order.company_client.company_cnpj }}</p>
+                {% if contract.work_order.company_client.phone %}
+                    <p><span class="bolded">Phone: </span>{{ contract.work_order.company_client.phone }}</p>
                 {% endif %}
-                {% if contract.original_contract.company_client.email %}
-                    <p><span class="bolded">Email: </span>{{ contract.original_contract.company_client.email }}</p>
+                {% if contract.work_order.company_client.email %}
+                    <p><span class="bolded">Email: </span>{{ contract.work_order.company_client.email }}</p>
                 {% endif %}
             </div>
         {% endif %}
-        {% if contract.original_contract.person_client %}
+        {% if contract.work_order.person_client %}
         <h3 class="subheader">Person client: </h3>
             <div class="detail">
-                <p><span class="bolded">Name: </span>{{ contract.original_contract.person_client.first_name }} {{ contract.original_contract.person_client.last_name }}</p>
-                <p><span class="bolded">CPF: </span>{{ contract.original_contract.person_client.cpf }}</p>
-                {% if contract.original_contract.person_client.phone %}
-                    <p><span class="bolded">Phone: </span>{{ contract.original_contract.person_client.phone }}</p>
+                <p><span class="bolded">Name: </span>{{ contract.work_order.person_client.first_name }} {{ contract.work_order.person_client.last_name }}</p>
+                <p><span class="bolded">CPF: </span>{{ contract.work_order.person_client.cpf }}</p>
+                {% if contract.work_order.person_client.phone %}
+                    <p><span class="bolded">Phone: </span>{{ contract.work_order.person_client.phone }}</p>
                 {% endif %}
-                {% if contract.original_contract.person_client.email %}
-                    <p><span class="bolded">Email: </span>{{ contract.original_contract.person_client.email }}</p>
+                {% if contract.work_order.person_client.email %}
+                    <p><span class="bolded">Email: </span>{{ contract.work_order.person_client.email }}</p>
                 {% endif %}
             </div>
         {% endif %}
@@ -108,7 +108,7 @@
 <!--  CONTRACT DESCRIPTION -->
         <h2>Contract description</h2>
         <div class="detail">
-            <p>{{ contract.original_contract.description }}</p>
+            <p>{{ contract.work_order.description }}</p>
         </div>
 
     <div><hr class="hr-full"></div>
@@ -135,11 +135,11 @@
                         {% for item in contract_items %}
                             <tr>
                                 <td>{{ item }}</td>
-                                <td>{{ item.item_value|floatformat:2|intcomma }}</td>
+                                <td>R$ {{ item.item_value|floatformat:2|intcomma }}</td>
                                 <td>{{ item.item_qt|floatformat:2|intcomma }}</td>
                                 <td>{{ item.unity }}</td>
                                 <td>{{ item.item_type }}</td>
-			                    <td>{{item.item_value|mul:item.item_qt|floatformat:2|intcomma}}</td>
+			                    <td>R$ {{item.item_value|mul:item.item_qt|floatformat:2|intcomma}}</td>
                             </tr>
                         {% endfor %}
                             <tr class="highlight">
@@ -148,7 +148,7 @@
                                 <td style="border: 0px ;"></td>
                                 <td style="border: 0px ;"></td>
                                 <td style="border: 0px ;"></td>
-                                <td style="border: 0px ;">{{ total|floatformat:2|intcomma }}</td>
+                                <td style="border: 0px ;">R$ {{ total|floatformat:2|intcomma }}</td>
                             </tr>
                     </tbody>
                 </table>
@@ -176,9 +176,9 @@
             <div id="dates">
                 <h2>Contract dates</h2>
                 <div class="detail">
-                    <p><span class="bolded">Starting date: </span>{{ contract.original_contract.starting_date }}</p>
-                    <p><span class="bolded">Ending date: </span>{{ contract.original_contract.ending_date }}</p>
-                    <p><span class="bolded">Payment date date: </span>{{ contract.original_contract.payment_date }}</p>
+                    <p><span class="bolded">Starting date: </span>{{ contract.work_order.starting_date }}</p>
+                    <p><span class="bolded">Ending date: </span>{{ contract.work_order.ending_date }}</p>
+                    <p><span class="bolded">Payment date date: </span>{{ contract.work_order.payment_date }}</p>
                 </div>
             </div>
 
@@ -200,12 +200,12 @@
                     <tr class="no-row">
                         <td class="bolded no-row">{{ user }}</td>
                         <td class="no-row"></td>
-                        <td class="bolded no-row">{{ contract.original_contract.person_client.first_name }} {{ contract.original_contract.person_client.last_name }}</td>
+                        <td class="bolded no-row">{{ contract.work_order.person_client.first_name }} {{ contract.work_order.person_client.last_name }}</td>
                     </tr>
                     <tr class="no-row">
                         <td class="no-row" style="text-align: left; padding-left: 10px;">CPF: <span class="bolded">{{ user.full_name }}</span></td>
                         <td class="no-row"></td>
-                        <td class="no-row" style="text-align: left; padding-left: 10px;">CPF: <span class="bolded">{{ contract.original_contract.person_client.cpf }}</span></td>
+                        <td class="no-row" style="text-align: left; padding-left: 10px;">CPF: <span class="bolded">{{ contract.work_order.person_client.cpf }}</span></td>
                     </tr>
 
                     <tr>

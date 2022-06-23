@@ -20,8 +20,7 @@ Companies List
         <!-- Pending amount -->
         <div class="info-box">
             <h3 class="h3-info-total">Work orders total value</h3>
-            <h4 class="h4-info-total received">R$</h4>
-            <h2 class="h2-info-total received">{{ total_contracts_value|floatformat:2|intcomma }}</h2>
+            <h2 class="h2-info-total received">R$ {{ total_contracts_value|floatformat:2|intcomma }}</h2>
         </div>
 
     </div>
@@ -50,7 +49,16 @@ Companies List
                     <tr>
                         <!-- NAME -->
                         <td>
-                            <a href="{% url 'edit_contract' contract.id %}">{{ contract.get_status_display }}</a>
+                            <a href="{% url 'edit_contract' contract.id %}">
+                                {% if contract.status == 'PN'  %}
+                                    <span class="pending st">{{ contract.get_status_display }}</span>
+                                {% elif contract.status == 'PD'  %}
+                                    <span class="payd st">{{ contract.get_status_display }}</span>
+                                {% else %}
+                                    <span class="canceled st">{{ contract.get_status_display }}</span>
+                                {% endif %}
+
+                            </a>
                         </td>
 
                         <!-- Client (Displays mainly the company client) -->
@@ -83,9 +91,9 @@ Companies List
                                 {% if contract.status == 'PN'  %}
                                     {{ today |timeuntil:contract.starting_date  }}
                                 {% elif contract.status == 'PD'  %}
-                                    Payd
+                                    <span class="payd st">Payd</span>
                                 {% else %}
-                                    Canceled
+                                    <span class="canceled st">Canceled</span>
                                 {% endif %}
                             </a>
                         </td>

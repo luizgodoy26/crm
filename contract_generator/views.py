@@ -5,7 +5,7 @@ from django.db.models import Sum
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 
-from contract_generator.forms import ClientContractForm, ClausuleForm, ItemForm
+from contract_generator.forms import ClientContractForm, ClausuleForm, ItemForm, ItemFormSimple
 from contract_generator.models import ClientContract, Item
 
 
@@ -14,6 +14,8 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 
 
+
+#TODO add list of clausules
 
 @login_required
 def new_client_contract(request):
@@ -30,13 +32,13 @@ def new_client_contract(request):
 
 @login_required
 def new_item(request):
-    form = ItemForm(request.POST or None, request.FILES or None)
+    form = ItemFormSimple(request.POST or None, request.FILES or None)
 
     if form.is_valid():
         form = form.save(commit=False)
         form.user = request.user
         form.save()
-        return redirect('list_generated_contracts')
+        return redirect('list_items')
     return render(request, 'item_form.html', {'form': form})
 
 
@@ -66,6 +68,15 @@ def list_generated_contracts(request):
 
 
 @login_required
+def list_items(request):
+    items = Item.objects.filter(user=request.user)
+    items_count = Item.objects.filter(user=request.user).count()
+    return render(request, 'list_items.html', {'items': items,
+                                                  'items_count': items_count
+                                                  })
+
+
+@login_required
 def edit_generated_contracts(request, id):
     contract = get_object_or_404(ClientContract, pk=id)
     user = request.user
@@ -78,6 +89,21 @@ def edit_generated_contracts(request, id):
         return redirect('list_generated_contracts')
     return render(request, 'client_contract_form.html', {'form': form,
                                                          'contract': contract
+                                                         })
+
+@login_required
+def edit_item(request, id):
+    item = get_object_or_404(Item, pk=id)
+    user = request.user
+
+    # Using instance, the form already start with the data from the client received
+    form = ItemFormSimple(request.POST or None, request.FILES or None, instance=item)
+
+    if form.is_valid():
+        form.save()
+        return redirect('list_items')
+    return render(request, 'item_form.html', {'form': form,
+                                                         'item': item
                                                          })
 
 
@@ -116,7 +142,7 @@ def adjust_values(request, id):
 
     if form.is_valid():
         form.save()
-        return redirect('companies_list')
+        return redirect('list_generated_contracts')
     return render(request, 'item_form.html', {'form': form, 'item': item})
 
 

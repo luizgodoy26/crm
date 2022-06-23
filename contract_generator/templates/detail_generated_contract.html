@@ -16,7 +16,7 @@
 <div class="container-detail">
 
 
-        <h1 id="detail-pdf">{{ contract.original_contract.contract_name }}</h1>
+        <h1 id="detail-pdf">{{ contract.work_order.contract_name }}</h1>
         <h2>{{ user.full_name }}</h2>
 
 
@@ -25,26 +25,26 @@
 
 <!--  DISPLAY THE CLIENT DATA   -->
         <h2>Client data:</h2>
-        {% if contract.original_contract.company_client %}
+        {% if contract.work_order.company_client %}
         <h3 class="subheader">Company client: </h3>
-            <p><span class="bolded">Company name: </span>{{ contract.original_contract.company_client.company_name }}</p>
-            <p><span class="bolded">CNPJ: </span>{{ contract.original_contract.company_client.company_cnpj }}</p>
-            {% if contract.original_contract.company_client.phone %}
-                <p><span class="bolded">Phone: </span>{{ contract.original_contract.company_client.phone }}</p>
+            <p><span class="bolded">Company name: </span>{{ contract.work_order.company_client.company_name }}</p>
+            <p><span class="bolded">CNPJ: </span>{{ contract.work_order.company_client.company_cnpj }}</p>
+            {% if contract.work_order.company_client.phone %}
+                <p><span class="bolded">Phone: </span>{{ contract.work_order.company_client.phone }}</p>
             {% endif %}
-            {% if contract.original_contract.company_client.email %}
-                <p><span class="bolded">Email: </span>{{ contract.original_contract.company_client.email }}</p>
+            {% if contract.work_order.company_client.email %}
+                <p><span class="bolded">Email: </span>{{ contract.work_order.company_client.email }}</p>
             {% endif %}
         {% endif %}
-        {% if contract.original_contract.person_client %}
+        {% if contract.work_order.person_client %}
         <h3 class="subheader">Person client: </h3>
-            <p><span class="bolded">Name: </span>{{ contract.original_contract.person_client.first_name }} {{ contract.original_contract.person_client.last_name }}</p>
-            <p><span class="bolded">CPF: </span>{{ contract.original_contract.person_client.cpf }}</p>
-            {% if contract.original_contract.person_client.phone %}
-                <p><span class="bolded">Phone: </span>{{ contract.original_contract.person_client.phone }}</p>
+            <p><span class="bolded">Name: </span>{{ contract.work_order.person_client.first_name }} {{ contract.work_order.person_client.last_name }}</p>
+            <p><span class="bolded">CPF: </span>{{ contract.work_order.person_client.cpf }}</p>
+            {% if contract.work_order.person_client.phone %}
+                <p><span class="bolded">Phone: </span>{{ contract.work_order.person_client.phone }}</p>
             {% endif %}
-            {% if contract.original_contract.person_client.email %}
-                <p><span class="bolded">Email: </span>{{ contract.original_contract.person_client.email }}</p>
+            {% if contract.work_order.person_client.email %}
+                <p><span class="bolded">Email: </span>{{ contract.work_order.person_client.email }}</p>
             {% endif %}
         {% endif %}
 
@@ -55,7 +55,7 @@
 <!--  CONTRACT DESCRIPTION -->
         <h2>Contract description</h2>
         <p>
-            {{ contract.original_contract.description }}
+            {{ contract.work_order.description }}
         </p>
 
 
@@ -131,9 +131,9 @@
 
 
             <h2>Contract dates</h2>
-            <p>{{ contract.original_contract.starting_date }}</p>
-            <p><span class="bolded">Ending date: </span>{{ contract.original_contract.ending_date }}</p>
-            <p><span class="bolded">Payment date date: </span>{{ contract.original_contract.payment_date }}</p>
+            <p><span class="bolded">Work starting date: </span>{{ contract.work_order.starting_date }}</p>
+            <p><span class="bolded">Ending date: </span>{{ contract.work_order.ending_date }}</p>
+            <p><span class="bolded">Payment date date: </span>{{ contract.work_order.payment_date }}</p>
 
 
 <!--    COMPANY SIGNATURE    -->
@@ -149,8 +149,8 @@
                 </div>
                 <div class="column center">
                     <p class="hr-signature"></p>
-                    <span class="bolded">{{ contract.original_contract.person_client.first_name }} {{ contract.original_contract.person_client.last_name }}</span>
-                    <span>{{ contract.original_contract.person_client.cpf }}</span>
+                    <span class="bolded">{{ contract.work_order.person_client.first_name }} {{ contract.work_order.person_client.last_name }}</span>
+                    <span>{{ contract.work_order.person_client.cpf }}</span>
                 </div>
             </div>
             <div class="container center">
