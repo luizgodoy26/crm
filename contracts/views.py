@@ -33,10 +33,16 @@ LIST CONTRACT
 def contract_list(request):
     contracts = Contract.objects.filter(user=request.user)
     total_contracts_value = Contract.objects.filter(user=request.user).aggregate(sum=Sum('value'))['sum'] or 0
+
+    total_received = Contract.objects.filter(user=request.user, status='PD').aggregate(sum=Sum('value'))['sum'] or 0
+    total_pending = Contract.objects.filter(user=request.user, status='PN').aggregate(sum=Sum('value'))['sum'] or 0
+
     contracts_count = Contract.objects.filter(user=request.user).count()
     today = date.today()
     return render(request, 'list_contract.html', {'contracts': contracts,
                                                        'total_contracts_value': total_contracts_value,
+                                                       'total_received': total_received,
+                                                       'total_pending': total_pending,
                                                        'contracts_count': contracts_count, 'today':today})
 
 

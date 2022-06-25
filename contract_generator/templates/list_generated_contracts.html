@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load mathfilters %}
 
+{% load humanize %}
+
 {% block title %}
 Companies List
 {% endblock %}
@@ -13,6 +15,12 @@ Companies List
         <div class="info-box">
             <h3 class="h3-info-total">Total contracts</h3>
             <h1 class="h1-info-total">{{ contracts_count }}</h1>
+        </div>
+
+
+        <div class="info-box">
+            <h3 class="h3-info-total">Total received</h3>
+            <h1 class="h1-info-total">R$ {{ total_value|floatformat:2|intcomma }}</h1>
         </div>
 
     </div>
@@ -45,13 +53,18 @@ Companies List
 
                         <!-- Client (Displays mainly the company client) -->
                         <td>
-                            <a href="#">
                                 {% if contract.work_order.company_client  %}
-                                    {{ contract.work_order.company_client.company_name }}
+                                    <a href="{% url 'detail_client_company' contract.work_order.company_client.id %}">
+                                        {{ contract.work_order.company_client.company_name }}
+                                    </a>
                                 {% elif contract.work_order.person_client  %}
-                                    {{ contract.work_order.person_client.first_name }} {{ contract.work_order.person_client.last_name }}
+                                    <a href="{% url 'detail_client_person' contract.work_order.person_client.id %}">
+                                        {{ contract.work_order.person_client.first_name }} {{ contract.work_order.person_client.last_name }}
+                                    </a>
                                 {% elif contract.person_client and contract.work_order.company_client %}
-                                    {{ contract.work_order.company_client.company_name }}
+                                    <a href="{% url 'detail_client_company' contract.work_order.company_client.id %}">
+                                        {{ contract.work_order.company_client.company_name }}
+                                    </a>
                                 {% else %}
                                     -
                                 {% endif %}
@@ -67,7 +80,7 @@ Companies List
                         </td>
                         <!-- TOTAL VALUE -->
                         <td>
-                            <a href="#">{{ contract.work_order.value }}</a>
+                            <a href="#" class="received">R$ {{ contract.work_order.value|floatformat:2|intcomma }}</a>
                         </td>
 
 

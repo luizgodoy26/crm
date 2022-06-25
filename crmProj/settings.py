@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'mathfilters',
     'clients',
     'contract_generator',
+    'django_cpf_cnpj',
     'accounts',
     'contracts',
     'agenda',

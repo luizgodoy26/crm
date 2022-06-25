@@ -6,8 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 
 from contract_generator.forms import ClientContractForm, ClausuleForm, ItemForm, ItemFormSimple
-from contract_generator.models import ClientContract, Item
-
+from contract_generator.models import ClientContract, Item, Clausule
 
 from django.http import HttpResponse
 from django.template.loader import get_template
@@ -16,6 +15,8 @@ from xhtml2pdf import pisa
 
 
 #TODO add list of clausules
+from contracts.models import Contract
+
 
 @login_required
 def new_client_contract(request):
@@ -60,9 +61,19 @@ def new_clausule(request):
 def list_generated_contracts(request):
     contracts = ClientContract.objects.filter(user=request.user)
     contracts_count = ClientContract.objects.filter(user=request.user).count()
+
+
+    # total_value = ClientContract.work_order.objects.filter(user=request.user).aggregate(sum=Sum('value'))['sum'] or 0
+
+    total_value = 0
+    for contract in contracts:
+        total_value += Contract.objects.filter(user=request.user, clientcontract=contract).aggregate(sum=Sum('value'))['sum'] or 0
+
+
     today = date.today()
     return render(request, 'list_generated_contracts.html', {'contracts': contracts,
                                                   'contracts_count': contracts_count,
+                                                  'total_value': total_value,
                                                   'today':today
                                                   })
 
@@ -73,6 +84,15 @@ def list_items(request):
     items_count = Item.objects.filter(user=request.user).count()
     return render(request, 'list_items.html', {'items': items,
                                                   'items_count': items_count
+                                                  })
+
+
+@login_required
+def list_clausules(request):
+    clausules = Clausule.objects.filter(user=request.user)
+    clausules_count = Clausule.objects.filter(user=request.user).count()
+    return render(request, 'list_clausules.html', {'clausules': clausules,
+                                                  'clausules_count': clausules_count
                                                   })
 
 
@@ -104,6 +124,21 @@ def edit_item(request, id):
         return redirect('list_items')
     return render(request, 'item_form.html', {'form': form,
                                                          'item': item
+                                                         })
+
+@login_required
+def edit_clausule(request, id):
+    clausule = get_object_or_404(Clausule, pk=id)
+    user = request.user
+
+    # Using instance, the form already start with the data from the client received
+    form = ClausuleForm(request.POST or None, request.FILES or None, instance=clausule)
+
+    if form.is_valid():
+        form.save()
+        return redirect('list_clausules')
+    return render(request, 'clausule_form.html', {'form': form,
+                                                         'clausule': clausule
                                                          })
 
 

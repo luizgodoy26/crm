@@ -16,7 +16,13 @@
 <div class="container-detail">
 
 
-        <h1 id="detail-pdf">{{ contract.work_order.contract_name }}</h1>
+        <h1 id="detail-pdf">
+            {{ contract.work_order.contract_name }}
+            <a href="{% url 'edit_generated_contracts' contract.id %}" class="edit-icon right">
+                <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+            </a>
+        </h1>
         <h2>{{ user.full_name }}</h2>
 
 
@@ -24,9 +30,16 @@
 
 
 <!--  DISPLAY THE CLIENT DATA   -->
-        <h2>Client data:</h2>
+        <h2>
+            Client data:
+            <a href="{% url 'edit_contract' contract.work_order.id %}" class="edit-icon right">
+                <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+            </a>
+        </h2>
         {% if contract.work_order.company_client %}
         <h3 class="subheader">Company client: </h3>
+
             <p><span class="bolded">Company name: </span>{{ contract.work_order.company_client.company_name }}</p>
             <p><span class="bolded">CNPJ: </span>{{ contract.work_order.company_client.company_cnpj }}</p>
             {% if contract.work_order.company_client.phone %}
@@ -53,17 +66,28 @@
 
 
 <!--  CONTRACT DESCRIPTION -->
-        <h2>Contract description</h2>
-        <p>
-            {{ contract.work_order.description }}
-        </p>
+        <h2>
+            Contract description
+            <a href="{% url 'edit_contract' contract.work_order.id %}" class="edit-icon right">
+                <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+            </a>
+        </h2>
+        <p>{{ contract.work_order.description }}</p>
 
 
     <div><hr class="hr-full"></div>
 
 
 <!-- DISPLAY ALL THE ITEMS FROM THE CONTRACT -->
-        <h2>Contract items</h2>
+        <h2>
+            Contract items
+            <a href="{% url 'edit_generated_contracts' contract.id %}" class="edit-icon right">
+                <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+            </a>
+        </h2>
+
                 <table class="client-table" name="item_table">
                     <thead>
                         <tr>
@@ -82,11 +106,11 @@
                             {% csrf_token %}
                             <tr class="line_items">
                                 <td>{{ item }}</td>
-                                <td>{{ item.item_value }}</td>
-                                <td>{{ item.item_qt }}</td>
+                                <td>R$ {{ item.item_value|floatformat:2|intcomma }}</td>
+                                <td>{{ item.item_qt|floatformat:2|intcomma }}</td>
                                 <td>{{ item.unity }}</td>
                                 <td>{{ item.item_type }}</td>
-			                    <td>{{item.item_value|mul:item.item_qt}}</td>
+			                    <td>R$ {{item.item_value|mul:item.item_qt|floatformat:2|intcomma}}</td>
 
                                 <td>
                                     <a href="{% url 'adjust_values' item.id %}" class="edit-icon">
@@ -103,7 +127,7 @@
                                 <td></td>
                                 <td></td>
                                 <td>
-                                    {{ total }}
+                                    R$ {{ total|floatformat:2|intcomma }}
                                 </td>
                             </tr>
 
@@ -113,7 +137,13 @@
 
 
 <!-- DISPLAY ALL THE CLAUSULES OF THE CONTRACT -->
-        <h2>Contract clausules</h2>
+        <h2>
+            Contract clausules
+            <a href="{% url 'edit_generated_contracts' contract.id %}" class="edit-icon right">
+                <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+            </a>
+        </h2>
             <ol>
                 {% for clausule in contract_clausules %}
                     <li>{{ clausule }}
@@ -130,7 +160,13 @@
 <!--    CONTRACT DATES    -->
 
 
-            <h2>Contract dates</h2>
+            <h2>
+                Contract dates
+                <a href="{% url 'edit_contract' contract.work_order.id %}" class="edit-icon right">
+                    <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                </a>
+            </h2>
             <p><span class="bolded">Work starting date: </span>{{ contract.work_order.starting_date }}</p>
             <p><span class="bolded">Ending date: </span>{{ contract.work_order.ending_date }}</p>
             <p><span class="bolded">Payment date date: </span>{{ contract.work_order.payment_date }}</p>

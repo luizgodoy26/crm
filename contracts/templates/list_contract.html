@@ -17,11 +17,16 @@ Companies List
             <h1 class="h1-info-total">{{ contracts_count }}</h1>
         </div>
 
-        <!-- Pending amount -->
         <div class="info-box">
-            <h3 class="h3-info-total">Work orders total value</h3>
-            <h2 class="h2-info-total received">R$ {{ total_contracts_value|floatformat:2|intcomma }}</h2>
+            <h3 class="h3-info-total">Pending work orders</h3>
+            <h2 class="h1-info-total pending">R$ {{ total_pending|floatformat:2|intcomma }}</h2>
         </div>
+
+        <div class="info-box">
+            <h3 class="h3-info-total">Received work orders</h3>
+            <h2 class="h1-info-total">R$ {{ total_received|floatformat:2|intcomma }}</h2>
+        </div>
+
 
     </div>
 
@@ -139,7 +144,7 @@ Companies List
                 <a href="{% url 'new_contract' %}" class="new-client-icon">
                 <i class="fa-solid fa-file-circle-plus"></i>
                 </a>
-                <span class="tooltip">Add contract</span>
+                <span class="tooltip" style="width: 180px; margin-left: 30px;">Add work-order</span>
             </div>
 
         </div>

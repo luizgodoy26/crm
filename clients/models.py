@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django_cpf_cnpj.fields import CNPJField, CPFField
 
 User = settings.AUTH_USER_MODEL
 
@@ -8,11 +9,9 @@ class ClientCompany(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     company_name = models.CharField(max_length=30)
-    company_cnpj = models.IntegerField()
+    company_cnpj = CNPJField(masked=True)
     phone = models.IntegerField(null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
-    pending_payments = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
-    received_payments = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     description = models.TextField(blank=True, null=True)
 
     # To return the name of the company on the django admin
@@ -26,12 +25,10 @@ class ClientPerson(models.Model):
 
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=90)
-    cpf = models.IntegerField()
+    cpf = CPFField(masked=False)
     phone = models.IntegerField(blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
     person_company = models.ForeignKey(ClientCompany, null=True, blank=True, on_delete=models.PROTECT)
-    pending_payments = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
-    received_payments = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     description = models.TextField(blank=True, null=True)
 
     # To return the name of the person on the django admin

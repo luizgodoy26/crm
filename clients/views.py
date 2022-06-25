@@ -28,8 +28,8 @@ def client_company_list(request):
 
     client_count = ClientCompany.objects.filter(user=request.user).count()
     return render(request, 'list_client_company.html', {'clients': clients,
-                                                       'pending_payments_total': total_received,
-                                                       'received_payments_total': total_pending,
+                                                       'pending_payments_total': total_pending,
+                                                       'received_payments_total': total_received,
                                                        'contracts': contracts,
                                                        'client_count': client_count})
 
@@ -53,8 +53,8 @@ def client_person_list(request):
 
     client_count = ClientPerson.objects.filter(user=request.user).count()
     return render(request, 'list_client_person.html', {'clients': clients,
-                                                       'pending_payments_total': total_received,
-                                                       'received_payments_total': total_pending,
+                                                       'pending_payments_total': total_pending,
+                                                       'received_payments_total': total_received,
                                                        'client_count': client_count
                                                        })
 

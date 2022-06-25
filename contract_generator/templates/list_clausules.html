@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load mathfilters %}
+
+{% block title %}
+Companies List
+{% endblock %}
+
+
+{% block main %}
+
+    <div class="box-row">
+        <!-- Active customers -->
+        <div class="info-box">
+            <h3 class="h3-info-total">Total clausules</h3>
+            <h1 class="h1-info-total">{{ clausules_count }}</h1>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="container-list">
+
+            <h2>Clausules list</h2>
+
+            <table class="client-table">
+
+                <thead>
+                    <tr>
+                        <th>Clausule</th>
+                        <th>Category</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for clausule in clausules %}
+                    <tr>
+                        <!-- NAME -->
+                        <td>
+                            <a href="#">{{ clausule.clausule_name }}</a>
+                        </td>
+
+                        <!-- Calusule category -->
+                        <td>
+                            <a href="#">
+                                {{ clausule.clausule_type }}
+                            </a>
+                        </td>
+
+
+                        <!-- OPTIONS -->
+                        <td>
+                            <a href="{% url 'edit_clausule' clausule.id %}" class="edit-icon">
+                                <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                            </a>
+
+                            <a href="#" class="delete-icon">
+                                <i class="fa-regular fa-trash-can fa-lg"></i>
+                                <i class="fa-solid fa-trash-can fa-lg"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+
+            <div class="add-new-client-btn">
+                <a href="{% url 'new_item' %}" class="new-client-icon">
+                <i class="fa-solid fa-clipboard-list"></i>
+                </a>
+                <span class="tooltip">Add clausule</span>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

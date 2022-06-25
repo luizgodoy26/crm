@@ -1,7 +1,8 @@
 from django.urls import path
 
 from contract_generator.views import new_client_contract, new_clausule, new_item, list_generated_contracts, \
-    edit_generated_contracts, detail_generated_contract, ContractToPdf, adjust_values, list_items, edit_item
+    edit_generated_contracts, detail_generated_contract, ContractToPdf, adjust_values, list_items, edit_item, \
+    list_clausules, edit_clausule
 
 urlpatterns = [
     path('newct/', new_client_contract, name='new_client_contract'),
@@ -10,12 +11,14 @@ urlpatterns = [
 
     path('', list_generated_contracts, name='list_generated_contracts'),
     path('items/', list_items, name='list_items'),
+    path('clausules/', list_clausules, name='list_clausules'),
 
     path('detailct/<int:id>', detail_generated_contract, name='detail_generated_contract'),
 
     # Edit
     path('editct/<int:id>', edit_generated_contracts, name='edit_generated_contracts'),
     path('editit/<int:id>', edit_item, name='edit_item'),
+    path('editcl/<int:id>', edit_clausule, name='edit_clausule'),
 
 
     path('adjust_values/<int:id>', adjust_values, name='adjust_values'),
