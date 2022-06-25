@@ -12,12 +12,12 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 
-
-
-#TODO add list of clausules
 from contracts.models import Contract
 
 
+"""
+ADD A NEW CONTRACT
+"""
 @login_required
 def new_client_contract(request):
     form = ClientContractForm(request.POST or None, request.FILES or None)
@@ -30,7 +30,9 @@ def new_client_contract(request):
     return render(request, 'client_contract_form.html', {'form': form})
 
 
-
+"""
+ADD A NEW ITEM
+"""
 @login_required
 def new_item(request):
     form = ItemFormSimple(request.POST or None, request.FILES or None)
@@ -43,7 +45,9 @@ def new_item(request):
     return render(request, 'item_form.html', {'form': form})
 
 
-
+"""
+ADD A NEW CLAUSULE
+"""
 @login_required
 def new_clausule(request):
     form = ClausuleForm(request.POST or None, request.FILES or None)
@@ -52,11 +56,14 @@ def new_clausule(request):
         form = form.save(commit=False)
         form.user = request.user
         form.save()
-        return redirect('list_generated_contracts')
+        return redirect('list_clausules')
     return render(request, 'clausule_form.html', {'form': form})
 
 
 
+"""
+LIST THE GENERATED CONTRACTS
+"""
 @login_required
 def list_generated_contracts(request):
     contracts = ClientContract.objects.filter(user=request.user)
@@ -78,6 +85,9 @@ def list_generated_contracts(request):
                                                   })
 
 
+"""
+LIST THE ITEMS
+"""
 @login_required
 def list_items(request):
     items = Item.objects.filter(user=request.user)
@@ -86,7 +96,9 @@ def list_items(request):
                                                   'items_count': items_count
                                                   })
 
-
+"""
+LIST THE CLAUSULES
+"""
 @login_required
 def list_clausules(request):
     clausules = Clausule.objects.filter(user=request.user)
@@ -95,7 +107,9 @@ def list_clausules(request):
                                                   'clausules_count': clausules_count
                                                   })
 
-
+"""
+EDIT THE CONTRACT
+"""
 @login_required
 def edit_generated_contracts(request, id):
     contract = get_object_or_404(ClientContract, pk=id)
@@ -110,7 +124,9 @@ def edit_generated_contracts(request, id):
     return render(request, 'client_contract_form.html', {'form': form,
                                                          'contract': contract
                                                          })
-
+"""
+EDIT ITEMS OF THE CONTRACT
+"""
 @login_required
 def edit_item(request, id):
     item = get_object_or_404(Item, pk=id)
@@ -126,6 +142,10 @@ def edit_item(request, id):
                                                          'item': item
                                                          })
 
+
+"""
+EDIT CLAUSULES OF THE CONTRACT
+"""
 @login_required
 def edit_clausule(request, id):
     clausule = get_object_or_404(Clausule, pk=id)
@@ -143,7 +163,7 @@ def edit_clausule(request, id):
 
 
 """
-DETAIL CONTRACT
+DETAIL GENERATE CONTRACT
 """
 @login_required
 def detail_generated_contract(request, id):
@@ -169,6 +189,10 @@ def detail_generated_contract(request, id):
 
 
 
+
+"""
+ADJUST THE VALUES ON THE GENERATED CONTRACTS
+"""
 @login_required
 def adjust_values(request, id):
     item = get_object_or_404(Item, pk=id)
@@ -182,7 +206,56 @@ def adjust_values(request, id):
 
 
 
+"""
+DELETE GENERATED CONTRACT
+"""
+@login_required
+def delete_gen_contract(request, id):
+    contract = get_object_or_404(ClientContract, pk=id)
 
+    if request.method == 'POST':
+        contract.delete()
+        return redirect('list_generated_contracts')
+
+    return render(request, 'deletion_gen_contract_confirm.html', {'contract': contract})
+
+
+
+
+"""
+DELETE ITEM
+"""
+@login_required
+def delete_item(request, id):
+    item = get_object_or_404(Item, pk=id)
+
+    if request.method == 'POST':
+        item.delete()
+        return redirect('list_items')
+
+    return render(request, 'deletion_item_confirm.html', {'item': item})
+
+
+
+
+"""
+DELETE CLAUSULE
+"""
+@login_required
+def delete_clausule(request, id):
+    clausule = get_object_or_404(Clausule, pk=id)
+
+    if request.method == 'POST':
+        clausule.delete()
+        return redirect('clausules_items')
+
+    return render(request, 'deletion_clausule_confirm.html', {'clausule': clausule})
+
+
+
+"""
+GENERATE CONTRACT PDF
+"""
 class ContractToPdf(View):
     def get(self, request, *args, **kwargs):
         template_path = 'generated_contract.html'
@@ -201,12 +274,14 @@ class ContractToPdf(View):
             owner = get_object_or_404(ClientContract.objects.filter(user=self.request.user, pk=self.kwargs['id']))
             return owner.user.full_name
 
+        counter = 0
         context = {
             'contract': ClientContract.objects.get(pk=self.kwargs['id']),
             'contract_items': ClientContract.objects.get(pk=self.kwargs['id']).items.all(),
             'contract_clausules': ClientContract.objects.get(pk=self.kwargs['id']).clausules.all(),
             'total': total,
             'user': get_queryset(self),
+            'counter': counter,
         }
         html = template.render(context)
 

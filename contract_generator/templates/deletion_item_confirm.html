@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+    {% if user.id == item.user.id %}
+
+        <h1>Do you want to delete {{ item.item_name }} ?</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+        </form>
+        <br>
+        <a href="{% url 'contract_list' %}"><button>Cancel</button></a>
+
+    {% else %}
+        <h2>You are not allowed to edit this page</h2>
+    {% endif %}
+
+{% endblock %}

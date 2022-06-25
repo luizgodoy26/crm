@@ -59,6 +59,15 @@
     .center{
         text-align: center;
     }
+
+    ol li {
+        display: block;
+    }
+
+    ol li:before {
+        content: counters(item, ".") " ";
+    }
+
 </style>
 
 
@@ -160,6 +169,7 @@
             <div class="detail">
                 <ol>
                     {% for clausule in contract_clausules %}
+
                         <li>{{ clausule }}
                             <ol>
                                 <li>{{ clausule.clausule_description }}</li>
