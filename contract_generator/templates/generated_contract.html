@@ -9,7 +9,7 @@
 <style>
     @page {
         @frame content_frame {          /* Content Frame */
-            left: 30px; right: 30px; width: 512pt; top: 50px;
+            left: 45px; right: 45px; width: 512pt; top: 60px; bottom: 60px;
         }
     }
 
@@ -21,7 +21,7 @@
 
     h1{
         color: #0540F2;
-        font-family: Poppins;
+        font-family: "Gotham";
     }
 
     table, th, td {
@@ -82,7 +82,7 @@
 
 
 <!--  DISPLAY THE CLIENT DATA   -->
-        <h2>Client data:</h2>
+        <h2 style="font-family:">Client data:</h2>
         {% if contract.work_order.company_client %}
         <h3 class="subheader">Company client: </h3>
             <div class="detail">

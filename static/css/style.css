@@ -16,6 +16,20 @@ form{
 }
 
 /*
+    FONTS FONTS FONTS FONTS
+*/
+.thin{
+    font-weight: 300;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.bolded {
+    font-weight: bold;
+}
+
+
+/*
     SIDEBAR    SIDEBAR    SIDEBAR    SIDEBAR
 */
 .sidebar{
@@ -262,6 +276,29 @@ a{
 /*
  INPUT TEXTAREA
 */
+input[type="file"] {
+    background: none;
+    outline: none;
+    border: none;
+}
+
+.custom-file-upload {
+    outline: 1px solid #0540F2;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    height: 25px;
+    width: 30%;
+    border-radius: 90px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.custom-file-upload:hover {
+    outline: 2px solid #0540F2;
+}
+
+
 textarea{
     font-family: Poppins;
     outline: none;
@@ -301,20 +338,6 @@ input{
     margin-bottom: 20px;
 }
 
-input[type='checkbox'] {
-    width: 3rem;
- }
-
-input:hover[type='checkbox'] {
-    outline:none;
-    cursor: pointer;
- }
-
-
-input:focus[type='checkbox']{
-    outline: 0;
-    background: none;
-}
 
 /* HIDE SPIN BUTTON */
 input::-webkit-outer-spin-button,
@@ -1020,6 +1043,27 @@ a .received{
     background-color: #22F29B;
 }
 
+.payd{
+
+    border-color: #0540F2;
+    color: #0540F2;
+}
+
+.pending {
+    padding-left: 9px;
+    padding-right: 9px;
+    border-color: #F29422;
+    border-radius: 20px;
+    color: #F29422;
+}
+
+.canceled{
+    padding-left: 9px;
+    padding-right: 9px;
+    border: 1px solid #F25252;
+    border-radius: 20px;
+    color: #F25252;
+}
 
 
 /* DASHBOARD */
@@ -1092,22 +1136,6 @@ a .received{
     display: inline-block;
     vertical-align: top;
 }
-.bolded {
-    font-weight: bold;
-}
-
-ol {
-  counter-reset: item;
-}
-
-ol li {
-  display: block;
-}
-
-ol li:before {
-  content: counters(item, ".") " ";
-  counter-increment: item;
-}
 
 .hr-full{
     bcolor: gray;
@@ -1138,24 +1166,19 @@ ol li:before {
     padding-right: 9px;
 }
 
-.payd{
+/*
+    LIST LIST LIST LIST
+*/
 
-    border-color: #0540F2;
-    color: #0540F2;
+ol {
+  counter-reset: item;
 }
 
-.pending {
-    padding-left: 9px;
-    padding-right: 9px;
-    border-color: #F29422;
-    border-radius: 20px;
-    color: #F29422;
+ol li {
+  display: block;
 }
 
-.canceled{
-    padding-left: 9px;
-    padding-right: 9px;
-    border: 1px solid #F25252;
-    border-radius: 20px;
-    color: #F25252;
+ol li:before {
+  content: counters(item, ".") " ";
+  counter-increment: item;
 }

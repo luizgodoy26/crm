@@ -24,13 +24,6 @@
             </div>
             <ul class="nav_list">
                 <li>
-                    <a href="{% url 'home' %}">
-                        <i class="fa-solid fa-house"></i>
-                        <span class="links_name">Home</span>
-                    </a>
-                    <span class="tooltip">Home</span>
-                </li>
-                <li>
                     <a href="{% url 'contract_list' %}">
                         <i class="fa-solid fa-coins"></i>
                         <span class="links_name">Work orders</span>
@@ -92,6 +85,13 @@
                         <span class="links_name">Dashboard</span>
                     </a>
                     <span class="tooltip">Dashboard</span>
+                </li>
+                <li>
+                    <a href="{% url 'add_company_profile' %}">
+                        <i class="fa-solid fa-user"></i>
+                        <span class="links_name">Profile</span>
+                    </a>
+                    <span class="tooltip">Profile</span>
                 </li>
             </ul>
             <div class="profile_content">

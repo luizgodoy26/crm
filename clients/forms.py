@@ -7,7 +7,6 @@ FORM FOR CLIENT COMPANY
 """
 class ClientCompanyForm(ModelForm):
     company_name = forms.CharField(required=True, label='Company name', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company name'}))
-    # company_cnpj = forms.IntegerField(required=True, label='CNPJ', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company CNPJ'}))
     company_cnpj = forms.CharField(required=True, label='CNPJ', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company CNPJ'}))
     phone = forms.IntegerField(required=False, label='Phone', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company phone number'}))
     email = forms.EmailField(required=False, label='E-mail', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company e-mail'}))

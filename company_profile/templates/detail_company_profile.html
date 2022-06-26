@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+{% block main %}
+
+<div class="container-detail">
+
+        <h1>{{ company_profile.name }}</h1>
+        <table class="client-table">
+                <thead>
+                    <tr>
+                        <th>Company data</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+        <tbody>
+            <tr>
+                <th>CNPJ:</th>
+                <td>{{ company_profile.cnpj }}</td>
+            </tr>
+            <tr>
+                <th>Address:</th>
+                <td>{{ company_profile.address }}</td>
+            </tr>
+            <tr>
+                <th>Zipcode:</th>
+                <td>{{ company_profile.zipcode }}</td>
+            </tr>
+        </tbody>
+        </table>
+
+</div>
+{% endblock %}

@@ -7,6 +7,7 @@ from contracts import urls as contract_urls
 from agenda import urls as agenda_urls
 from dashboard import urls as dashboard_urls
 from contract_generator import urls as contractgen_urls
+from company_profile import urls as company_profile_urls
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -28,6 +29,10 @@ urlpatterns = [
     path('client/', include(clients_urls)),
     path('admin/', admin.site.urls),
 
+    # Contract generator urls
     path('contractgen/', include(contractgen_urls)),
+
+    # Company profile urls
+    path('profile/', include(company_profile_urls)),
 
 ]

@@ -8,7 +8,7 @@ from django.views import View
 from contract_generator.forms import ClientContractForm, ClausuleForm, ItemForm, ItemFormSimple
 from contract_generator.models import ClientContract, Item, Clausule
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 
@@ -199,9 +199,14 @@ def adjust_values(request, id):
     # Using instance, the form already start with the data from the client received
     form = ItemForm(request.POST or None, request.FILES or None, instance=item)
 
+    # Get the contract that sent the user to the adjustment page
+    if request.method == 'GET':
+        request.session['last_contract'] = request.META.get('HTTP_REFERER', '/')
+
     if form.is_valid():
         form.save()
-        return redirect('list_generated_contracts')
+        # Redirect the user to the contract that sent the user to the adjustment page
+        return HttpResponseRedirect(request.session['last_contract'])
     return render(request, 'item_form.html', {'form': form, 'item': item})
 
 

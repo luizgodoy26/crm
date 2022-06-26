@@ -113,7 +113,7 @@
 			                    <td>R$ {{item.item_value|mul:item.item_qt|floatformat:2|intcomma}}</td>
 
                                 <td>
-                                    <a href="{% url 'adjust_values' item.id %}" class="edit-icon">
+                                    <a href="{% url 'adjust_values' item.id %}"" onclick='overlay()' class="edit-icon">
                                         <i class="fa-regular fa-pen-to-square fa-lg"></i>
                                         <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                     </a>

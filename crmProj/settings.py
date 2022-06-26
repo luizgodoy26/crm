@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'contracts',
     'agenda',
     'dashboard',
+    'company_profile',
     'home'
 ]
 
