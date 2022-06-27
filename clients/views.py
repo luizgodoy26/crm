@@ -155,7 +155,7 @@ def edit_client_person(request, id):
     if form.is_valid():
         form.save()
         return redirect('person_list')
-    return render(request, 'company_profile_form.html', {'form': form, 'client': client})
+    return render(request, 'client_person_form.html', {'form': form, 'client': client})
 
 
 

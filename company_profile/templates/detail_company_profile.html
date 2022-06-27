@@ -5,7 +5,12 @@
 
 <div class="container-detail">
 
-        <h1>{{ company_profile.name }}</h1>
+        <h1 class="center">{{ company_profile.name }}</h1>
+        <a href="{% url 'edit_company_profile' company_profile.id %}" class="edit-icon tx-right">
+            <i class="fa-regular fa-pen-to-square fa-lg"></i>
+            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+        </a>
+
         <table class="client-table">
                 <thead>
                     <tr>

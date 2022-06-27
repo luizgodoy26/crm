@@ -25,10 +25,10 @@ def add_company_profile(request):
                 form = form.save(commit=False)
                 form.user = request.user
                 form.save()
-                return redirect('detail_company_profile')
+                return redirect('detail_company_profile', company_profile)
             return render(request, 'add_company_profile.html', {'form': form})
         else:
-            return redirect('edit_company_profile', company_profile)
+            return redirect('detail_company_profile', company_profile)
 
 
 """
@@ -41,7 +41,7 @@ def edit_company_profile(request, id):
 
     if form.is_valid():
         form.save()
-        return redirect('detail_company_profile')
+        return redirect('detail_company_profile', company_profile.id)
     return render(request, 'company_profile_form.html', {'form': form, 'company_profile': company_profile})
 
 

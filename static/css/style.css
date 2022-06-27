@@ -1029,6 +1029,10 @@ a .received{
 }
 
 
+.tx-right{
+    text-align: right;
+}
+
 
 /* COLORS */
 .light-blue {
@@ -1181,4 +1185,8 @@ ol li {
 ol li:before {
   content: counters(item, ".") " ";
   counter-increment: item;
+}
+
+.center{
+    text-align: center;
 }
