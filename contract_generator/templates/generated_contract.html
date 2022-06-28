@@ -68,11 +68,20 @@
         content: counters(item, ".") " ";
     }
 
+    img {
+        zoom: 5%;
+    }
+
+    #detail-pdf {
+        margin-top: 30px;
+    }
+
 </style>
 
 
 <div class="container-detail">
 
+        <img clas="logo" src="{{ STATIC_ROOT }}{{ profile.logo.url }}">
 
         <h1 id="detail-pdf">{{ contract.work_order.contract_name }}</h1>
         <h2>{{ user.full_name }}</h2>

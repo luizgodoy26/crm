@@ -4,6 +4,7 @@ from contract_generator.views import new_client_contract, new_clausule, new_item
     edit_generated_contracts, detail_generated_contract, ContractToPdf, adjust_values, list_items, edit_item, \
     list_clausules, edit_clausule, delete_gen_contract, delete_item, delete_clausule
 
+
 urlpatterns = [
     # Create
     path('newct/', new_client_contract, name='new_client_contract'),

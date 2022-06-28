@@ -5,6 +5,7 @@ from django.db.models import Sum
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 
+from company_profile.models import CompanyProfile
 from contract_generator.forms import ClientContractForm, ClausuleForm, ItemForm, ItemFormSimple
 from contract_generator.models import ClientContract, Item, Clausule
 
@@ -13,7 +14,9 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 
 from contracts.models import Contract
+from crmProj.settings import STATIC_ROOT
 
+from crmProj import settings
 
 """
 ADD A NEW CONTRACT
@@ -269,6 +272,10 @@ class ContractToPdf(View):
         contract = ClientContract.objects.get(pk=self.kwargs['id'])
         contract_items = contract.items.all()
 
+        profile = CompanyProfile.objects.filter(user=request.user).first()
+
+
+
         total = 0
         for item in contract_items:
             item_total_qt = item.item_qt or 0
@@ -285,6 +292,8 @@ class ContractToPdf(View):
             'contract_items': ClientContract.objects.get(pk=self.kwargs['id']).items.all(),
             'contract_clausules': ClientContract.objects.get(pk=self.kwargs['id']).clausules.all(),
             'total': total,
+            'profile': profile,
+            'STATIC_ROOT': STATIC_ROOT,
             'user': get_queryset(self),
             'counter': counter,
         }
