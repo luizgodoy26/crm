@@ -276,6 +276,14 @@ a{
 /*
  INPUT TEXTAREA
 */
+.search{
+    background-color: red;
+}
+
+input[type=search]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
+}
+
 input[type="file"] {
     background: none;
     outline: none;

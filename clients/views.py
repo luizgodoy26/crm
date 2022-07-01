@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
 from contracts.models import Contract
+from .filters import CompanyFilter
 from .models import ClientCompany, ClientPerson, ClientDocuments
 from .forms import ClientCompanyForm, ClientPersonForm, FilesForm
 from django.contrib.auth.decorators import login_required
@@ -16,6 +17,8 @@ LIST THE CLIENT COMPANIES
 def client_company_list(request):
     clients = ClientCompany.objects.filter(user=request.user)
     contracts = Contract.objects.filter(user=request.user)
+    company_filter = CompanyFilter(request.GET, queryset=clients)
+
 
     total_received = 0
     total_pending = 0
@@ -31,6 +34,7 @@ def client_company_list(request):
                                                        'pending_payments_total': total_pending,
                                                        'received_payments_total': total_received,
                                                        'contracts': contracts,
+                                                       'company_filter': company_filter,
                                                        'client_count': client_count})
 
 

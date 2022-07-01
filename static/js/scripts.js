@@ -132,5 +132,3 @@ function render_client_received(url){
 
         })
 }
-
-

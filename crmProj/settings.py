@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'mathfilters',
+    'django_filters',
     'clients',
     'contract_generator',
     'django_cpf_cnpj',
