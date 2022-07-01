@@ -277,7 +277,30 @@ a{
  INPUT TEXTAREA
 */
 .search{
-    background-color: red;
+    border-radius: 99px;
+    width: 250px;
+    background: none;
+    outline: 1px solid #0540F2;
+    padding-left: 48px;
+    margin-bottom: 6px;
+}
+.search-icon i {
+    position: absolute;
+    padding-top: 10px;
+    padding-left: 24px;
+    color: #0540F2;
+}
+
+.search::placeholder {
+    font-family: Poppins;
+    font-style: italic;
+    text-decoration: underline;
+    color: #0540F2;
+}
+
+.search:focus::-webkit-input-placeholder{
+    color: #D8E3F2;
+    transition: all 0.5s ease;
 }
 
 input[type=search]::-webkit-search-cancel-button {
@@ -561,6 +584,7 @@ button{
     border-radius: 100%;
     font-size: 34px;
 }
+
 
 .btn-next-icon .tooltip{
     opacity: 0;

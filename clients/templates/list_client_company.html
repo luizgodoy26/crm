@@ -32,13 +32,19 @@ Companies List
 
     <div class="container">
         <div class="container-list">
-            <form method="GET">
-                {{ company_filter.form  }}
-                <button type="submit">Pesquisar</button>
-            </form>
 
             <h2>Client companies list</h2>
-
+            <div>
+                <form class="flex right" method="GET">
+                        <span class="search-icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                        {{ company_filter.form.company_name  }}
+                        <div class="right">
+                            <button class="btn-confirm right">Search</button>
+                        </div>
+                </form>
+            </div>
 <!--            <div class="add-new-client-btn">-->
 <!--                <a href="{% url 'new_client_company' %}" class="new-client-icon">-->
 <!--                    <i class="fa-solid fa-user-plus"></i>-->
