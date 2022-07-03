@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
 from clients.forms import FilesForm
+from .filters import WorkOrderFilter
 from .forms import ContractForm
 from .models import Contract
 
@@ -37,13 +38,16 @@ def contract_list(request):
     total_received = Contract.objects.filter(user=request.user, status='PD').aggregate(sum=Sum('value'))['sum'] or 0
     total_pending = Contract.objects.filter(user=request.user, status='PN').aggregate(sum=Sum('value'))['sum'] or 0
 
+    workorder_filter = WorkOrderFilter(request.GET, queryset=contracts)
+
     contracts_count = Contract.objects.filter(user=request.user).count()
     today = date.today()
     return render(request, 'list_contract.html', {'contracts': contracts,
                                                        'total_contracts_value': total_contracts_value,
                                                        'total_received': total_received,
                                                        'total_pending': total_pending,
-                                                       'contracts_count': contracts_count, 'today':today})
+                                                       'workorder_filter': workorder_filter,
+                                                       'contracts_count': contracts_count, 'today': today})
 
 
 """

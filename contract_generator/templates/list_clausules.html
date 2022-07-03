@@ -22,6 +22,18 @@ Companies List
 
             <h2>Clausules list</h2>
 
+            <div>
+                <form class="flex right" method="GET">
+                        <span class="search-icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                        {{ clausule_filter.form.clausule  }}
+                        <div class="right">
+                            <button class="btn-confirm right">Search</button>
+                        </div>
+                </form>
+            </div>
+
             <table class="client-table">
 
                 <thead>
@@ -33,34 +45,38 @@ Companies List
                 </thead>
 
                 <tbody>
-                    {% for clausule in clausules %}
-                    <tr>
-                        <!-- NAME -->
-                        <td>
-                            <a href="#">{{ clausule.clausule_name }}</a>
-                        </td>
+                    {% for qs in clausule_filter.qs %}
+                        {% for clausule in clausules %}
+                            {% if clausule == qs %}
+                            <tr>
+                                <!-- NAME -->
+                                <td>
+                                    <a href="#">{{ clausule.clausule_name }}</a>
+                                </td>
 
-                        <!-- Calusule category -->
-                        <td>
-                            <a href="#">
-                                {{ clausule.clausule_type }}
-                            </a>
-                        </td>
+                                <!-- Calusule category -->
+                                <td>
+                                    <a href="#">
+                                        {{ clausule.clausule_type }}
+                                    </a>
+                                </td>
 
 
-                        <!-- OPTIONS -->
-                        <td>
-                            <a href="{% url 'edit_clausule' clausule.id %}" class="edit-icon">
-                                <i class="fa-regular fa-pen-to-square fa-lg"></i>
-                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                            </a>
+                                <!-- OPTIONS -->
+                                <td>
+                                    <a href="{% url 'edit_clausule' clausule.id %}" class="edit-icon">
+                                        <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                    </a>
 
-                            <a href="{% url 'delete_clausule' clausule.id %}" class="delete-icon">
-                                <i class="fa-regular fa-trash-can fa-lg"></i>
-                                <i class="fa-solid fa-trash-can fa-lg"></i>
-                            </a>
-                        </td>
-                    </tr>
+                                    <a href="{% url 'delete_clausule' clausule.id %}" class="delete-icon">
+                                        <i class="fa-regular fa-trash-can fa-lg"></i>
+                                        <i class="fa-solid fa-trash-can fa-lg"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
                     {% endfor %}
                 </tbody>
 

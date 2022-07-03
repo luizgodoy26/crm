@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 
 from company_profile.models import CompanyProfile
-from contract_generator.filters import ItemFilter
+from contract_generator.filters import ItemFilter, ContractFilter, ClausuleFilter
 from contract_generator.forms import ClientContractForm, ClausuleForm, ItemForm, ItemFormSimple
 from contract_generator.models import ClientContract, Item, Clausule
 
@@ -73,6 +73,7 @@ def list_generated_contracts(request):
     contracts = ClientContract.objects.filter(user=request.user)
     contracts_count = ClientContract.objects.filter(user=request.user).count()
 
+    contract_filter = ContractFilter(request.GET, queryset=contracts)
 
     # total_value = ClientContract.work_order.objects.filter(user=request.user).aggregate(sum=Sum('value'))['sum'] or 0
 
@@ -85,6 +86,7 @@ def list_generated_contracts(request):
     return render(request, 'list_generated_contracts.html', {'contracts': contracts,
                                                   'contracts_count': contracts_count,
                                                   'total_value': total_value,
+                                                  'contract_filter': contract_filter,
                                                   'today':today
                                                   })
 
@@ -111,8 +113,12 @@ LIST THE CLAUSULES
 def list_clausules(request):
     clausules = Clausule.objects.filter(user=request.user)
     clausules_count = Clausule.objects.filter(user=request.user).count()
+
+    clausule_filter = ClausuleFilter(request.GET, queryset=clausules)
+
     return render(request, 'list_clausules.html', {'clausules': clausules,
-                                                  'clausules_count': clausules_count
+                                                  'clausules_count': clausules_count,
+                                                  'clausule_filter': clausule_filter
                                                   })
 
 """

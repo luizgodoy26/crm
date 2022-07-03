@@ -30,6 +30,18 @@ Companies List
 
             <h2>Contracts list</h2>
 
+            <div>
+                <form class="flex right" method="GET">
+                        <span class="search-icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                        {{ contract_filter.form.contract  }}
+                        <div class="right">
+                            <button class="btn-confirm right">Search</button>
+                        </div>
+                </form>
+            </div>
+
             <table class="client-table">
 
                 <thead>
@@ -38,70 +50,74 @@ Companies List
                         <th>Client</th>
                         <th>Start date</th>
                         <th>End date</th>
-                        <th>Total value</th>
+                        <th>Work order value</th>
                         <th>Options</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    {% for contract in contracts %}
-                    <tr>
-                        <!-- NAME -->
-                        <td>
-                            <a href="{% url 'detail_generated_contract' contract.id %}">{{ contract.contract_name }}</a>
-                        </td>
+                    {% for qs in contract_filter.qs %}
+                        {% for contract in contracts %}
+                            {% if contract == qs %}
+                            <tr>
+                                <!-- NAME -->
+                                <td>
+                                    <a href="{% url 'detail_generated_contract' contract.id %}">{{ contract.contract_name }}</a>
+                                </td>
 
-                        <!-- Client (Displays mainly the company client) -->
-                        <td>
-                                {% if contract.work_order.company_client  %}
-                                    <a href="{% url 'detail_client_company' contract.work_order.company_client.id %}">
-                                        {{ contract.work_order.company_client.company_name }}
+                                <!-- Client (Displays mainly the company client) -->
+                                <td>
+                                        {% if contract.work_order.company_client  %}
+                                            <a href="{% url 'detail_client_company' contract.work_order.company_client.id %}">
+                                                {{ contract.work_order.company_client.company_name }}
+                                            </a>
+                                        {% elif contract.work_order.person_client  %}
+                                            <a href="{% url 'detail_client_person' contract.work_order.person_client.id %}">
+                                                {{ contract.work_order.person_client.first_name }} {{ contract.work_order.person_client.last_name }}
+                                            </a>
+                                        {% elif contract.person_client and contract.work_order.company_client %}
+                                            <a href="{% url 'detail_client_company' contract.work_order.company_client.id %}">
+                                                {{ contract.work_order.company_client.company_name }}
+                                            </a>
+                                        {% else %}
+                                            -
+                                        {% endif %}
                                     </a>
-                                {% elif contract.work_order.person_client  %}
-                                    <a href="{% url 'detail_client_person' contract.work_order.person_client.id %}">
-                                        {{ contract.work_order.person_client.first_name }} {{ contract.work_order.person_client.last_name }}
+                                </td>
+                                <!-- STARTING DATE -->
+                                <td>
+                                    <a href="#">{{ contract.work_order.starting_date }}</a>
+                                </td>
+                                <!-- ENDING DATE -->
+                                <td>
+                                    <a href="#">{{ contract.work_order.ending_date }}</a>
+                                </td>
+                                <!-- TOTAL VALUE -->
+                                <td>
+                                    <a href="#" class="received">R$ {{ contract.work_order.value|floatformat:2|intcomma }}</a>
+                                </td>
+
+
+
+                                <!-- OPTIONS -->
+                                <td>
+                                    <a href="{% url 'contract_to_pdf' contract.id %}" class="edit-icon">
+                                        <i class="fa-solid fa-print"></i>
                                     </a>
-                                {% elif contract.person_client and contract.work_order.company_client %}
-                                    <a href="{% url 'detail_client_company' contract.work_order.company_client.id %}">
-                                        {{ contract.work_order.company_client.company_name }}
+
+                                    <a href="{% url 'edit_generated_contracts' contract.id %}" class="edit-icon">
+                                        <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                     </a>
-                                {% else %}
-                                    -
-                                {% endif %}
-                            </a>
-                        </td>
-                        <!-- STARTING DATE -->
-                        <td>
-                            <a href="#">{{ contract.work_order.starting_date }}</a>
-                        </td>
-                        <!-- ENDING DATE -->
-                        <td>
-                            <a href="#">{{ contract.work_order.ending_date }}</a>
-                        </td>
-                        <!-- TOTAL VALUE -->
-                        <td>
-                            <a href="#" class="received">R$ {{ contract.work_order.value|floatformat:2|intcomma }}</a>
-                        </td>
 
-
-
-                        <!-- OPTIONS -->
-                        <td>
-                            <a href="{% url 'contract_to_pdf' contract.id %}" class="edit-icon">
-                                <i class="fa-solid fa-print"></i>
-                            </a>
-
-                            <a href="{% url 'edit_generated_contracts' contract.id %}" class="edit-icon">
-                                <i class="fa-regular fa-pen-to-square fa-lg"></i>
-                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                            </a>
-
-                            <a href="{% url 'delete_gen_contract' contract.id %}" class="delete-icon">
-                                <i class="fa-regular fa-trash-can fa-lg"></i>
-                                <i class="fa-solid fa-trash-can fa-lg"></i>
-                            </a>
-                        </td>
-                    </tr>
+                                    <a href="{% url 'delete_gen_contract' contract.id %}" class="delete-icon">
+                                        <i class="fa-regular fa-trash-can fa-lg"></i>
+                                        <i class="fa-solid fa-trash-can fa-lg"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
                     {% endfor %}
                 </tbody>
 

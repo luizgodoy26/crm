@@ -35,6 +35,18 @@ Companies List
 
             <h2>Work order list</h2>
 
+            <div>
+                <form class="flex right" method="GET">
+                        <span class="search-icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                        {{ workorder_filter.form.work_order  }}
+                        <div class="right">
+                            <button class="btn-confirm right">Search</button>
+                        </div>
+                </form>
+            </div>
+
             <table class="client-table">
 
                 <thead>
@@ -50,91 +62,95 @@ Companies List
                 </thead>
 
                 <tbody>
-                    {% for contract in contracts %}
-                    <tr>
-                        <!-- NAME -->
-                        <td>
-                            <a href="{% url 'edit_contract' contract.id %}">
-                                {% if contract.status == 'PN'  %}
-                                    <span class="pending st">{{ contract.get_status_display }}</span>
-                                {% elif contract.status == 'PD'  %}
-                                    <span class="payd st">{{ contract.get_status_display }}</span>
-                                {% else %}
-                                    <span class="canceled st">{{ contract.get_status_display }}</span>
-                                {% endif %}
+                    {% for qs in workorder_filter.qs %}
+                        {% for contract in contracts %}
+                            {% if contract == qs %}
+                            <tr>
+                                <!-- NAME -->
+                                <td>
+                                    <a href="{% url 'edit_contract' contract.id %}">
+                                        {% if contract.status == 'PN'  %}
+                                            <span class="pending st">{{ contract.get_status_display }}</span>
+                                        {% elif contract.status == 'PD'  %}
+                                            <span class="payd st">{{ contract.get_status_display }}</span>
+                                        {% else %}
+                                            <span class="canceled st">{{ contract.get_status_display }}</span>
+                                        {% endif %}
 
-                            </a>
-                        </td>
+                                    </a>
+                                </td>
 
-                        <!-- Client (Displays mainly the company client) -->
-                        <td>
-                            <a href="{% url 'edit_contract' contract.id %}">
-                                {% if contract.company_client  %}
-                                    {{ contract.company_client }}
-                                {% elif contract.person_client  %}
-                                    {{ contract.person_client }}
-                                {% elif contract.person_client and contract.company_client %}
-                                    {{ contract.company_client }}
-                                {% else %}
-                                    -
-                                {% endif %}
-                            </a>
-                        </td>
+                                <!-- Client (Displays mainly the company client) -->
+                                <td>
+                                    <a href="{% url 'edit_contract' contract.id %}">
+                                        {% if contract.company_client  %}
+                                            {{ contract.company_client }}
+                                        {% elif contract.person_client  %}
+                                            {{ contract.person_client }}
+                                        {% elif contract.person_client and contract.company_client %}
+                                            {{ contract.company_client }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </a>
+                                </td>
 
-                        <!-- Client (Displays mainly the company client) -->
-                        <td>
-                            <a href="{% url 'edit_contract' contract.id %}">
-                                {% if contract.contract_name  %}
-                                    {{ contract.contract_name }}
-                                {% else %}
-                                    -
-                                {% endif %}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="{% url 'edit_contract' contract.id %}">
-                                {% if contract.status == 'PN'  %}
-                                    {{ today |timeuntil:contract.starting_date  }}
-                                {% elif contract.status == 'PD'  %}
-                                    <span class="payd st">Payd</span>
-                                {% else %}
-                                    <span class="canceled st">Canceled</span>
-                                {% endif %}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="{% url 'edit_contract' contract.id %}">
-                                {% if contract.status == 'PD'  %}
-                                    {{ contract.payment_date }}
-                                {% else %}
-                                    -
-                                {% endif %}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="{% url 'edit_contract' contract.id %}">
-                                {% if contract.invoice  %}
-                                    {{ contract.invoice }}
-                                {% else %}
-                                    -
-                                {% endif %}
-                            </a>
-                        </td>
+                                <!-- Client (Displays mainly the company client) -->
+                                <td>
+                                    <a href="{% url 'edit_contract' contract.id %}">
+                                        {% if contract.contract_name  %}
+                                            {{ contract.contract_name }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'edit_contract' contract.id %}">
+                                        {% if contract.status == 'PN'  %}
+                                            {{ today |timeuntil:contract.starting_date  }}
+                                        {% elif contract.status == 'PD'  %}
+                                            <span class="payd st">Payd</span>
+                                        {% else %}
+                                            <span class="canceled st">Canceled</span>
+                                        {% endif %}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'edit_contract' contract.id %}">
+                                        {% if contract.status == 'PD'  %}
+                                            {{ contract.payment_date }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'edit_contract' contract.id %}">
+                                        {% if contract.invoice  %}
+                                            {{ contract.invoice }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </a>
+                                </td>
 
 
-                        <!-- OPTIONS -->
-                        <td>
-                            <a href="{% url 'edit_contract' contract.id %}" class="edit-icon">
-                                <i class="fa-regular fa-pen-to-square fa-lg"></i>
-                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                            </a>
+                                <!-- OPTIONS -->
+                                <td>
+                                    <a href="{% url 'edit_contract' contract.id %}" class="edit-icon">
+                                        <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                    </a>
 
-                            <a href="{% url 'delete_contract' contract.id %}" class="delete-icon">
-                                <i class="fa-regular fa-trash-can fa-lg"></i>
-                                <i class="fa-solid fa-trash-can fa-lg"></i>
-                            </a>
-                        </td>
-                    </tr>
+                                    <a href="{% url 'delete_contract' contract.id %}" class="delete-icon">
+                                        <i class="fa-regular fa-trash-can fa-lg"></i>
+                                        <i class="fa-solid fa-trash-can fa-lg"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
                     {% endfor %}
                 </tbody>
 
