@@ -35,14 +35,17 @@ Client person List
         <div class="container-list" id="one">
 
             <h2>Client person list</h2>
-
-
-<!--            <div class="add-new-client-btn">-->
-<!--                <a href="{% url 'new_client_company' %}" class="new-client-icon">-->
-<!--                    <i class="fa-solid fa-user-plus"></i>-->
-<!--                </a>-->
-<!--                <span class="tooltip">Add client</span>-->
-<!--            </div>-->
+            <div>
+                <form class="flex right" method="GET">
+                        <span class="search-icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                        {{ client_filter.form.client  }}
+                        <div class="right">
+                            <button class="btn-confirm right">Search</button>
+                        </div>
+                </form>
+            </div>
 
             <table class="client-table">
 
@@ -60,66 +63,70 @@ Client person List
                 </thead>
 
                 <tbody>
+                {% for qs in client_filter.qs %}
                     {% for client in clients %}
-                    <tr>
-                        <!-- NAME -->
-                        <td>
-                            <a href="{% url 'detail_client_person' client.id %}">{{ client.first_name }} {{ client.last_name }}</a>
-                        </td>
+                            {% if client == qs %}
+                            <tr>
+                                <!-- NAME -->
+                                <td>
+                                    <a href="{% url 'detail_client_person' client.id %}">{{ client.first_name }} {{ client.last_name }}</a>
+                                </td>
 
-                        <!-- CPF -->
-                        <td>
-                            <a href="{% url 'detail_client_person' client.id %}">{{ client.cpf }}</a>
-                        </td>
+                                <!-- CPF -->
+                                <td>
+                                    <a href="{% url 'detail_client_person' client.id %}">{{ client.cpf }}</a>
+                                </td>
 
-                        <!-- PHONE -->
-                        <td>
-                            <a href="{% url 'detail_client_person' client.id %}">
-                                {% if client.phone %} {{client.phone}} {% else %} &nbsp; {% endif %}
-                            </a>
-                        </td>
+                                <!-- PHONE -->
+                                <td>
+                                    <a href="{% url 'detail_client_person' client.id %}">
+                                        {% if client.phone %} {{client.phone}} {% else %} &nbsp; {% endif %}
+                                    </a>
+                                </td>
 
-                        <!-- EMAIL -->
-                        <td>
-                            <a href="{% url 'detail_client_person' client.id %}">
-                                {% if client.email %} {{client.email}} {% else %} &nbsp; {% endif %}
-                            </a>
-                        </td>
+                                <!-- EMAIL -->
+                                <td>
+                                    <a href="{% url 'detail_client_person' client.id %}">
+                                        {% if client.email %} {{client.email}} {% else %} &nbsp; {% endif %}
+                                    </a>
+                                </td>
 
-                        <!-- COMPANY -->
-                        <td>
-                            <a href="{% url 'detail_client_person' client.id %}">
-                                {% if client.person_company %} {{client.person_company}} {% else %} &nbsp; {% endif %}
-                            </a>
-                        </td>
+                                <!-- COMPANY -->
+                                <td>
+                                    <a href="{% url 'detail_client_person' client.id %}">
+                                        {% if client.person_company %} {{client.person_company}} {% else %} &nbsp; {% endif %}
+                                    </a>
+                                </td>
 
-                        <!-- PENDING PAYMENTS -->
-                        <td>
-                            <a href="{% url 'detail_client_person' client.id %}" class="pending-a">
-                                {% if client.pending_payments %} {{ client.pending_payments|floatformat:2|intcomma }} {% else %} &nbsp; {% endif %}
-                            </a>
-                        </td>
+                                <!-- PENDING PAYMENTS -->
+                                <td>
+                                    <a href="{% url 'detail_client_person' client.id %}" class="pending-a">
+                                        {% if client.pending_payments %} {{ client.pending_payments|floatformat:2|intcomma }} {% else %} &nbsp; {% endif %}
+                                    </a>
+                                </td>
 
-                        <!-- RECEIVED PAYMENTS -->
-                        <td>
-                            <a href="{% url 'detail_client_person' client.id %}" class="received">
-                                {% if client.received_payments %} {{client.received_payments|floatformat:2|intcomma}} {% else %} &nbsp; {% endif %}
-                            </a>
-                        </td>
+                                <!-- RECEIVED PAYMENTS -->
+                                <td>
+                                    <a href="{% url 'detail_client_person' client.id %}" class="received">
+                                        {% if client.received_payments %} {{client.received_payments|floatformat:2|intcomma}} {% else %} &nbsp; {% endif %}
+                                    </a>
+                                </td>
 
-                        <!-- OPTIONS -->
-                        <td>
-                            <a href="{% url 'edit_client_person' client.id %}" class="edit-icon">
-                                <i class="fa-regular fa-pen-to-square fa-lg"></i>
-                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                            </a>
+                                <!-- OPTIONS -->
+                                <td>
+                                    <a href="{% url 'edit_client_person' client.id %}" class="edit-icon">
+                                        <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                    </a>
 
-                            <a href="{% url 'delete_client_person' client.id %}" class="delete-icon">
-                                <i class="fa-regular fa-trash-can fa-lg"></i>
-                                <i class="fa-solid fa-trash-can fa-lg"></i>
-                            </a>
-                        </td>
-                    </tr>
+                                    <a href="{% url 'delete_client_person' client.id %}" class="delete-icon">
+                                        <i class="fa-regular fa-trash-can fa-lg"></i>
+                                        <i class="fa-solid fa-trash-can fa-lg"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
                     {% endfor %}
                 </tbody>
 

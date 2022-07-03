@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 
 from company_profile.models import CompanyProfile
+from contract_generator.filters import ItemFilter
 from contract_generator.forms import ClientContractForm, ClausuleForm, ItemForm, ItemFormSimple
 from contract_generator.models import ClientContract, Item, Clausule
 
@@ -95,8 +96,12 @@ LIST THE ITEMS
 def list_items(request):
     items = Item.objects.filter(user=request.user)
     items_count = Item.objects.filter(user=request.user).count()
+
+    item_filter = ItemFilter(request.GET, queryset=items)
+
     return render(request, 'list_items.html', {'items': items,
-                                                  'items_count': items_count
+                                                  'items_count': items_count,
+                                                  'item_filter': item_filter
                                                   })
 
 """

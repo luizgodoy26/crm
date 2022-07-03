@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
 from contracts.models import Contract
-from .filters import CompanyFilter
+from .filters import CompanyFilter, PersonFilter
 from .models import ClientCompany, ClientPerson, ClientDocuments
 from .forms import ClientCompanyForm, ClientPersonForm, FilesForm
 from django.contrib.auth.decorators import login_required
@@ -45,6 +45,7 @@ LIST THE CLIENT PERSONS
 @login_required
 def client_person_list(request):
     clients = ClientPerson.objects.filter(user=request.user)
+    client_filter = PersonFilter(request.GET, queryset=clients)
 
     total_received = 0
     total_pending = 0
@@ -59,7 +60,8 @@ def client_person_list(request):
     return render(request, 'list_client_person.html', {'clients': clients,
                                                        'pending_payments_total': total_pending,
                                                        'received_payments_total': total_received,
-                                                       'client_count': client_count
+                                                       'client_count': client_count,
+                                                       'client_filter': client_filter
                                                        })
 
 

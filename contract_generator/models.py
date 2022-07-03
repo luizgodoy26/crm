@@ -30,9 +30,9 @@ class Item(models.Model):
     unity = models.CharField(choices=UNITY_CHOICES, default=METERS, max_length=20)
 
     # Type options
-    EQUIPMENT = 'EQ'
-    LABOR = 'LB'
-    MATERIAL = 'MR'
+    EQUIPMENT = 'Equipment'
+    LABOR = 'Labor'
+    MATERIAL = 'Material'
     TYPE_CHOICES = [
         (EQUIPMENT, 'Equipment'),
         (LABOR, 'Labor'),
