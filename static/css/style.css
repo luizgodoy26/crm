@@ -1060,9 +1060,16 @@ a .received{
     float: right;
 }
 
+.left{
+    float: left;
+}
 
 .tx-right{
     text-align: right;
+}
+
+.tx-left{
+    text-align: left;
 }
 
 
@@ -1222,3 +1229,4 @@ ol li:before {
 .center{
     text-align: center;
 }
+

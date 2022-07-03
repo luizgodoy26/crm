@@ -16,17 +16,17 @@
     html {
       font-size: 12px;
       font-weight: normal;
-      color: #4A4A4A;
+      color: #292929;
     }
 
     h1{
-        color: #0540F2;
+        color: #212121;
         font-family: "Gotham";
     }
 
     table, th, td {
         border: 1px solid;
-        border-color: #0540F2;
+        border-color: #262626;
         text-align: center;
         padding-top: 3px;
     }
@@ -40,12 +40,12 @@
     .bottom{
         height: 50px;
         border-color: #FFFFFF;
-        border-bottom: 1px solid #0540F2;
+        border-bottom: 1px solid #262626;
         white-space: 50px;
     }
 
     .highlight{
-        background-color: #c1cef5;
+        background-color: #C8C8C8;
     }
 
     .bolded{
@@ -83,8 +83,13 @@
 
         <img clas="logo" src="{{ STATIC_ROOT }}{{ profile.logo.url }}">
 
-        <h1 id="detail-pdf">{{ contract.work_order.contract_name }}</h1>
-        <h2>{{ user.full_name }}</h2>
+        <h1 id="detail-pdf">{{ contract }}</h1>
+
+
+        <h2>{{ company_profile.name }}</h2>
+        <p><span class="bolded">CNPJ: </span>{{ company_profile.cnpj }}</p>
+        <p><span class="bolded">Address: </span>{{ company_profile.address }}</p>
+        <p><span class="bolded">Zipcode: </span>{{ company_profile.zipcode }}</p>
 
 
         <div><hr class="hr-full"></div>

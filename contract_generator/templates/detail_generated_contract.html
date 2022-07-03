@@ -23,7 +23,13 @@
                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
             </a>
         </h1>
-        <h2>{{ user.full_name }}</h2>
+
+
+        <h2>{{ company_profile.name }}</h2>
+        <p><span class="bolded">CNPJ: </span>{{ company_profile.cnpj }}</p>
+        <h3 style="text-align: left;">Address:</h3>
+        <p><span class="bolded">Address: </span>{{ company_profile.address }}</p>
+        <p><span class="bolded">Zipcode: </span>{{ company_profile.zipcode }}</p>
 
 
         <div><hr class="hr-full"></div>

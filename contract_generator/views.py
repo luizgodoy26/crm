@@ -182,9 +182,11 @@ DETAIL GENERATE CONTRACT
 @login_required
 def detail_generated_contract(request, id):
     contract = get_object_or_404(ClientContract.objects.filter(user=request.user), pk=id)
+    company_profile = get_object_or_404(CompanyProfile.objects.filter(user=request.user))
     contract_clausules = contract.clausules.all()
     contract_items = contract.items.all()
 
+    print(company_profile)
     total = 0
     for item in contract_items:
         item_total_qt = item.item_qt or 0
@@ -195,6 +197,7 @@ def detail_generated_contract(request, id):
     context = {'contract': contract,
                'contract_clausules': contract_clausules,
                'contract_items': contract_items,
+               'company_profile': company_profile,
                'total': total,
     }
 
@@ -280,12 +283,14 @@ class ContractToPdf(View):
         template_path = 'generated_contract.html'
         template = get_template(template_path)
 
+        company_profile = get_object_or_404(CompanyProfile.objects.filter(user=request.user))
+
         contract = ClientContract.objects.get(pk=self.kwargs['id'])
         contract_items = contract.items.all()
 
         profile = CompanyProfile.objects.filter(user=request.user).first()
 
-
+        color = 'red;'
 
         total = 0
         for item in contract_items:
@@ -303,6 +308,8 @@ class ContractToPdf(View):
             'contract_items': ClientContract.objects.get(pk=self.kwargs['id']).items.all(),
             'contract_clausules': ClientContract.objects.get(pk=self.kwargs['id']).clausules.all(),
             'total': total,
+            'color': color,
+            'company_profile': company_profile,
             'profile': profile,
             'STATIC_ROOT': STATIC_ROOT,
             'user': get_queryset(self),
