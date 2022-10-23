@@ -36,7 +36,7 @@
                 <div class="info-box md">
                     <h3>Monthly income</h3>
                     <div class="chart-md">
-                        <canvas id="month_income" height="100"></canvas>
+                        <canvas id="month_income" height="120"></canvas>
                     </div>
                 </div>
 
@@ -46,6 +46,10 @@
 
             <div class="column">
                 <div class="info-box lg">
+                    <h3>Yearly income by client</h3>
+                    <div class="chart-md" style="width:85%">
+                        <canvas id="top_five"></canvas>
+                    </div>
                 </div>
             </div>
 
@@ -61,6 +65,7 @@
         render_total_received('{% url "total_amount_received" %}')
         render_total_pending('{% url "total_amount_pending" %}')
         render_month_received('{% url "total_month_income" %}')
+        render_top_five('{% url "top_five_client_income" %}')
     }
 </script>
 

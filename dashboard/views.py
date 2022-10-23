@@ -87,3 +87,45 @@ def total_client_income(request):
 
     if request.method == 'GET':
         return JsonResponse({'labels': label, 'data':data})
+
+
+def top_five_client_income (request):
+    today = date.today()
+    clients_c = ClientCompany.objects.filter(user=request.user)
+    clients_p = ClientPerson.objects.filter(user=request.user)
+
+    values_by_client = []
+    client_names = []
+    data = []
+    label = []
+
+    for client in clients_c:
+        client_value_c = float(Contract.objects.filter(user=request.user, company_client=client, status='PD', starting_date__year=today.year).aggregate(sum=Sum('value'))['sum'] or 0)
+        client_data = {'name':client.company_name,'value':client_value_c}
+        values_by_client.append(client_data)
+        client_names.append(client_data)
+
+    for client in clients_p:
+        client_value_p = float(Contract.objects.filter(user=request.user, person_client=client, status='PD', starting_date__year=today.year).aggregate(sum=Sum('value'))['sum'] or 0)
+        client_data = {'name':client.first_name,'value':client_value_p}
+        values_by_client.append(client_data)
+        client_names.append(client_data)
+
+
+
+
+    # # Get the 5 highest values on the list
+    values_by_client = sorted(values_by_client, key=lambda x: x['value'], reverse=True)[:5]
+    print(values_by_client)
+
+    # Input contract values on data[]
+    for value in values_by_client:
+        data.append(value.get('value'))
+    # Input contract name  on label[]
+    for client in values_by_client:
+        label.append(client.get('name'))
+
+    print(label)
+
+    if request.method == 'GET':
+        return JsonResponse({'labels': label, 'data':data})

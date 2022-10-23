@@ -29,7 +29,6 @@ function render_total_received(url){
     })
 }
 
-
 function render_total_pending(url){
     fetch(url, {
         method: 'get',
@@ -41,7 +40,6 @@ function render_total_pending(url){
         document.getElementById('total_pending').innerHTML = decVal.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
     })
 }
-
 
 function render_month_received(url){
         fetch(url, {
@@ -96,16 +94,16 @@ function render_month_received(url){
         })
 }
 
-function render_client_received(url){
+function render_top_five(url){
         fetch(url, {
-            method: 'doughnut',
+            method: 'get',
         }).then(function(result){
             return result.json()
         }).then(function(data){
 
-            const ctx = document.getElementById('client_income');
+            const ctx = document.getElementById('top_five');
             const myChart = new Chart(ctx, {
-                type: 'bar',
+                type: 'doughnut',
                 data: {
                     labels: data.labels,
                     datasets: [{
@@ -118,17 +116,11 @@ function render_client_received(url){
                           'rgba(100, 61, 242)',
                           'rgba(217, 85, 181)',
                         ],
-                        hoverOffset: 4,
+                        borderRadius: 10,
                     }]
                 },
-                options: {
-                    plugins: {
-                        legend: {
-                            display: false,
-                        }
-                    },
-                }
             });
 
         })
 }
+
