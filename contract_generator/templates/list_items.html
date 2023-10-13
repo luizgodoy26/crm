@@ -11,7 +11,7 @@ Companies List
     <div class="box-row">
         <!-- Active customers -->
         <div class="info-box">
-            <h3 class="h3-info-total">Total items</h3>
+            <h3 class="h3-info-total">Itens totais</h3>
             <h1 class="h1-info-total">{{ items_count }}</h1>
         </div>
 
@@ -20,7 +20,7 @@ Companies List
     <div class="container">
         <div class="container-list">
 
-            <h2>Items list</h2>
+            <h2>Lista de itens</h2>
 
             <div>
                 <form class="flex right" method="GET">
@@ -29,7 +29,7 @@ Companies List
                         </span>
                         {{ item_filter.form.item  }}
                         <div class="right">
-                            <button class="btn-confirm right">Search</button>
+                            <button class="btn-confirm right">Procurar</button>
                         </div>
                 </form>
             </div>
@@ -38,10 +38,10 @@ Companies List
 
                 <thead>
                     <tr>
-                        <th>Item name</th>
-                        <th>Type</th>
-                        <th>Unity</th>
-                        <th>Options</th>
+                        <th>Nome do item</th>
+                        <th>Tipo</th>
+                        <th>Unidade</th>
+                        <th>Opções</th>
                     </tr>
                 </thead>
 
@@ -92,7 +92,7 @@ Companies List
                 <a href="{% url 'new_item' %}" class="new-client-icon">
                 <i class="fa-solid fa-boxes-packing"></i>
                 </a>
-                <span class="tooltip">Add item</span>
+                <span class="tooltip">Adicionar item</span>
             </div>
 
         </div>

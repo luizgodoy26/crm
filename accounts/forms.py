@@ -10,9 +10,9 @@ User = get_user_model()
 class UserAdminCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
-    full_name = forms.CharField(label='Full name',  widget=forms.TextInput)
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    full_name = forms.CharField(label='Nome completo',  widget=forms.TextInput)
+    password1 = forms.CharField(label='Senha', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirme a senha', widget=forms.PasswordInput)
 
     class Meta:
         model = User
@@ -23,7 +23,7 @@ class UserAdminCreationForm(forms.ModelForm):
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("Passwords don't match")
+            raise forms.ValidationError("As senhas precisam ser iguais")
         return password2
 
     def save(self, commit=True):
@@ -44,6 +44,11 @@ class UserAdminChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
+        labels = {
+            'full_name': ('Nome completo'),
+            'email': ('Email'),
+            'password': ('Senha'),
+        }
         fields = ('full_name', 'email', 'password', 'active', 'admin')
 
     def clean_password(self):
@@ -69,7 +74,7 @@ class LoginForm(forms.Form):
         password = data.get("password")
         user = authenticate(request, username=email, password=password)
         if user is None:
-            raise forms.ValidationError("Invalid credentials")
+            raise forms.ValidationError("Credenciais inválidas")
         login(request, user)
         self.user = user
         return data
@@ -78,14 +83,14 @@ class LoginForm(forms.Form):
 class RegisterForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
-    full_name = forms.CharField(required=True, label='Full name', widget=forms.TextInput(
-        attrs={'class': 'form-control', 'placeholder': 'Your name here'}))
+    full_name = forms.CharField(required=True, label='Nome completo', widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Seu nome aqui'}))
     email = forms.CharField(required=True, label='E-mail', widget=forms.TextInput(
-        attrs={'class': 'form-control', 'placeholder': 'Your e-mail here'}))
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput(
-        attrs={'class': 'form-control', 'placeholder': 'Your password here'}))
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput(
-        attrs={'class': 'form-control', 'placeholder': 'Confirm your password here'}))
+        attrs={'class': 'form-control', 'placeholder': 'Seu email aqui'}))
+    password1 = forms.CharField(label='Senha', widget=forms.PasswordInput(
+        attrs={'class': 'form-control', 'placeholder': 'Sua senha aqui'}))
+    password2 = forms.CharField(label='Confirmação de senha', widget=forms.PasswordInput(
+        attrs={'class': 'form-control', 'placeholder': 'Confirme sua senha'}))
 
     class Meta:
         model = User
@@ -96,7 +101,7 @@ class RegisterForm(forms.ModelForm):
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("Passwords don't match")
+            raise forms.ValidationError("As senhas precisam ser iguais")
         return password2
 
     def save(self, commit=True):

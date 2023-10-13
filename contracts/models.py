@@ -10,13 +10,13 @@ User = settings.AUTH_USER_MODEL
 class Contract(models.Model):
 
     # Payment options
-    IN_CASH = 'IC'
-    INSTALLMENTS = 'IS'
-    EXCHANGE = 'EX'
+    IN_CASH = 'AV'
+    INSTALLMENTS = 'PC'
+    EXCHANGE = 'PM'
     PAYMENT_CHOICES = [
-        (IN_CASH, 'In cash'),
-        (INSTALLMENTS, 'Installments'),
-        (EXCHANGE, 'Exchange'),
+        (IN_CASH, 'Á vista'),
+        (INSTALLMENTS, 'Parcelado'),
+        (EXCHANGE, 'Permuta'),
     ]
 
     # Status options
@@ -24,9 +24,9 @@ class Contract(models.Model):
     PENDING = 'PN'
     CANCELLED = 'CC'
     STATUS_CHOICES = (
-        (PAYD, "Payd"),
-        (PENDING, "Pending"),
-        (CANCELLED, "Cancelled"),
+        (PAYD, "Pago"),
+        (PENDING, "Pendente"),
+        (CANCELLED, "Cancelado"),
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)

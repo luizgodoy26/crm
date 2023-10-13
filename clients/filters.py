@@ -6,7 +6,7 @@ from .models import ClientCompany, ClientPerson
 
 
 class CompanyFilter(django_filters.FilterSet):
-    company = django_filters.CharFilter(method='my_custom_filter', label='Search', widget=TextInput(attrs={'class': 'search right', 'placeholder': 'Search client'}))
+    company = django_filters.CharFilter(method='my_custom_filter', label='Pesquisar', widget=TextInput(attrs={'class': 'search right', 'placeholder': 'Pesquisar cliente'}))
 
 
     class Meta:
@@ -20,7 +20,7 @@ class CompanyFilter(django_filters.FilterSet):
 
 
 class PersonFilter(django_filters.FilterSet):
-    client = django_filters.CharFilter(method='my_custom_filter', label='Search', widget=TextInput(attrs={'class': 'search right', 'placeholder': 'Search client'}))
+    client = django_filters.CharFilter(method='my_custom_filter', label='Pesquisar', widget=TextInput(attrs={'class': 'search right', 'placeholder': 'Pesquisar cliente'}))
 
 
     class Meta:

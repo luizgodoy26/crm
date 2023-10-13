@@ -7,10 +7,10 @@ from company_profile.models import CompanyProfile
 FORM FOR COMPANY PROFILE
 """
 class CompanyProfileForm(ModelForm):
-    name = forms.CharField(required=True, label='First name', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company name'}))
-    cnpj = forms.CharField(required=True, label='CNPJ', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company CNPJ'}))
-    address = forms.CharField(required=True, label='Address', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company address'}))
-    zipcode = forms.IntegerField(required=False, label='Zipcode', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company zipcode'}))
+    name = forms.CharField(required=True, label='Nome', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome da empresa'}))
+    cnpj = forms.CharField(required=True, label='CNPJ', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'CNPJ da empresa'}))
+    address = forms.CharField(required=True, label='Endereço', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Endereço da empresa'}))
+    zipcode = forms.IntegerField(required=False, label='CEP', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'CEP da empresa'}))
 
     class Meta:
         model = CompanyProfile

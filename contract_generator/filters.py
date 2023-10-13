@@ -6,7 +6,7 @@ from .models import Item, ClientContract, Clausule
 
 
 class ItemFilter(django_filters.FilterSet):
-    item = django_filters.CharFilter(method='my_custom_filter', label='Search', widget=TextInput(attrs={'class': 'search right', 'placeholder': 'Search item'}))
+    item = django_filters.CharFilter(method='my_custom_filter', label='Pesquisar', widget=TextInput(attrs={'class': 'search right', 'placeholder': 'Pesquisar item'}))
 
 
     class Meta:
@@ -20,7 +20,7 @@ class ItemFilter(django_filters.FilterSet):
 
 
 class ContractFilter(django_filters.FilterSet):
-    contract = django_filters.CharFilter(method='my_custom_filter', label='Search', widget=TextInput(attrs={'class': 'search right', 'placeholder': 'Search item'}))
+    contract = django_filters.CharFilter(method='my_custom_filter', label='Pesquisar', widget=TextInput(attrs={'class': 'search right', 'placeholder': 'Pesquisar item'}))
 
 
     class Meta:
@@ -35,7 +35,7 @@ class ContractFilter(django_filters.FilterSet):
 
 
 class ClausuleFilter(django_filters.FilterSet):
-    clausule = django_filters.CharFilter(method='my_custom_filter', label='Search', widget=TextInput(attrs={'class': 'search right', 'placeholder': 'Search item'}))
+    clausule = django_filters.CharFilter(method='my_custom_filter', label='Pesquisar', widget=TextInput(attrs={'class': 'search right', 'placeholder': 'Pesquisar item'}))
 
 
     class Meta:

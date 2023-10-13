@@ -13,17 +13,17 @@ Companies List
     <div class="box-row">
         <!-- Active customers -->
         <div class="info-box">
-            <h3 class="h3-info-total">Total work orders</h3>
+            <h3 class="h3-info-total">Ordens de serviço</h3>
             <h1 class="h1-info-total">{{ contracts_count }}</h1>
         </div>
 
         <div class="info-box">
-            <h3 class="h3-info-total">Pending work orders</h3>
+            <h3 class="h3-info-total">Pagamentos pendentes</h3>
             <h2 class="h1-info-total pending">R$ {{ total_pending|floatformat:2|intcomma }}</h2>
         </div>
 
         <div class="info-box">
-            <h3 class="h3-info-total">Received work orders</h3>
+            <h3 class="h3-info-total">Pagamentos recebidos</h3>
             <h2 class="h1-info-total">R$ {{ total_received|floatformat:2|intcomma }}</h2>
         </div>
 
@@ -33,7 +33,7 @@ Companies List
     <div class="container">
         <div class="container-list">
 
-            <h2>Work order list</h2>
+            <h2>Ordens de serviço</h2>
 
             <div>
                 <form class="flex right" method="GET">
@@ -42,7 +42,7 @@ Companies List
                         </span>
                         {{ workorder_filter.form.work_order  }}
                         <div class="right">
-                            <button class="btn-confirm right">Search</button>
+                            <button class="btn-confirm right">Pesquisar</button>
                         </div>
                 </form>
             </div>
@@ -52,12 +52,12 @@ Companies List
                 <thead>
                     <tr>
                         <th>Status</th>
-                        <th>Client</th>
-                        <th>Work order name</th>
-                        <th>Days since start</th>
-                        <th>Payment date</th>
-                        <th>Invoice</th>
-                        <th>Options</th>
+                        <th>Cliente</th>
+                        <th>Nome da ordem de serviço</th>
+                        <th>Dias desde o início</th>
+                        <th>Data de pagamento</th>
+                        <th>Nota fiscal</th>
+                        <th>Opções</th>
                     </tr>
                 </thead>
 
@@ -110,9 +110,9 @@ Companies List
                                         {% if contract.status == 'PN'  %}
                                             {{ today |timeuntil:contract.starting_date  }}
                                         {% elif contract.status == 'PD'  %}
-                                            <span class="payd st">Payd</span>
+                                            <span class="payd st">Pago</span>
                                         {% else %}
-                                            <span class="canceled st">Canceled</span>
+                                            <span class="canceled st">Cancelado</span>
                                         {% endif %}
                                     </a>
                                 </td>
@@ -160,7 +160,7 @@ Companies List
                 <a href="{% url 'new_contract' %}" class="new-client-icon">
                 <i class="fa-solid fa-file-circle-plus"></i>
                 </a>
-                <span class="tooltip" style="width: 180px; margin-left: 30px;">Add work-order</span>
+                <span class="tooltip" style="width: 180px; margin-left: 30px;">Adicionar ordem de serviço</span>
             </div>
 
         </div>

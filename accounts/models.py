@@ -7,11 +7,11 @@ class UserManager(BaseUserManager):
     # Create standard user
     def create_user(self, email, full_name, password=None, is_active=True, is_staff=False, is_admin=False):
         if not email:
-            raise ValueError('User must have an email address')
+            raise ValueError('O usuário deve informar um email')
         if not full_name:
-            raise ValueError('User must provide a full name')
+            raise ValueError('O usuário deve informar o nome completo')
         if not password:
-            raise ValueError('User must provide a password')
+            raise ValueError('O usuário deve informar uma senha')
         user_obj = self.model(
             email = self.normalize_email(email),
             full_name = full_name

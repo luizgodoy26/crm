@@ -20,22 +20,22 @@ class Item(models.Model):
     # Unity options
     METERS = 'MT'
     LITERS = 'LT'
-    NOT_APPLY = 'NA'
+    NOT_APPLY = '-'
     UNITY_CHOICES = [
-        (METERS, 'Meters'),
-        (LITERS, 'Liters'),
-        (NOT_APPLY, 'Na'),
+        (METERS, 'Metros'),
+        (LITERS, 'Litros'),
+        (NOT_APPLY, '-'),
     ]
 
     unity = models.CharField(choices=UNITY_CHOICES, default=METERS, max_length=20)
 
     # Type options
-    EQUIPMENT = 'Equipment'
-    LABOR = 'Labor'
+    EQUIPMENT = 'Equipamento'
+    LABOR = 'Mão de obra'
     MATERIAL = 'Material'
     TYPE_CHOICES = [
-        (EQUIPMENT, 'Equipment'),
-        (LABOR, 'Labor'),
+        (EQUIPMENT, 'Equipamento'),
+        (LABOR, 'Mão de obra'),
         (MATERIAL, 'Material'),
     ]
 
@@ -75,6 +75,8 @@ class ClientContract(models.Model):
     items = models.ManyToManyField(Item, blank=True, null=True)
     clausules = models.ManyToManyField(Clausule, blank=True, null=True)
 
+    # Company associated with the contract
+    company_client = models.ForeignKey(ClientCompany,blank=True, null=True, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.contract_name

@@ -9,7 +9,7 @@
         <table class="client-table">
                 <thead>
                     <tr>
-                        <th>Client data</th>
+                        <th>Dados do cliente</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -17,12 +17,12 @@
                 </thead>
         <tbody>
             <tr>
-                <th>Client CPF:</th>
+                <th>CPF:</th>
                 <td>{{ client.cpf }}</td>
             </tr>
 
             <tr>
-                <th>Phone:</th>
+                <th>Telefone:</th>
                     <td>{{ client.phone }}</td>
                 <th>Email:</th>
                     <td>{{ client.email }}</td>
@@ -34,27 +34,27 @@
             </tr>
 
             <tr>
-                <th>Total pending payments:</th>
+                <th>Pagamentos pendentes:</th>
                     <td class="pending-a">R$ {{ total_received|intcomma }}</td>
 
-                <th>Total received payments:</th>
+                <th>Pagamentos recebidos:</th>
                 <td class="received">R$ {{ total_pending|intcomma }}</td>
             </tr>
 
         </tbody>
         </table>
 
-        <h3 style="text-align:left;">Client description: </h3>
+        <h3 style="text-align:left;">Descrição: </h3>
         <p class="description">{{ client.description }}</p>
 
-        <h3>Files list</h3>
+        <h3>Lista de arquivos do cliente</h3>
         <table class="client-table" style="margin-top:-10px">
                 <thead>
                     <tr>
-                        <th>File name</th>
-                        <th>Company</th>
-                        <th>Client</th>
-                        <th>Options</th>
+                        <th>Nome do arquivo</th>
+                        <th>Empresa</th>
+                        <th>Pessoa</th>
+                        <th>Opções</th>
                     </tr>
                 </thead>
 

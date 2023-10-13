@@ -7,14 +7,14 @@ class RegisterForm(forms.Form):
     username = forms.CharField()
     email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirme a senha', widget=forms.PasswordInput)
 
     # Validate if the username is not taken
     def clean_username(self):
         username = self.cleaned_data.get('username')
         qs = User.objects.filter(username=username)
         if qs.exists():
-            raise forms.ValidationError('Username is already taken')
+            raise forms.ValidationError('Usuário já está em uso')
         return username
 
     # Validate if the email is not taken
@@ -22,7 +22,7 @@ class RegisterForm(forms.Form):
         email = self.cleaned_data.get('email')
         qs = User.objects.filter(email=email)
         if qs.exists():
-            raise forms.ValidationError('Email is already taken')
+            raise forms.ValidationError('Email já está em uso')
         return email
 
     def clean(self):
@@ -30,5 +30,5 @@ class RegisterForm(forms.Form):
         password = self.cleaned_data.get('password')
         password2 = self.cleaned_data.get('password2')
         if password != password2:
-            raise forms.ValidationError('Passwords must match')
+            raise forms.ValidationError('As senhas precisam ser iguais')
         return data

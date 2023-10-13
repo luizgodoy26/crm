@@ -13,6 +13,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+
+    <div class="alert-bar">
+        {% block alert %}
+            <div class="alert alert-warning">
+                <strong>PROMPTUS:</strong> Uma solução de LTG Software!
+            </div>
+        {% endblock %}
+   </div>
+
     {% block sidebar %}
         <div class="sidebar">
             <div class="logo_content">
@@ -26,58 +35,58 @@
                 <li>
                     <a href="{% url 'contract_list' %}">
                         <i class="fa-solid fa-coins"></i>
-                        <span class="links_name">Work orders</span>
+                        <span class="links_name">Ordens de serviço</span>
                     </a>
-                    <span class="tooltip" style="width: 180px; margin-left: 30px;">Work orders</span>
+                    <span class="tooltip" style="width: 180px; margin-left: 30px;">Ordens de serviço</span>
                 </li>
                 <li>
                     <a href="{% url 'list_generated_contracts' %}">
                         <i class="fa-solid fa-file-contract"></i>
-                        <span class="links_name">Generate contract</span>
+                        <span class="links_name">Gerar contrato</span>
                     </a>
-                    <span class="tooltip" style="width: 180px; margin-left: 30px;">Generate contract</span>
+                    <span class="tooltip" style="width: 180px; margin-left: 30px;">Gerar contrato</span>
                 </li>
                 <li>
                     <a href="{% url 'list_items' %}">
                         <i class="fa-solid fa-box"></i>
-                        <span class="links_name">List items</span>
+                        <span class="links_name">Lista de itens</span>
                     </a>
-                    <span class="tooltip">Items</span>
+                    <span class="tooltip">Itens</span>
                 </li>
                 <li>
                     <a href="{% url 'list_clausules' %}">
                         <i class="fa-solid fa-clipboard-list"></i>
-                        <span class="links_name">Clausules</span>
+                        <span class="links_name">Cláusulas</span>
                     </a>
-                    <span class="tooltip">Clausules</span>
+                    <span class="tooltip">Cláusulas</span>
                 </li>
                 <li>
                     <a href="{% url 'companies_list' %}">
                         <i class="fa-solid fa-building-user"></i>
-                        <span class="links_name">Companies</span>
+                        <span class="links_name">Empresas</span>
                     </a>
-                    <span class="tooltip">Companies</span>
+                    <span class="tooltip">Empresas</span>
                 </li>
                 <li>
                     <a href="{% url 'person_list' %}">
                         <i class="fa-solid fa-users"></i>
-                        <span class="links_name">People</span>
+                        <span class="links_name">Pessoas</span>
                     </a>
-                    <span class="tooltip">People</span>
+                    <span class="tooltip">Pessoas</span>
                 </li>
                 <li>
                     <a href="{% url 'files_list' %}">
                         <i class="fa-solid fa-file"></i>
-                        <span class="links_name">Files</span>
+                        <span class="links_name">Arquivos</span>
                     </a>
-                    <span class="tooltip">Files</span>
+                    <span class="tooltip">Arquivos</span>
                 </li>
                 <li>
                     <a href="{% url 'calendar' %}">
                         <i class="fa-solid fa-calendar"></i>
-                        <span class="links_name">Calendar</span>
+                        <span class="links_name">Calendário</span>
                     </a>
-                    <span class="tooltip">Calendar</span>
+                    <span class="tooltip">Calendário</span>
                 </li>
                 <li>
                     <a href="{% url 'dashboard' %}">
@@ -89,9 +98,9 @@
                 <li>
                     <a href="{% url 'add_company_profile' %}">
                         <i class="fa-solid fa-user"></i>
-                        <span class="links_name">Profile</span>
+                        <span class="links_name">Perfil</span>
                     </a>
-                    <span class="tooltip">Profile</span>
+                    <span class="tooltip">Perfil</span>
                 </li>
             </ul>
             <div class="profile_content">

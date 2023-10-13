@@ -8,6 +8,7 @@ body{
     width: 100%;
     overflow-x: hidden;
     color: #4A4A4A;
+    margin: 0;
 }
 
 form{
@@ -27,6 +28,26 @@ form{
 .bolded {
     font-weight: bold;
 }
+
+/*
+    ALERT    ALERT    ALERT    ALERT
+*/
+.alert-bar {
+    font-size: 12px;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00000;
+    background-color: #f3f3f3;
+    margin-bottom: 25px;
+}
+
+
 
 
 /*
@@ -114,7 +135,7 @@ form{
     transform: translate(-50%, -50%);
     border-radius: 6px;
     height: 35px;
-    width: 122px;
+    min-width: 122px;
     background: #FFFFFF;
     line-height: 35px;
     text-align: center;
@@ -243,6 +264,13 @@ form{
     background: none;
 }
 
+.sidebar.active ~ .page_content{
+    transition: all 0.5s ease;
+    left: 88%;
+    width: calc(100% -440px);
+    left: 340px;
+}
+
 .page_content{
     position: relative;
     height: 100%;
@@ -251,16 +279,6 @@ form{
     width: calc(100% - 200px);
     transition: all 0.5s ease;
 }
-
-
-.sidebar.active ~ .page_content{
-    transition: all 0.5s ease;
-    left: 88%;
-    width: calc(100% -440px);
-    left: 340px;
-}
-
-
 
 
 /*
@@ -550,7 +568,7 @@ button{
     transform: translate(-50%, -50%);
     border-radius: 6px;
     height: 35px;
-    width: 122px;
+    min-width: 170px;
     background: #FFFFFF;
     line-height: 35px;
     text-align: center;
@@ -558,7 +576,7 @@ button{
     transition: 0s;
     opacity: 0;
     pointer-events: none;
-    display: block;
+    display: inline-block;
     color: #000000;
 }
 
@@ -604,7 +622,7 @@ button{
     transform: translate(-50%, -50%);
     border-radius: 6px;
     height: 35px;
-    width: 122px;
+    min-width: 122px;
     background: #FFFFFF;
     line-height: 35px;
     text-align: center;
@@ -750,12 +768,15 @@ button{
 .container-form{
     padding-top: 2rem;
     padding-bottom: 2rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     background-color: #FBFBFB;
-    width: 35rem;
+    min-width: 35rem;
     display: flex;
     justify-content: center;
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
     border-radius: 2rem;
+
 }
 
 .container-list{
@@ -765,7 +786,7 @@ button{
     flex-direction: column;
     justify-content: center;
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
-    border-radius: 2rem;
+    border-radius: 1rem;
 }
 
 .container-login{
@@ -864,14 +885,15 @@ a .received{
 */
 .info-box{
     background-color: #FBFBFB;
-    width: 250px;
-    height: 100px;
+    min-width: 250px;
+    min-height: 100px;
     border-radius: 12px;
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
     display: flex;
-    justify-content: right;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
+    text-align: center;
 }
 
 .info-box h3{
@@ -896,8 +918,6 @@ a .received{
     padding: 0;
     padding-right: 15px;
     margin: 0;
-    float: right;
-    margin-left: auto;
 }
 
 .h3-info-total{
@@ -912,7 +932,6 @@ a .received{
     padding-right: 15px;
     margin-top: 0;
     margin-bottom: 0;
-    margin-left: auto;
 }
 
 .received{

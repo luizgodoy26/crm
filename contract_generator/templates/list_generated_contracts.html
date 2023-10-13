@@ -13,13 +13,13 @@ Companies List
     <div class="box-row">
         <!-- Active customers -->
         <div class="info-box">
-            <h3 class="h3-info-total">Total contracts</h3>
+            <h3 class="h3-info-total">Contratos totais</h3>
             <h1 class="h1-info-total">{{ contracts_count }}</h1>
         </div>
 
 
         <div class="info-box">
-            <h3 class="h3-info-total">Total received</h3>
+            <h3 class="h3-info-total">Total recebido</h3>
             <h1 class="h1-info-total">R$ {{ total_value|floatformat:2|intcomma }}</h1>
         </div>
 
@@ -28,7 +28,7 @@ Companies List
     <div class="container">
         <div class="container-list">
 
-            <h2>Contracts list</h2>
+            <h2>Lista de contratos</h2>
 
             <div>
                 <form class="flex right" method="GET">
@@ -37,7 +37,7 @@ Companies List
                         </span>
                         {{ contract_filter.form.contract  }}
                         <div class="right">
-                            <button class="btn-confirm right">Search</button>
+                            <button class="btn-confirm right">Procurar</button>
                         </div>
                 </form>
             </div>
@@ -46,12 +46,12 @@ Companies List
 
                 <thead>
                     <tr>
-                        <th>Contract name</th>
-                        <th>Client</th>
-                        <th>Start date</th>
-                        <th>End date</th>
-                        <th>Work order value</th>
-                        <th>Options</th>
+                        <th>Nome do contrato</th>
+                        <th>Cliente</th>
+                        <th>Início</th>
+                        <th>Fim</th>
+                        <th>Valor da ordem de serviço</th>
+                        <th>Opções</th>
                     </tr>
                 </thead>
 
@@ -127,7 +127,7 @@ Companies List
                 <a href="{% url 'new_client_contract' %}" class="new-client-icon">
                 <i class="fa-solid fa-file-circle-plus"></i>
                 </a>
-                <span class="tooltip">Add contract</span>
+                <span class="tooltip">Adicionar contrato</span>
             </div>
 
         </div>

@@ -11,19 +11,19 @@ Client person List
     <div class="box-row" id="two">
         <!-- Active customers -->
         <div class="info-box">
-            <h3 class="h3-info-total">Person clients</h3>
+            <h3 class="h3-info-total">Pessoas</h3>
             <h1 class="h1-info-total">{{ client_count }}</h1>
         </div>
 
         <!-- Pending amount -->
         <div class="info-box">
-            <h3 class="h3-info-total">Pending amount</h3>
+            <h3 class="h3-info-total">Pagamentos pendentes</h3>
             <h2 class="h2-info-total pending">R$ {{ pending_payments_total|floatformat:2|intcomma }}</h2>
         </div>
 
         <!-- Received amount -->
         <div class="info-box">
-            <h3 class="h3-info-total">Received amount</h3>
+            <h3 class="h3-info-total">Pagamentos recebidos</h3>
             <h2 class="h2-info-total received">R$ {{ received_payments_total|floatformat:2|intcomma }}</h2>
         </div>
 
@@ -42,7 +42,7 @@ Client person List
                         </span>
                         {{ client_filter.form.client  }}
                         <div class="right">
-                            <button class="btn-confirm right">Search</button>
+                            <button class="btn-confirm right">Pesquisar</button>
                         </div>
                 </form>
             </div>
@@ -51,14 +51,14 @@ Client person List
 
                 <thead>
                     <tr>
-                        <th>Client name</th>
-                        <th>Client CPF</th>
-                        <th>Phone</th>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Telefone</th>
                         <th>Email</th>
-                        <th>Company</th>
-                        <th>Pending payments</th>
-                        <th>Received payments</th>
-                        <th>Options</th>
+                        <th>Empresa</th>
+                        <th>Pagamentos pendentes</th>
+                        <th>Pagamentos recebidos</th>
+                        <th>Opções</th>
                     </tr>
                 </thead>
 
@@ -136,7 +136,7 @@ Client person List
                 <a href="{% url 'new_client_person' %}" class="new-client-icon">
                     <i class="fa-solid fa-user-plus"></i>
                 </a>
-                <span class="tooltip">Add client</span>
+                <span class="tooltip">Adicionar pessoa</span>
             </div>
 
         </div>

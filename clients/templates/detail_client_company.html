@@ -9,7 +9,7 @@
         <table class="client-table">
                 <thead>
                     <tr>
-                        <th>Client data</th>
+                        <th>Dados dos clientes</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -17,39 +17,39 @@
                 </thead>
         <tbody>
             <tr>
-                <th>Client CNPJ:</th>
+                <th>CNPJ:</th>
                 <td>{{ client.company_cnpj }}</td>
             </tr>
 
             <tr>
-                <th>Phone:</th>
+                <th>Telefone:</th>
                     <td>{{ client.phone }}</td>
                 <th>Email:</th>
                     <td>{{ client.email }}</td>
             </tr>
 
             <tr>
-                <th>Total pending payments:</th>
+                <th>Pagamentos pendentes:</th>
                     <td class="pending-a">R$ {{ total_received|intcomma }}</td>
 
-                <th>Total received payments:</th>
+                <th>Pagamentos recebidos:</th>
                 <td class="received">R$ {{ total_pending|intcomma }}</td>
             </tr>
 
         </tbody>
         </table>
 
-        <h3 style="text-align:left;">Client description: </h3>
+        <h3 style="text-align:left;">Descrição: </h3>
         <p class="description">{{ client.description }}</p>
 
 
-        <h3>Files list</h3>
+        <h3>Lista de arquivos do cliente</h3>
         <table class="client-table" style="margin-top:-10px">
                 <thead>
                     <tr>
-                        <th>File name</th>
-                        <th>Client</th>
-                        <th>Options</th>
+                        <th>Nome do arquivo</th>
+                        <th>Cliente</th>
+                        <th>Opções</th>
                     </tr>
                 </thead>
 
@@ -89,7 +89,7 @@
                 <a href="{% url 'new_file_detail' client.id %}" class="new-client-icon">
                     <i class="fa-solid fa-paperclip"></i>
                 </a>
-                <span class="tooltip">Add file</span>
+                <span class="tooltip">Adicionar arquivo</span>
             </div>
 
 
@@ -101,12 +101,12 @@
                 <thead>
                     <tr>
                         <th>Status</th>
-                        <th>Client</th>
-                        <th>Contract name</th>
-                        <th>Days since start</th>
-                        <th>Payment date</th>
-                        <th>Invoice</th>
-                        <th>Options</th>
+                        <th>Cliente</th>
+                        <th>Nome do contrato</th>
+                        <th>Tempo desde o início</th>
+                        <th>Data de pagamento</th>
+                        <th>Nota fiscal</th>
+                        <th>Opções</th>
                     </tr>
                 </thead>
 
@@ -196,7 +196,7 @@
                 <a href="{% url 'new_contract' %}" class="new-client-icon">
                 <i class="fa-solid fa-file-circle-plus"></i>
                 </a>
-                <span class="tooltip">Add contract</span>
+                <span class="tooltip">Adicionar contrato</span>
             </div>
 </div>
 {% endblock %}

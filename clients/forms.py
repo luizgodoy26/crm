@@ -6,12 +6,12 @@ from django import forms
 FORM FOR CLIENT COMPANY
 """
 class ClientCompanyForm(ModelForm):
-    company_name = forms.CharField(required=True, label='Company name', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company name'}))
-    company_cnpj = forms.CharField(required=True, label='CNPJ', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company CNPJ'}))
-    phone = forms.IntegerField(required=False, label='Phone', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company phone number'}))
-    email = forms.EmailField(required=False, label='E-mail', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company e-mail'}))
-    pending_payments = forms.DecimalField(required=False, label='Pending payments', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Pending payments from the client'}))
-    received_payments = forms.DecimalField(required=False, label='Received payments', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Received payments from the client'}))
+    company_name = forms.CharField(required=True, label='Empresa', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome da empresa'}))
+    company_cnpj = forms.CharField(required=True, label='CNPJ', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'CNPJ da empresa'}))
+    phone = forms.IntegerField(required=False, label='Telefone', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Telefone da empresa'}))
+    email = forms.EmailField(required=False, label='E-mail', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'E-mail da empresa'}))
+    pending_payments = forms.DecimalField(required=False, label='Pagamentos pendentes', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Pagamentos pendentes da empresa'}))
+    received_payments = forms.DecimalField(required=False, label='Pagamentos recebidos', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Pagamentos recebidos da empresa'}))
     class Meta:
         model = ClientCompany
         fields = ['company_name','company_cnpj', 'phone', 'email', 'pending_payments', 'received_payments', 'description']
@@ -22,13 +22,14 @@ class ClientCompanyForm(ModelForm):
 FORM FOR CLIENT PERSON
 """
 class ClientPersonForm(ModelForm):
-    first_name = forms.CharField(required=True, label='First name', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Client first name'}))
-    last_name = forms.CharField(required=True, label='Last name', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Client last name'}))
-    cpf = forms.CharField(required=True, label='CPF', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Client CPF'}))
-    phone = forms.IntegerField(required=False, label='Phone', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Client phone number'}))
-    email = forms.EmailField(required=False, label='E-mail', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company e-mail'}))
-    pending_payments = forms.DecimalField(required=False, label='Pending payments', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Pending payments from the client'}))
-    received_payments = forms.DecimalField(required=False, label='Received payments', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Received payments from the client'}))
+    first_name = forms.CharField(required=True, label='Primeiro nome', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Primeiro nome do cliente'}))
+    last_name = forms.CharField(required=True, label='Último nome', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Último nome do cliente'}))
+    cpf = forms.CharField(required=True, label='CPF', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'CPF do cliente'}))
+    phone = forms.IntegerField(required=False, label='Telefone', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Telefone do cliente'}))
+    email = forms.EmailField(required=False, label='E-mail', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'E-mail do cliente'}))
+    pending_payments = forms.DecimalField(required=False, label='Pagamentos pendentes', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Pagamentos pendentes do cliente'}))
+    received_payments = forms.DecimalField(required=False, label='Pagamentos recebidos', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Pagamentos recebidos do cliente'}))
+    description = forms.DecimalField(required=False, label='Descrição', widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Descrição do cliente'}))
 
     class Meta:
         model = ClientPerson
@@ -44,10 +45,10 @@ class ClientPersonForm(ModelForm):
 FORM FOR FILES
 """
 class FilesForm(ModelForm):
-    name = forms.CharField(required=True, label='File name', widget=forms.TextInput(
-        attrs={'class': 'form-control', 'placeholder': 'File name'}))
-    description = forms.CharField(required=True, label='File description', widget=forms.TextInput(
-        attrs={'class': 'form-control', 'placeholder': 'File description'}))
+    name = forms.CharField(required=True, label='Nome do arquivo', widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Nome do arquivo'}))
+    description = forms.CharField(required=True, label='Descrição do arquivo', widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Descrição do arquivo'}))
     class Meta:
         model = ClientDocuments
         fields = ['name', 'description', 'client_company', 'client_person', 'file']

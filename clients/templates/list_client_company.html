@@ -12,19 +12,19 @@ Companies List
     <div class="box-row">
         <!-- Active customers -->
         <div class="info-box">
-            <h3 class="h3-info-total">Person clients</h3>
+            <h3 class="h3-info-total">Empresas</h3>
             <h1 class="h1-info-total">{{ client_count }}</h1>
         </div>
 
         <!-- Pending amount -->
         <div class="info-box">
-            <h3 class="h3-info-total">Pending amount</h3>
+            <h3 class="h3-info-total">Pagamentos pendentes</h3>
             <h2 class="h2-info-total pending">R$ {{ pending_payments_total|floatformat:2|intcomma }}</h2>
         </div>
 
         <!-- Received amount -->
         <div class="info-box">
-            <h3 class="h3-info-total">Received amount</h3>
+            <h3 class="h3-info-total">Pagamentos recebidos</h3>
             <h2 class="h2-info-total received">R$ {{ received_payments_total|floatformat:2|intcomma }}</h2>
         </div>
 
@@ -33,7 +33,7 @@ Companies List
     <div class="container">
         <div class="container-list">
 
-            <h2>Client companies list</h2>
+            <h2>Empresas</h2>
             <div>
                 <form class="flex right" method="GET">
                         <span class="search-icon">
@@ -41,7 +41,7 @@ Companies List
                         </span>
                         {{ company_filter.form.company  }}
                         <div class="right">
-                            <button class="btn-confirm right">Search</button>
+                            <button class="btn-confirm right">Pesquisar</button>
                         </div>
                 </form>
             </div>
@@ -56,13 +56,13 @@ Companies List
 
                 <thead>
                     <tr>
-                        <th>Company name</th>
-                        <th>Company cnpj</th>
-                        <th>Phone</th>
+                        <th>Empresa</th>
+                        <th>CNPJ</th>
+                        <th>Telefone</th>
                         <th>Email</th>
-                        <th>Pending payments</th>
-                        <th>Received payments</th>
-                        <th>Options</th>
+                        <th>Pagamentos pendentes</th>
+                        <th>Pagamentos recebidos</th>
+                        <th>Opções</th>
                     </tr>
                 </thead>
 
@@ -133,7 +133,7 @@ Companies List
                 <a href="{% url 'new_client_company' %}" class="new-client-icon">
                     <i class="fa-solid fa-user-plus"></i>
                 </a>
-                <span class="tooltip">Add client</span>
+                <span class="tooltip">Adicionar empresa</span>
             </div>
 
         </div>
