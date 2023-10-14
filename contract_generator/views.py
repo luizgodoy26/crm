@@ -24,12 +24,21 @@ ADD A NEW CONTRACT
 """
 @login_required
 def new_client_contract(request):
-    form = ClientContractForm(request.POST or None, request.FILES or None)
+    user = request.user
+    form = ClientContractForm(request.POST or None, request.FILES or None, user=user)
 
     if form.is_valid():
-        form = form.save(commit=False)
-        form.user = request.user
-        form.save()
+        contract = form.save(commit=False)
+        contract.user = request.user
+        contract.save()
+
+        selected_clausules_ids = request.POST.getlist('clausules')
+        contract.clausules.set(selected_clausules_ids)
+        # Suponhamos que o campo 'items' do formulário seja uma lista de IDs dos itens selecionados
+        selected_items_ids = request.POST.getlist('items')
+        contract.items.set(selected_items_ids)
+        contract.save()
+
         return redirect('list_generated_contracts')
     return render(request, 'client_contract_form.html', {'form': form})
 
@@ -39,7 +48,9 @@ ADD A NEW ITEM
 """
 @login_required
 def new_item(request):
-    form = ItemFormSimple(request.POST or None, request.FILES or None)
+    user = request.user
+
+    form = ItemFormSimple(request.POST or None, request.FILES or None, user=user)
 
     if form.is_valid():
         form = form.save(commit=False)
@@ -54,7 +65,9 @@ ADD A NEW CLAUSULE
 """
 @login_required
 def new_clausule(request):
-    form = ClausuleForm(request.POST or None, request.FILES or None)
+    user = request.user
+
+    form = ClausuleForm(request.POST or None, request.FILES or None, user=user)
 
     if form.is_valid():
         form = form.save(commit=False)
@@ -129,8 +142,7 @@ def edit_generated_contracts(request, id):
     contract = get_object_or_404(ClientContract, pk=id)
     user = request.user
 
-    # Using instance, the form already start with the data from the client received
-    form = ClientContractForm(request.POST or None, request.FILES or None, instance=contract)
+    form = ClientContractForm(request.POST or None, request.FILES or None, instance=contract, user=user)
 
     if form.is_valid():
         form.save()
@@ -146,8 +158,7 @@ def edit_item(request, id):
     item = get_object_or_404(Item, pk=id)
     user = request.user
 
-    # Using instance, the form already start with the data from the client received
-    form = ItemFormSimple(request.POST or None, request.FILES or None, instance=item)
+    form = ItemFormSimple(request.POST or None, request.FILES or None, instance=item, user=user)
 
     if form.is_valid():
         form.save()
@@ -165,8 +176,7 @@ def edit_clausule(request, id):
     clausule = get_object_or_404(Clausule, pk=id)
     user = request.user
 
-    # Using instance, the form already start with the data from the client received
-    form = ClausuleForm(request.POST or None, request.FILES or None, instance=clausule)
+    form = ClausuleForm(request.POST or None, request.FILES or None, instance=clausule, user=user)
 
     if form.is_valid():
         form.save()
@@ -269,7 +279,7 @@ def delete_clausule(request, id):
 
     if request.method == 'POST':
         clausule.delete()
-        return redirect('clausules_items')
+        return redirect('list_clausules')
 
     return render(request, 'deletion_clausule_confirm.html', {'clausule': clausule})
 

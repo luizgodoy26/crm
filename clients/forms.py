@@ -29,7 +29,7 @@ class ClientPersonForm(ModelForm):
     email = forms.EmailField(required=False, label='E-mail', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'E-mail do cliente'}))
     pending_payments = forms.DecimalField(required=False, label='Pagamentos pendentes', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Pagamentos pendentes do cliente'}))
     received_payments = forms.DecimalField(required=False, label='Pagamentos recebidos', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Pagamentos recebidos do cliente'}))
-    description = forms.DecimalField(required=False, label='Descrição', widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Descrição do cliente'}))
+    description = forms.CharField(required=False, label='Descrição', widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Descrição do cliente'}))
 
     class Meta:
         model = ClientPerson

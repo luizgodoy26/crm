@@ -6,17 +6,21 @@ from .models import Item, Clausule, ClientContract
 from django import forms
 
 
-# Todo: Add delete contracts
-# Todo: Fix the bug on contract clausule selection with no cheboxes
 
 class DateInput(forms.DateInput):
     input_type = 'date'
 
 
 class ClausuleForm(ModelForm):
-  class Meta:
-    model = Clausule
-    fields = ['clausule_name', 'clausule_type', 'clausule_description']
+    clausule_name = forms.CharField(required=True, label='Nome da cláusula', widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Insira o nome da cláusula'}))
+    clausule_type = forms.CharField(required=True, label='Tipo de cláusula', widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Insira o tipo de cláusula'}))
+    clausule_description = forms.CharField(required=False, label='Descrição da cláusula', widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Insira a descrição da cláusula'}))
+
+    class Meta:
+        model = Clausule
+        fields = ['clausule_name', 'clausule_type', 'clausule_description']
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
@@ -24,43 +28,65 @@ class ClausuleForm(ModelForm):
 
 
 
-class ItemForm(ModelForm):
-  class Meta:
-    model = Item
 
-    fields = ['item_name', 'item_type', 'unity', 'item_qt', 'item_value']
+class ItemForm(ModelForm):
+    item_name = forms.CharField(required=True, label='Nome do item', widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Insira o nome do item'}))
+    item_qt = forms.CharField(required=True, label='Quantidade', widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Insira a quantidade de itens'}))
+    item_value = forms.CharField(required=True, label='Valor do item', widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Insira o valor dos itens'}))
+    item_type = forms.ModelChoiceField(queryset=Item.objects.all(),required=True,label='Tipo de item',widget=forms.Select(
+        attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Item
+        fields = ['item_name', 'item_type', 'unity', 'item_qt', 'item_value']
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(ItemForm, self).__init__(*args, **kwargs)
+        self.fields['item_type'].label = 'Tipo de item'
+        self.fields['unity'].label = 'Unidade de medida'
 
 
 class ItemFormSimple(ModelForm):
-  class Meta:
-    model = Item
+    item_name = forms.CharField(required=True, label='Nome do item', widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Insira o nome do item'}))
+    item_type = forms.ModelChoiceField(queryset=Item.objects.all(),required=True,label='Tipo de item',widget=forms.Select(
+        attrs={'class': 'form-control'}))
+    unity = forms.ModelChoiceField(queryset=Item.objects.all(),required=True,label='Unidade de medida',widget=forms.Select(
+        attrs={'class': 'form-control'}))
 
-    fields = ['item_name', 'item_type', 'unity']
+    class Meta:
+        model = Item
+        fields = ['item_name', 'item_type', 'unity']
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
-        super(ItemForm, self).__init__(*args, **kwargs)
+        super(ItemFormSimple, self).__init__(*args, **kwargs)
+        self.fields['item_type'].label = 'Tipo de item'
+        self.fields['unity'].label = 'Unidade de medida'
 
 
 
 #TODO: adjust the choiche field to display multiple choices fields
 
 class ClientContractForm(ModelForm):
-    clausules = forms.CheckboxSelectMultiple()
-    work_order = forms.CharField(required=True, label='Ordem de serviço',
-                                 widget=forms.TextInput(attrs={'class': 'form-control'}))
+    work_order = forms.ModelChoiceField(queryset=Contract.objects.all(),required=True,label='Ordem de serviço',widget=forms.Select(
+        attrs={'class': 'form-control'}))
     contract_name = forms.CharField(required=True, label='Nome do contrato', widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Insira o nome do seu contrato'}))
     address = forms.CharField(required=True, label='Endereço do contrato', widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Insira o endereço do contrato'}))
     installments = forms.CharField(required=True, label='Parcelas', widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Insira o número de parcelas do contrato'}))
-    items = forms.CharField(required=True, label='Itens do contrato', widget=forms.TextInput(
-        attrs={'class': 'form-control', 'placeholder': 'Insira o número de parcelas do contrato'}))
+    items = forms.ModelMultipleChoiceField(queryset=Item.objects.all(), label='Itens do contrato', widget=forms.CheckboxSelectMultiple,
+                                               required=False)
+    clausules = forms.ModelMultipleChoiceField(queryset=Clausule.objects.all(), label='Cláusulas do contrato', widget=forms.CheckboxSelectMultiple,
+                                               required=False)
+    company_client = forms.ModelChoiceField(queryset=ClientCompany.objects.all(),required=True,label='Empresa',widget=forms.Select(
+        attrs={'class': 'form-control'}))
 
     class Meta:
         model = ClientContract
