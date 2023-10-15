@@ -51,9 +51,9 @@ Companies List
 
                 <thead>
                     <tr>
+                        <th>Nome da ordem de serviço</th>
                         <th>Status</th>
                         <th>Cliente</th>
-                        <th>Nome da ordem de serviço</th>
                         <th>Dias desde o início</th>
                         <th>Data de pagamento</th>
                         <th>Nota fiscal</th>
@@ -66,7 +66,16 @@ Companies List
                         {% for contract in contracts %}
                             {% if contract == qs %}
                             <tr>
-                                <!-- NAME -->
+                                <td>
+                                    <a href="{% url 'edit_contract' contract.id %}">
+                                        {% if contract.contract_name  %}
+                                            {{ contract.contract_name }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </a>
+                                </td>
+
                                 <td>
                                     <a href="{% url 'edit_contract' contract.id %}">
                                         {% if contract.status == 'PN'  %}
@@ -80,7 +89,6 @@ Companies List
                                     </a>
                                 </td>
 
-                                <!-- Client (Displays mainly the company client) -->
                                 <td>
                                     <a href="{% url 'edit_contract' contract.id %}">
                                         {% if contract.company_client  %}
@@ -95,16 +103,6 @@ Companies List
                                     </a>
                                 </td>
 
-                                <!-- Client (Displays mainly the company client) -->
-                                <td>
-                                    <a href="{% url 'edit_contract' contract.id %}">
-                                        {% if contract.contract_name  %}
-                                            {{ contract.contract_name }}
-                                        {% else %}
-                                            -
-                                        {% endif %}
-                                    </a>
-                                </td>
                                 <td>
                                     <a href="{% url 'edit_contract' contract.id %}">
                                         {% if contract.status == 'PN'  %}

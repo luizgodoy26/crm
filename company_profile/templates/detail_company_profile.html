@@ -5,7 +5,10 @@
 
 <div class="container-detail">
 
-        <h1 class="center">{{ company_profile.name }}</h1>
+        <div>
+            <img class="company-logo left" src="{{company_profile.logo.url}}" alt="Logo da sua Empresa">
+            <h1 class="center">{{ company_profile.name }}</h1>
+        </div>
         <a href="{% url 'edit_company_profile' company_profile.id %}" class="edit-icon tx-right">
             <i class="fa-regular fa-pen-to-square fa-lg"></i>
             <i class="fa-solid fa-pen-to-square fa-lg"></i>
