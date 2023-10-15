@@ -113,7 +113,7 @@
         {% if contract.work_order.person_client %}
         <h3 class="subheader">Person client: </h3>
             <div class="detail">
-                <p><span class="bolded">Nome: </span>{{ contract.work_order.person_client.first_name }} {{ contract.work_order.person_client.last_name }}</p>
+                <p><span class="bolded">Nome: </span>{{ contract.work_order.person_client.fullname }}</p>
                 <p><span class="bolded">CPF: </span>{{ contract.work_order.person_client.cpf }}</p>
                 {% if contract.work_order.person_client.phone %}
                     <p><span class="bolded">Telefone: </span>{{ contract.work_order.person_client.phone }}</p>

@@ -23,8 +23,9 @@ class ClientCompany(models.Model):
 class ClientPerson(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=90)
+    fullname = models.CharField(max_length=30)
+    # first_name = models.CharField(max_length=30)
+    # last_name = models.CharField(max_length=90)
     cpf = CPFField(masked=False)
     phone = models.IntegerField(blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
@@ -33,7 +34,7 @@ class ClientPerson(models.Model):
 
     # To return the name of the person on the django admin
     def __str__(self):
-        return self.first_name
+        return self.fullname
 
 
 # Documents

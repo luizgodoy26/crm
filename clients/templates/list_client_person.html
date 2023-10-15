@@ -69,7 +69,7 @@ Client person List
                             <tr>
                                 <!-- NAME -->
                                 <td>
-                                    <a href="{% url 'detail_client_person' client.id %}">{{ client.first_name }} {{ client.last_name }}</a>
+                                    <a href="{% url 'detail_client_person' client.id %}">{{ client.fullname }}</a>
                                 </td>
 
                                 <!-- CPF -->

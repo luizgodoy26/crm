@@ -4,7 +4,7 @@
 
     {% if user.id == client.user.id %}
 
-        <h1>Você gostaria de deletar {{ client.first_name }} ?</h1>
+        <h1>Você gostaria de deletar {{ client.fullname }} ?</h1>
 
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}

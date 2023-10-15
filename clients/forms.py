@@ -22,8 +22,9 @@ class ClientCompanyForm(ModelForm):
 FORM FOR CLIENT PERSON
 """
 class ClientPersonForm(ModelForm):
-    first_name = forms.CharField(required=True, label='Primeiro nome', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Primeiro nome do cliente'}))
-    last_name = forms.CharField(required=True, label='Último nome', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Último nome do cliente'}))
+    fullname = forms.CharField(required=True, label='Nome completo', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome completo do cliente'}))
+    # first_name = forms.CharField(required=True, label='Primeiro nome', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Primeiro nome do cliente'}))
+    # last_name = forms.CharField(required=True, label='Último nome', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Último nome do cliente'}))
     cpf = forms.CharField(required=True, label='CPF', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'CPF do cliente'}))
     phone = forms.IntegerField(required=False, label='Telefone', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Telefone do cliente'}))
     email = forms.EmailField(required=False, label='E-mail', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'E-mail do cliente'}))
@@ -33,7 +34,7 @@ class ClientPersonForm(ModelForm):
 
     class Meta:
         model = ClientPerson
-        fields = ['first_name','last_name', 'cpf', 'phone', 'email', 'person_company', 'pending_payments', 'received_payments', 'description']
+        fields = ['fullname', 'cpf', 'phone', 'email', 'person_company', 'pending_payments', 'received_payments', 'description']
 
     def __init__(self,  *args, **kwargs):
         self.user = kwargs.pop('user', None)

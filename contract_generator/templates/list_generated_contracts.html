@@ -73,7 +73,7 @@ Companies List
                                             </a>
                                         {% elif contract.work_order.person_client  %}
                                             <a href="{% url 'detail_client_person' contract.work_order.person_client.id %}">
-                                                {{ contract.work_order.person_client.first_name }} {{ contract.work_order.person_client.last_name }}
+                                                {{ contract.work_order.person_client.fullname }}
                                             </a>
                                         {% elif contract.person_client and contract.work_order.company_client %}
                                             <a href="{% url 'detail_client_company' contract.work_order.company_client.id %}">
