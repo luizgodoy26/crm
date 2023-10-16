@@ -1,5 +1,5 @@
 # Promptus CRM
-**V1.2.1**
+**V1.8.1**
 
 This project is focused on developing a software that help enterpreneurs that struggle to manage their workflow.
 
