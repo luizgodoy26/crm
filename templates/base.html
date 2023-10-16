@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -16,9 +18,8 @@
 
     <div class="navbar">
             <div class="logo">
-                <i class="fa-solid fa-house"></i>
+                <i class="logo-icon"><img src="{% static 'favicon.ico' %}" alt="Ícone"></i>
             </div>
-
             <div class="logo_name">Promptus</div>
             <i class="fa-solid fa-bars" id="btn-menu-n"></i>
     </div>
@@ -35,7 +36,7 @@
         <div class="sidebar">
             <div class="logo_content">
                 <div class="logo">
-                    <i class="fa-solid fa-house"></i>
+                    <i class="logo-icon"><img src="{% static 'favicon.ico' %}" alt="Ícone"></i>
                     <div class="logo_name">Promptus</div>
                 </div>
                 <i class="fa-solid fa-bars" id="btn-menu"></i>

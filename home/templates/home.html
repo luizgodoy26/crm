@@ -6,16 +6,12 @@
 
 
 {% block main %}
-    <h1 class="ola">Bem vindo!</h1>
-
     <!--  CHECK IF THE USER IS LOGGED IN AND DISPLAY IT'S NAME  -->
     {% if user.is_authenticated%}
         <p>Hello {{ user.full_name }}!</p>
 
     {% else %}
         <a href="{% url 'login' %}"><button class="btn-login">Login</button></a>
-        <br>
-        <br>
         <a href="{% url 'register_page' %}"><button class="btn-register">Registrar</button></a>
     {% endif %}
 

@@ -10,21 +10,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-        {% block navbar %}
-            <ul>
-              <li><a href="{% url 'dashboard' %}">Home</a></li>
-              <li><a href="news.asp">Novidades</a></li>
-              <li><a href="contact.asp">Contato</a></li>
-              <li><a href="about.asp">Sobre</a></li>
-            </ul>
-        {% endblock %}
 
-    <div class="page_content">
-        {% block main %}
-        {% endblock %}
+    <header class="header-lp">
+        <a href="#"><img class="logo-lp" src="{% static 'img/logo.png' %}" alt="Logo Promptus"></a>
+        <nav class="navbar-lp">
+            <a href="#">Novidades</a>
+            <a href="#">Contato</a>
+            <a href="#">Sobre</a>
+            {% block main %}
+            {% endblock %}
+        </nav>
+    </header>
+
+    <div class="content">
+        <div class="hero" style="background: url('{% static 'img/HOME.png' %}') no-repeat; background-size: cover; background-position: center;">
+            <div class="hero-text">
+                <h1>Uma nova forma de administrar sua empresa!</h1>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="card">
+                <i class="fa-solid fa-money-bill"></i>
+                <h1>GERE CONTRATOS</h1>
+                <p>Gere os contratos da sua empresa em poucos segundos, basta escolher as cláusulas, clientes e itens do contrato, e pronto!</p>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-user"></i>
+                <h1>ADMINISTRE CLIENTES</h1>
+                <p>Cadastre e administre seus clientes com facilidade, gerenciando pagamentos pendentes e valores recebidos.</p>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-briefcase"></i>
+                <h1>ADMINISTRE ORDENS DE SERVIÇO</h1>
+                <p>De forma muito simples, consulte e acompanhe suas ordens de serviço, administrando valores, itens e todos os demais detalhes.</p>
+            </div>
+        </div>
     </div>
-
-
-
 </body>
+
 </html>
