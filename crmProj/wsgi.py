@@ -12,6 +12,10 @@ import os
 from django.core.wsgi import get_wsgi_application
 from dj_static import Cling
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'crmProj.settings')
+# https://www.youtube.com/watch?v=QjEVmQ4rcWA
+
+settings_module = 'crmProj.deployment' if 'WEBSITE_HOSTNAME' in os.environ else 'crmProj.settings'
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
 
 application = Cling(get_wsgi_application())
