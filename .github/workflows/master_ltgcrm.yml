@@ -22,9 +22,6 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Set the DJANGO_SUPERUSER_PASSWORD environment variable
-        run: echo "yes" >> $GITHUB_ENV
-
       - name: Create and start virtual environment
         run: |
           python -m venv venv
@@ -33,8 +30,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run collectstatic
-        run: python manage.py collectstatic
+      - name: Collect static files
+          run: echo "yes" | python manage.py collectstatic --noinput
 
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
