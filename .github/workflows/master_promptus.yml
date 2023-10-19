@@ -31,7 +31,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Collect static files
-        run: python manage.py collectstatic
+        run: echo "yes" | python manage.py collectstatic --noinput
 
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       - name: Zip artifact for deployment
