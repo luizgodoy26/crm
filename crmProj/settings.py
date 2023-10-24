@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 from decouple import config
 from dj_database_url import parse as dburl
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,14 +24,14 @@ DATE_INPUT_FORMATS = ('%d %b %Y')
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=i0gd0r4i%!cm3uv*$gw=1qq-o8mbk78f(ds8d(kk%i3ivtsw8'
-
+SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG')
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'promtustwo.fly.dev']
 
+CSRF_TRUSTED_ORIGINS = ['https://promtustwo.fly.dev']
 
 # Application definition
 
@@ -52,13 +53,15 @@ INSTALLED_APPS = [
     'agenda',
     'dashboard',
     'company_profile',
-    'home'
+    'home',
+    'whitenoise.runserver_nostatic'
 ]
 
 AUTH_USER_MODEL = 'accounts.User' # Overrides the current user model
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -98,12 +101,11 @@ default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 # }
 
 DATABASES = {
-    'default': {
-       'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default='sqlite:///' + os.path.join('db.sqlite3')
+    )
 }
-
+DATABASE_URL = 'postgres://promtustwo:P15V2jeBiNgX0RB@promtustwo-db.flycast:5432/promtustwo?'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
